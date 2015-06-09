@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- Vista correspondiente a la Img. 23 Listado de Catálogo de Tipos de Facilitadores
+                                    Img. 24 Nuevo Tipo de Facilitador -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            
+            <!-- Título del formulario "CATALOGO DE TIPOS DE FACILITADORES" -->
+            <div class="form-header">
+                <h4 class="modal-title"><font color="507642"><center><b>CATÁTOLOGOS DE TIPOS DE FACILITADORES</b></center></font></h4>
+            </div>
+            
+            <!-- Panel con 2 pestañas --> 
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <!-- Propiedades de las pestañas -->
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#tipos" role="tab" id="tipos-tab" data-toggle="tab" aria-controls="tipos" aria-expanded="false"><font color="507642"><b>Lista de Tipos</b></font></a></li>
+                    <li role="presentation" class=""><a href="#nuevo" role="tab" id="nuevo-tab" data-toggle="tab" aria-controls="nuevo" aria-expanded="true"><font color="507642"><b>Nuevo</b></font></a></li>
+                </ul>
+                                
+                <div id="myTabContent" class="tab-content">
+                    
+                    <!-- Primer Panel "Categorías de Seguimientos"-->
+                    <div role="tabpanel" class="tab-pane fade active in" id="tipos" aria-labelledby="tipos-tab">
+                        <form role="form">
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>
+                            
+                        <!-- Formulario para mostrar lista de tipos de facilitadores -->
+                        <h:form id="formTipos">
+                            <div class="table table-responsive" >
+                                <table id="tipo" class="table table-striped table-bordered table-hover table-condensed">
+
+                                    <!-- Cabecera de la tabla -->
+                                    <thead>
+                                        <!-- Atributos de la tabla -->
+                                        <tr>
+                                            <th><center>Id.</center></th>
+                                            <th><center>Nombre</center></th>
+                                            <th><center>Descripción</center></th>
+                                        </tr>
+                                    </thead>
+
+                                    <!-- Cuerpo de la tabla -->
+                                    <tbody>
+                                        <ui:repeat value="#{catalogosControlador.todasTiposFacilitadores()}" var="tipo" >
+                                            <tr>
+                                                <td align="center">#{tipo.tipofId}</td>
+                                                <td>#{tipo.tipofNombre}</td>
+                                                <td>#{tipo.tipofDescripcion}</td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody> 
+                                </table>
+                            </div>
+                        </h:form>
+                        </form>
+                    </div>
+                    
+                    
+                    <!-- Segundo Panel "Nuevo"-->
+                    <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
+                        <form role="form">
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Formulario para captura de datos de tipos de facilitadores -->
+                            <h:form>
+                                
+                            <!-- Id -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Id</label>
+                                </div>
+                                <div class="col-xs-1">
+                                    <div>
+                                        <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Nombre -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Nombre</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <p:inputText id="nomcat" value="#{catalogosControlador.nuevoTipo.tipofNombre}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Descripción -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Descripción</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <p:inputText id="descri" value="#{catalogosControlador.nuevoTipo.tipofDescripcion}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Botones "Cancelar" y "Guardar" -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-8" align="center">
+                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <label> </label>
+                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarTipo()}"/>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            </h:form>
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                        
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+        
+        <ui:define name="scripts">
+            <script>
+                $(document).ready(function () {
+                    $('#tipo').dataTable(
+                            {
+                                "oLanguage": {
+                                    "sProcessing": "Procesando...",
+                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                    "sZeroRecords": "No se encontraron resultados",
+                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "Buscar:",
+                                    "sUrl": "",
+                                    "sInfoThousands": ",",
+                                    "sLoadingRecords": "Cargando...",
+                                    "oPaginate": {
+                                        "sFirst": "Primero",
+                                        "sLast": "Último",
+                                        "sNext": "Siguiente",
+                                        "sPrevious": "Anterior"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                    }
+                                }
+                            }
+                    );
+                });
+            </script>
+        </ui:define>
+        
+    </ui:composition>
+</html>

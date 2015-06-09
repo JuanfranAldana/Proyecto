@@ -1,0 +1,740 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!-- Vista correspondiente a la Img. 34 Aprobación de Proyecto
+                                    Img. 35 Adición de Facilitadores del Proyecto-->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            <!-- Panel con 3 pestañas --> 
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#perfil" role="tab" id="perfil-tab" data-toggle="tab" aria-controls="perfil" aria-expanded="false"><font color="507642"><b>Perfil</b></font></a></li>
+                    <li role="presentation" class=""><a href="#aprobacion" role="tab" id="aprobacion-tab" data-toggle="tab" aria-controls="aprobacion" aria-expanded="true"><font color="507642"><b>Aprobación</b></font></a></li>
+                    <li role="presentation" class=""><a href="#facilitadores" role="tab" id="facilitadores-tab" data-toggle="tab" aria-controls="facilitadores" aria-expanded="true"><font color="507642"><b>Facilitadores</b></font></a></li>
+                </ul>
+                
+                
+                <div id="myTabContent" class="tab-content">
+                    
+                    <div role="tabpanel" class="tab-pane fade active in" id="perfil" aria-labelledby="perfil-tab">
+                        <form role="form">
+                        <!-- Título del formulario "PERFIL DEL PROYECTO" -->
+                        <legend>
+                                  <div class="form-header">
+                                      <h4 class="modal-title"><font color="507642"><center><b>PERFIL DEL PROYECTO</b></center></font></h4>
+                                  </div>
+                        </legend>
+                        
+                        <!-- Id y Fecha del Proyecto -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Id</label>
+                            </div>
+                            <div class="col-xs-2">
+                                <div>
+                                    <p:inputText id="id" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                            </div>
+                            <div class="col-xs-2">
+                                <label >Fecha de Ingreso</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <div>
+                                    <p:calendar id="fecing"
+                                                value="#{nombreManejagor.atributo}" locale="es"
+                                                pattern="dd/MM/yyyy" showOn="button" 
+                                                size="12" tabindex="2" style="width: 100%;">
+                                        <p:ajax event="dateSelect" />
+                                    </p:calendar>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>
+                            
+                        <!-- Nombre Proyecto -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Nombre Proyecto</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <p:inputText id="nompro" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>
+                        
+                        <!-- Institución Cultural -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Institución Cultural</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <h:selectOneMenu id="inscul" class="form-control" value="#{nombreBean.atributo}"  style="width: 100%;">
+                                    <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                    <f:selectItems value="#{nombreBean.atributo}" var="" itemLabel="" itemValue=""/>
+                                    <p:ajax  listener="#{nombreBean.atributo}" update=""/>                         
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>
+                        
+                        <!-- Representante Legal -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Representante Legal</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <h:selectOneMenu id="repleg" class="form-control" value="#{nombreBean.atributo}"  style="width: 100%;">
+                                    <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                    <f:selectItems value="#{nombreBean.atributo}" var="" itemLabel="" itemValue=""/>
+                                    <p:ajax  listener="#{nombreBean.atributo}" update=""/>                         
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>
+                        
+                        <!-- Persona de Contacto -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Persona de Contacto</label>
+                            </div>
+                            <div class="col-xs-5">
+                                <p:inputText id="percon" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                            </div>
+                            <div class="col-xs-4">
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>    
+                            
+                        <!-- Correo de Contacto y Teléfono de Contacto -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Correo de Contacto</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <p:inputText id="corcon" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                            </div>
+                            <div class="col-xs-3">
+                                <label >Teléfono de Contacto</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <p:inputText id="telcon" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>    
+                            
+                        <!-- Unidad que Recibe y Fecha Recepción UTR -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Unidad que Recibe</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <p:inputText id="unirec" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                            </div>
+                            <div class="col-xs-3">
+                                <label >Fecha de Recepción UTR</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <p:calendar id="fecrec"
+                                            value="#{nombreManejagor.atributo}" locale="es"
+                                            pattern="dd/MM/yyyy" showOn="button" 
+                                            size="12" tabindex="2" style="width: 100%;">
+                                    <p:ajax event="dateSelect" />
+                                </p:calendar>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>      
+                        
+                        <!-- Fecha de Inicio y Fecha de Fin -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Fecha de Inicio</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <p:calendar id="fecini"
+                                            value="#{nombreManejagor.atributo}" locale="es"
+                                            pattern="dd/MM/yyyy" showOn="button" 
+                                            size="12" tabindex="2" style="width: 100%;">
+                                    <p:ajax event="dateSelect" />
+                                </p:calendar>
+                            </div>
+                            <div class="col-xs-3">
+                                <label >Fecha de Fin</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <p:calendar id="fecfin"
+                                            value="#{nombreManejagor.atributo}" locale="es"
+                                            pattern="dd/MM/yyyy" showOn="button" 
+                                            size="12" tabindex="2" style="width: 100%;">
+                                    <p:ajax event="dateSelect" />
+                                </p:calendar>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>      
+                        
+                        <!-- Objetivo -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Objetivo</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <textarea class="form-control" name="metas" value="#{nombreManejagor.atributo}" rows="4" style="width: 100%;">
+                                </textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>
+                            
+                        <!-- Metas / Alcance-->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Metas / Alcance</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <textarea class="form-control" name="metas" value="#{nombreManejagor.atributo}" rows="4" style="width: 100%;">
+                                </textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>
+                            
+                        <!-- Descripción -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Descripción</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <textarea class="form-control" name="metas" value="#{nombreManejagor.atributo}" rows="4" style="width: 100%;">
+                                </textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>    
+                        
+                        <!-- Beneficiados -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Beneficiados</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <textarea class="form-control" name="metas" value="#{nombreManejagor.atributo}" rows="4" style="width: 100%;">
+                                </textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>    
+                            
+                        <!-- Dirección acional -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label>Direccción Nacional</label>
+                            </div>
+                            <div class="col-xs-9">
+                                <h:selectOneMenu id="dirnac" class="form-control" value="#{nombreBean.atributo}"  style="width: 100%;">
+                                    <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                    <f:selectItems value="#{nombreBean.atributo}" var="" itemLabel="" itemValue=""/>
+                                    <p:ajax  listener="#{nombreBean.atributo}" update=""/>                         
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>    
+                                
+                        <!-- No. de Convenio y Fuente Financiamiento -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >No. de Convenio</label>
+                            </div>
+                            <div class="col-xs-2">
+                                <p:inputText id="numcon" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                            </div>
+                            <div class="col-xs-1">
+                            </div>
+                            <div class="col-xs-3">
+                                <label >Fuente de Financiamiento</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <h:selectOneMenu id="fuefin" class="form-control" value="#{nombreBean.atributo}"  style="width: 100%;">
+                                    <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                    <f:selectItems value="#{nombreBean.atributo}" var="" itemLabel="" itemValue=""/>
+                                    <p:ajax  listener="#{nombreBean.atributo}" update=""/>                         
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>          
+                               
+                        <!-- Monto SEC -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Monto SEC</label>
+                            </div>
+                            <div class="col-xs-2">
+                                <p:inputText id="monsec" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                            </div>
+                            <div class="col-xs-10">
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>        
+                                
+                        <!-- Monto Contraparte IC y Formulario de Verificación -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Monto Contraparte IC</label>
+                            </div>
+                            <div class="col-xs-2">
+                                <p:inputText id="moncon" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                            </div>
+                            <div class="col-xs-1">
+                            </div>
+                            <div class="col-xs-3">
+                                <label >Formulario e Verificación</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <button type="button" class="btn btn-default" style="width: 50%;">Ver</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>         
+                                
+                        <!-- Monto Total del Proyecto y Documentos Adjuntos -->
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label >Monto Total del Proyecto</label>
+                            </div>
+                            <div class="col-xs-2">
+                                <p:inputText id="montot" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                            </div>
+                            <div class="col-xs-1">
+                            </div>
+                            <div class="col-xs-3">
+                                <label >Documentos Adjuntos</label>
+                            </div>
+                            <div class="col-xs-3">
+                                <button type="button" class="btn btn-default" style="width: 50%;">Adjuntar</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>      
+                            
+                        <!-- Botones "Cancelar" y "Guardar" -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-8" align="center">
+                                    <button type="button" class="btn btn-default">Cancelar</button>
+                                    <button type="button" class="btn btn-default">Guardar</button>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                        
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                        </form>
+                    </div>
+                    
+                    
+                    <!-- Segundo Panel "Aprobacion"-->
+                    <div role="tabpanel" class="tab-pane fade" id="aprobacion" aria-labelledby="aprobacion-tab">
+                        <form role="form">
+                            <!-- Título del formulario "APROBACIÓN DEL PROYECTO" -->
+                            <legend>
+                                <div class="form-header">
+                                    <h4 class="modal-title"><font color="507642"><center><b>APROBACIÓN DEL PROYECTO</b></center></font></h4>
+                                </div>
+                            </legend>
+                            
+                            <!-- Fecha Aprobación -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Fecha de Aprobación</label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div>
+                                        <p:calendar id="fecapr"
+                                                    value="#{nombreManejagor.atributo}" locale="es"
+                                                    pattern="dd/MM/yyyy" showOn="button" 
+                                                    size="9" tabindex="2" style="width: 100%;">
+                                            <p:ajax event="dateSelect" />
+                                        </p:calendar>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Aprobado por -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Aprobado por</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <p:inputText id="aprpor" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Monto Aprobado SEC -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Monto Aprobado SEC</label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div>
+                                        <p:inputText id="monapr" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Monto Contraparte IC -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Monto Contraparte IC</label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div>
+                                        <p:inputText id="moncon" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Monto Total Aprobado -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Monto Total Aprobado</label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div>
+                                        <p:inputText id="montot" value="#{nombreManejagor.atributo}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Panel "Fecha de Observación y Observación" -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-8">
+                                    <!-- Panel -->
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <!-- Fecha de Observación -->
+                                            <div class="col-xs-4">
+                                                <label>Fecha de Observación</label>
+                                            </div>
+                                            <div class="col-xs-5">
+                                                <div>
+                                                    <p:calendar id="fecobs"
+                                                                value="#{nombreManejagor.atributo}" locale="es"
+                                                                pattern="dd/MM/yyyy" showOn="button" 
+                                                                size="9" tabindex="2" style="width: 100%;">
+                                                        <p:ajax event="dateSelect" />
+                                                    </p:calendar>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Espacio en blanco -->
+                                            <div class="col-xs-12"><label></label></div>
+                            
+                                            <!-- Observación -->
+                                            <div class="col-xs-4">
+                                                <label>Observación</label>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <div>
+                                                    <textarea class="form-control" name="metas" value="#{nombreManejagor.atributo}" rows="4" style="width: 100%;">
+                                                    </textarea>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Documentos Adjuntos -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Documentos Adjuntos</label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div>
+                                        <input type="file" id="ejemplo_archivo_1"></input>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Estado -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label>Estado</label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div>
+                                        <h:selectOneMenu id="estado" class="form-control" value="#{nombreBean.atributo}"  style="width: 100%;">
+                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                            <f:selectItems value="#{nombreBean.atributo}" var="" itemLabel="" itemValue=""/>
+                                            <p:ajax  listener="#{nombreBean.atributo}" update=""/>                         
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Botones "Cancelar" y "Guardar" -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-8" align="center">
+                                    <button type="button" class="btn btn-default">Cancelar</button>
+                                    <button type="button" class="btn btn-default">Guardar</button>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                        
+                        </form>
+                    </div>
+                    
+                    
+                    <!-- Tercer Panel "Facilitadores"-->
+                    <div role="tabpanel" class="tab-pane fade" id="facilitadores" aria-labelledby="facilitadores-tab">
+                        <form role="form">
+                            <!-- Título del formulario "FACILITADORES DEL PROYECTO" -->
+                            <legend>
+                                <div class="form-header">
+                                    <h4 class="modal-title"><font color="507642"><center><b>FACILITADORES DEL PROYECTO</b></center></font></h4>
+                                </div>
+                            </legend>
+                            
+                            <!-- Facilitador Administrativo -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label >Facilitador Administrativo</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <h:selectOneMenu id="facadm" class="form-control" value="#{nombreBean.atributo}"  style="width: 100%;">
+                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                            <f:selectItems value="#{nombreBean.atributo}" var="" itemLabel="" itemValue=""/>
+                                            <p:ajax  listener="#{nombreBean.atributo}" update=""/>                         
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Facilitador Técnico -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label >Facilitador Técnico</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <h:selectOneMenu id="factec" class="form-control" value="#{nombreBean.atributo}"  style="width: 100%;">
+                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                            <f:selectItems value="#{nombreBean.atributo}" var="" itemLabel="" itemValue=""/>
+                                            <p:ajax  listener="#{nombreBean.atributo}" update=""/>                         
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <br></br>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Facilitador Cultural -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label >Facilitador Cultural</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <h:selectOneMenu id="faccul" class="form-control" value="#{nombreBean.atributo}"  style="width: 100%;">
+                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                            <f:selectItems value="#{nombreBean.atributo}" var="" itemLabel="" itemValue=""/>
+                                            <p:ajax  listener="#{nombreBean.atributo}" update=""/>                         
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <br></br>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Documentos Adjuntos -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <label >Documentos Adjuntos</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <input type="file" id="ejemplo_archivo_1"></input>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <br></br>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Botones "Cancelar" y "Guardar" -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-8" align="center">
+                                    <button type="button" class="btn btn-default">Cancelar</button>
+                                    <button type="button" class="btn btn-default">Guardar</button>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                        
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+        <!--<link href="#{request.contextPath}/resources/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="screen"/> -->
+        <link href="#{request.contextPath}/resources/css/otrotema.css" rel="stylesheet" type="text/css" media="screen"/>
+        <!--<link href="#{request.contextPath}/resources/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/> -->
+        <link href="#{request.contextPath}/resources/css/jquery.smartmenus.bootstrap.css" rel="stylesheet" type="text/css" media="screen"/>    
+        <link href="#{request.contextPath}/resources/js/datatables/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <title>Sistema Informático para Seguimiento de Proyectos</title>     
+    </h:head>
+    
+    <h:body>
+        <header id="top">
+            
+            <!-- Contenedor de banner y usuario -->
+           <div class="container">
+                <div class="col-md-10">
+                    <img src="../resources/imagenes/banner.jpg" class="img-responsive img-rounded" width="100%"/>
+                </div>                            
+                <div class="col-md-2"><strong>Usuario: </strong></div>
+                <div class="col-md-2">Nombre del Usuario: </div>
+                <div class="col-md-2"><p></p></div>
+                <div class="col-md-2"><strong>Perfil: </strong></div>
+                <div class="col-md-2">Perfil de Usuario: </div>
+            </div> 
+            
+            
+            <div class="container" >
+                <nav class="navbar navbar-inverse" role="navigation">
+                    
+                    <!-- Botón Inicio de la Barra de Menú -->
+                   <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>                   
+                        <a class="navbar-brand" href="../contenido/inicio.jsf">INICIO</a>
+                    </div> 
+                    
+                    <div class="navbar-collapse collapse"> 
+                        <ul class="nav navbar-nav">
+                            
+                            <!-- Botón Administración de la Barra de Menú -->
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración</a>
+                            <ul class="dropdown-menu" >
+                                <li><a>Catálogos Generales</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="../contenido/cat_seguimientos.jsf" aria-expanded="true">Categoría de Seguimentos</a></li>
+                                        <li><a href="../contenido/cat_contactos.jsf" aria-expanded="true">Contactos</a></li>
+                                        <li><a href="../contenido/cat_direcciones.jsf" aria-expanded="true">Direcciones Nacionales</a></li>
+                                        <li><a href="../contenido/cat_facilitadores.jsf" aria-expanded="true">Facilitadores</a></li>
+                                        <li><a href="../contenido/cat_financiamiento.jsf" aria-expanded="true">Fuentes de Financiamiento</a></li>
+                                        <li><a href="../contenido/cat_instituciones.jsf" aria-expanded="true">Instituciones</a></li>
+                                        <li><a href="../contenido/cat_paises.jsf" aria-expanded="true">Paises</a></li>
+                                        <li><a href="../contenido/cat_subseguimientos.jsf" aria-expanded="true">Sub Categoría de Seguimiento</a></li>
+                                        <li><a href="../contenido/cat_representantes.jsf" aria-expanded="true">Representantes</a></li>
+                                        <li><a href="../contenido/cat_tipofacilitadores.jsf" aria-expanded="true">Tipos de Facilitadores</a></li>
+                                        <li><a href="../contenido/cat_unidades.jsf" aria-expanded="true">Unidades Técnicas</a></li>
+                                    </ul>
+                                </li>
+                                <li class="divider"></li> <!-- Linea de división -->
+                                <li class="dropdown-header">Seguridad</li> <!-- Viñeta Título -->
+                                <li><a href="../contenido/cat_usuarios.jsf">Administrar Usuarios</a></li>
+                                <li><a href="../contenido/cat_roles.jsf">Administrar Roles</a></li>
+                            </ul> 
+                            </li>
+                            
+                            <!-- Botón Poryectos de la Barra de Menú -->
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Proyectos</a>
+                            <ul class="dropdown-menu" >
+                                <li class="dropdown-header">Gestión de Proyectos</li> <!-- Viñeta Título -->
+                                <li><a href="../contenido/lis_perfiles.jsf">Perfil de Proyectos</a></li>
+                                <li><a href="../contenido/lis_proyectos.jsf">Consultar Proyectos</a></li>
+                                <li><a href="../contenido/fin_proyectos.jsf">Finalización de Proyectos</a></li>
+                                <li class="divider"></li> <!-- Linea de división -->
+                                <li class="dropdown-header">Gestión de Metas y Actividades</li> <!-- Viñeta Título -->
+                                <li><a href="../contenido/man_metas.jsf">Mantenimiento de Metas</a></li>
+                                <li><a href="../contenido/man_actividades.jsf">Mantenimientos de actividades</a></li>
+                                <li class="divider"></li> <!-- Linea de división -->
+                                <li><a href="../contenido/seg_proyecto.jsf">Seguimiento de Proyectos</a></li>
+                                <li class="divider"></li> <!-- Linea de división -->
+                                <li><a href="../contenido/tra_historicas.jsf">Históricos</a></li>
+                            </ul> 
+                            </li>
+                            
+                            <!-- Botón Reportes de la Barra de Menú -->
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes</a>
+                            <ul class="dropdown-menu" >
+                                <li><a>Catálogos Generales</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="../contenido/cat_seguimiento.jsf" aria-expanded="true">Categoría de Seguimentos</a></li>
+                                        <li><a href="../contenido/cat_contactos.jsf" aria-expanded="true">Contactos</a></li>
+                                        <li><a href="../contenido/cat_direcciones.jsf" aria-expanded="true">Direcciones Nacionales</a></li>
+                                        <li><a href="../contenido/cat_facilitadores.jsf" aria-expanded="true">Facilitadores</a></li>
+                                        <li><a href="../contenido/cat_financiamiento.jsf" aria-expanded="true">Fuentes de Financiamiento</a></li>
+                                        <li><a href="../contenido/cat_instituciones.jsf" aria-expanded="true">Instituciones</a></li>
+                                        <li><a href="../contenido/cat_paises.jsf" aria-expanded="true">Paises</a></li>
+                                        <li><a href="../contenido/subcat_seguimiento.jsf" aria-expanded="true">Sub Categoría de Seguimiento</a></li>
+                                        <li><a href="../contenido/cat_representantes.jsf" aria-expanded="true">Representantes</a></li>
+                                        <li><a href="../contenido/cat_tipofacilitadores.jsf" aria-expanded="true">Tipos de Facilitadores</a></li>
+                                        <li><a href="../contenido/cat_unidades.jsf" aria-expanded="true">Unidades Técnicas</a></li>
+                                    </ul>
+                                </li>
+                                <li class="divider"></li> <!-- Linea de división -->
+                                <li><a href="../contenido/cat_usuarios.jsf">Perfil de Proyecto</a></li>
+                                <li><a href="../contenido/cat_roles.jsf">Proyectos por Estado</a></li>
+                                <li><a href="../contenido/cat_usuarios.jsf">Presupuesto por Metas y Actividades</a></li>
+                                <li><a href="../contenido/cat_roles.jsf">Seguimientos por Subcategoría</a></li>
+                                <li><a href="../contenido/cat_usuarios.jsf">Histórico de Transferencias</a></li>
+                                <li class="divider"></li> <!-- Linea de división -->
+                                <li><a href="../contenido/cat_usuarios.jsf">Documentos para Remisión</a></li>
+                            </ul> 
+                            </li>
+                            
+                            <!-- Botón Ayuda de la Barra de Menú -->
+                            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Ayuda</a>
+                                <ul class="dropdown-menu" >
+                                    <li><a href="../contenido/acercade.jsf">Acerca de...</a></li>
+                                    <li><a href="../contenido/manual.jsf">Manual de Usuario</a></li>
+                                    <li><a href="../contenido/pre_frecuentes.jsf">Preguntas Frecuentes</a></li>
+                                </ul> 
+                            </li>
+                            
+                            <!-- Botón Salir de la Barra de Menú -->
+                            <li><a href="#">Salir</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            
+        </header>
+        
+        <!-- Contenerdor de páginas. Aquí aparecerá el contenido de cada página -->
+        <div id="content" class="container">
+            <ui:insert name="content"></ui:insert>
+        </div>
+        
+        <!-- Banner inferior -->
+        <footer id="bottom" class="container" >
+            <img id="piepag" src="../resources/imagenes/piepagina.jpg" class="img-rounded img-responsive" width="100%" /> 
+        </footer>
+        
+        <!-- jQuery (Necesario para plugins JavaScript de Bootstrap) -->
+        <h:outputScript library="primefaces" name="jquery/jquery.js"/>
+        <!-- Incluya todos los plugins compilados (abajo), o incluir archivos individuales según sea necesario -->
+        <script src="#{request.contextPath}/resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/css/jquery.smartmenus.min.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/css/jquery.smartmenus.bootstrap.min.js" type="text/javascript"></script>
+        <script src="#{request.contextPath}/resources/js/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+        <ui:insert name="scripts"/>
+        
+    </h:body>
+    
+</html>

@@ -1,0 +1,437 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- Vista correspondiente a la Img. 27 Listado de Catálogo de Usuarios
+                                    Img. 28 Nuevo Usuario -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            
+            <!-- Título del formulario "CATÁLOGO DE USUARIOS" -->
+            <div class="form-header">
+                <h4 class="modal-title"><font color="507642"><center><b>CATÁLOGO DE USUARIOS</b></center></font></h4>
+            </div>
+            
+            <!-- Panel con 2 pestañas --> 
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <!-- Propiedades de las pestañas -->
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#usuarios" role="tab" id="usuarios-tab" data-toggle="tab" aria-controls="usuarios" aria-expanded="false"><font color="507642"><b>Lista de Usuarios</b></font></a></li>
+                    <li role="presentation" class=""><a href="#nuevo" role="tab" id="nuevo-tab" data-toggle="tab" aria-controls="nuevo" aria-expanded="true"><font color="507642"><b>Nuevo</b></font></a></li>
+                </ul>
+                                
+                <div id="myTabContent" class="tab-content">
+                    
+                    <!-- Primer Panel "Catalogo de Usuarios"-->
+                    <div role="tabpanel" class="tab-pane fade active in" id="usuarios" aria-labelledby="usuarios-tab">
+                        <form role="form">
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-xs-12"><label></label></div>
+                            
+                        <!-- Formulario para mostrar lista de usuarios -->
+                        <h:form id="formUsuarios">
+                            <div class="table table-responsive" >
+                                <table id="usuario" class="table table-striped table-bordered table-hover table-condensed">
+
+                                    <!-- Cabecera de la tabla -->
+                                    <thead>
+                                        <!-- Atributos de la tabla -->
+                                        <tr>
+                                            <th><center>No.</center></th>
+                                            <th><center>Nombre</center></th>
+                                            <th><center>Usuario</center></th>
+                                            <th><center>Correo</center></th>
+                                            <th><center>Consultar</center></th>
+                                        </tr>
+                                    </thead>
+
+                                    <!-- Cuerpo de la tabla -->
+                                    <tbody>
+                                        <ui:repeat value="#{catalogosControlador.todasUsuarios()}" var="usuario" >
+                                            <tr>
+                                                <td align="center">#{usuario.usuarioId}</td>
+                                                <td>#{usuario.usuarioNombre}</td>
+                                                <td>#{usuario.usuarioUsuario}</td>
+                                                <td>#{usuario.usuarioCorreo}</td>
+                                                <td align="center">
+                                                    <h:commandLink value="Ver" class="btn btn-default btn-xs" pt:data-toggle="modal" pt:data-target="#verUsuario">
+                                                        <f:setPropertyActionListener value="#{usuario}" target="#{catalogosControlador.usuarioSeleccionado}" />
+                                                        <p:ajax process="@this" update=":formUsuarios:displayJ1"/>
+                                                    </h:commandLink>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody> 
+                                </table>
+                            </div>
+                            
+                            <!-- Modal Direcciones -->
+                            <div id="verUsuario" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642">Usuario</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="displayJ1" columns="2" border="0">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Id:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.usuarioId}" /> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Nombre:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.usuarioNombre}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Usuario -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Usuario:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.usuarioUsuario}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Contraseña -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Contraseña:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.usuarioContrasenia}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Rol -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Rol:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.rolId.rolNombre}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Estado -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Estado:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.usuarioEstado}" />
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                 
+                                                <!-- Correo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Correo:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.usuarioCorreo}" />
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                
+                                                <!-- Teléfono -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Teléfono:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.usuarioTelefono}" />
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                
+                                                <!-- Unidad Técnica -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Unidad Técnica:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.utecId.utecNombre}" />
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                
+                                                <!-- Fecha de Creación -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Fecha de Creación:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.usuarioSeleccionado.usuarioFechaCrea}" />
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </h:form>
+                        </form>
+                    </div>
+                    
+                    
+                    <!-- Segundo Panel "Nuevo"-->
+                    <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
+                        <form role="form">
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Formulario para captura de datos de usuarios -->
+                            <h:form>
+                            <!-- Id -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label>Id</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
+                                    </label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div></div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Nombre y Correo-->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label>Nombre</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <p:inputText id="nombre" value="#{catalogosControlador.nuevoUsuario.usuarioNombre}" style="width: 100%;"/>
+                                    </label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div>Correo</div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <p:inputText id="correo" value="#{catalogosControlador.nuevoUsuario.usuarioCorreo}" style="width: 100%;"/>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Usuario y Teléfono -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label>Usuario</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <p:inputText id="usuari" value="#{catalogosControlador.nuevoUsuario.usuarioUsuario}" style="width: 100%;"/>
+                                    </label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div>Teléfono</div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <p:inputText id="telefo" value="#{catalogosControlador.nuevoUsuario.usuarioTelefono}" style="width: 100%;"/>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Contraseña y Unidade Técnica -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label>Contraseña</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <p:inputText id="contra" value="#{catalogosControlador.nuevoUsuario.usuarioContrasenia}" style="width: 100%;"/>
+                                    </label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div>Unidad Técnica</div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <h:selectOneMenu id="unitec" class="form-control" value="#{catalogosControlador.nuevoUsuario.utecId}"  style="width: 100%;" converter="#{uniTecConvertidor}">
+                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                            <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="uni" itemLabel="#{uni.utecNombre}" itemValue="#{uni}"/>
+                                        </h:selectOneMenu>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Rol y Fecha de Creación -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label>Rol</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <h:selectOneMenu id="roles" class="form-control" value="#{catalogosControlador.nuevoUsuario.rolId}"  style="width: 100%;" converter="#{rolConvertidor}">
+                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                            <f:selectItems value="#{catalogosControlador.todasRoles()}" var="rol" itemLabel="#{rol.rolNombre}" itemValue="#{rol}"/>
+                                        </h:selectOneMenu>
+                                    </label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div>Fecha de Creación</div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <p:calendar id="feccre"
+                                                    value="#{catalogosControlador.nuevoUsuario.usuarioFechaCrea}" locale="es"
+                                                    pattern="dd-MM-yyyy" showOn="button" 
+                                                    size="12" tabindex="2" style="width: 100%;">
+                                            <p:ajax event="dateSelect" />
+                                        </p:calendar>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Estado -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label>Estado</label>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label>
+                                        <p:inputText id="estado" value="#{catalogosControlador.nuevoUsuario.usuarioEstado}" style="width: 100%;"/>
+                                    </label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div></div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Botones "Cancelar" y "Guardar" -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-8" align="center">
+                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <label> </label>
+                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarDireccion()}"/>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            </h:form>
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                        
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+        
+        <ui:define name="scripts">
+            <script>
+                $(document).ready(function () {
+                    $('#usuario').dataTable(
+                            {
+                                "oLanguage": {
+                                    "sProcessing": "Procesando...",
+                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                    "sZeroRecords": "No se encontraron resultados",
+                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "Buscar:",
+                                    "sUrl": "",
+                                    "sInfoThousands": ",",
+                                    "sLoadingRecords": "Cargando...",
+                                    "oPaginate": {
+                                        "sFirst": "Primero",
+                                        "sLast": "Último",
+                                        "sNext": "Siguiente",
+                                        "sPrevious": "Anterior"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                    }
+                                }
+                            }
+                    );
+                });
+            </script>
+        </ui:define>
+        
+    </ui:composition>
+</html>

@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- Vista correspondiente a la Img. 36 Lista de Proyectos por Estado -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            <!-- Formulario para mostrar lista de proyectos -->
+            <h:form id="formPerfiles" >
+                <div class="table table-responsive table-bordered " >
+                    <table id="perfiles" class="table table-striped table-bordered table-hover table-condensed">
+                        
+                        <!-- Cabecera de la tabla -->
+                        <thead>
+                            <!-- Título -->
+                            <tr><center><h4><font color="507642">LISTADO DE PROYECTOS</font></h4></center></tr>
+                            <!-- Atributos de la tabla -->
+                            <tr>
+                                <th><center>Id</center></th>
+                                <th><center>Nombre Proyecto</center></th>
+                                <th><center>Institución Cultural</center></th>
+                                <th><center>Monto Total</center></th>
+                                <th><center>Estado</center></th>
+                                <th><center>Año</center></th>
+                                <th><center>ver</center></th>
+                            </tr>
+                        </thead>
+                        
+                        <!-- Cuerpo de la tabla -->
+                        <tbody>
+                            <ui:repeat value="#{proyectosControlador.todosProyectos()}" var="proyecto" >
+                                <tr>
+                                    <td align="center">#{proyecto.proyeId}</td>
+                                    <td>#{proyecto.proyeNombre}</td>
+                                    <td>#{proyecto.instId.instNombre}</td>
+                                    <td align="right">#{proyecto.proyeMontoSolicitado+proyecto.proyeMontoContraparte}</td>
+                                    <td align="center">#{proyecto.estadoId.estadoNombre}</td>
+                                    <td align="center">#{proyecto.proyeAnio}</td>
+                                    <td align="center">
+                                        <h:commandLink value="Ver" class="btn btn-default btn-xs
+                                                       " action="ver_perfil.jsf">
+                                            <f:setPropertyActionListener value="#{proyecto}"
+                                                                         target="#{proyectosControlador.proyectoSeleccionado}"  />
+                                        </h:commandLink></td>
+                                    
+                                </tr>
+                            </ui:repeat>
+                        </tbody> 
+                        
+                    </table>
+                </div>
+                
+           </h:form>
+        </ui:define>
+       
+        <ui:define name="scripts">
+            <script>
+                $(document).ready(function () {
+                    $('#perfiles').dataTable(
+                            {
+                                "oLanguage": {
+                                    "sProcessing": "Procesando...",
+                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                    "sZeroRecords": "No se encontraron resultados",
+                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "Buscar:",
+                                    "sUrl": "",
+                                    "sInfoThousands": ",",
+                                    "sLoadingRecords": "Cargando...",
+                                    "oPaginate": {
+                                        "sFirst": "Primero",
+                                        "sLast": "Último",
+                                        "sNext": "Siguiente",
+                                        "sPrevious": "Anterior"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                    }
+                                }
+                            }
+                    );
+                });
+            </script>
+        </ui:define>
+        
+    </ui:composition>
+</html>
