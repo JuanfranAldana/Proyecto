@@ -272,9 +272,9 @@
                                 </div>
                                 <div class="col-xs-5">
                                     <div>
-                                        <h:selectOneMenu id="dirnac" class="form-control" value="#{catalogosControlador.nuevaUnidad.dnacId}"  style="width: 100%;" converter="#{dirnacionalConvertidor}">
+                                        <h:selectOneMenu id="dirnac" class="form-control" value="#{catalogosControlador.direccion}"  style="width: 100%;">
                                             <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                            <f:selectItems value="#{catalogosControlador.todasDireccionesNacionales()}" var="dir" itemLabel="#{dir.dnacNombre}" itemValue="#{dir}"/>
+                                            <f:selectItems value="#{catalogosControlador.todasDireccionesNacionales()}" var="dir" itemLabel="#{dir.dnacNombre}" itemValue="#{dir.dnacId}"/>
                                         </h:selectOneMenu>
                                     </div>
                                 </div>

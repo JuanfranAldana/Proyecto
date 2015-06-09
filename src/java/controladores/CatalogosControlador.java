@@ -95,6 +95,8 @@ public class CatalogosControlador implements Serializable{
     private Representantes nuevoRepresentante = new Representantes();
     private Representantes representanteSeleccionado = new Representantes();
     
+    private int direccion;
+    
     //Creates a new instance of catalogosControlador
     public CatalogosControlador() {
     }
@@ -376,6 +378,16 @@ public class CatalogosControlador implements Serializable{
     
     
     
+    //Get y Set para Id Dirección
+    public int getDireccion() {
+        return direccion;
+    }
+    public void setdireccion(int direccion) {
+        this.direccion = direccion;
+    }
+    
+    
+    
     //Método para guardar a la entidad CategoriaSeguimientos
     public void guardarCategoria() {
         getCategoriaSeguimientosFacade().create(nuevaCategoria);
@@ -414,7 +426,7 @@ public class CatalogosControlador implements Serializable{
     
     //Método para guardar a la entidad UnidadesTécnicas
     public void guardarUnidad() {
-        
+        nuevaUnidad.setDnacId(new DireccionesNacionales(direccion));
         getUnidadesTecnicasFacade().create(nuevaUnidad);
         nuevaUnidad = new UnidadesTecnicas();
     }
