@@ -2,9 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html   xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:f="http://xmlns.jcp.org/jsf/core">
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <!-- Vista correspondiente a la Img. 23 Listado de Catálogo de Tipos de Facilitadores
                                     Img. 24 Nuevo Tipo de Facilitador -->
@@ -17,7 +18,7 @@
             
             <!-- Título del formulario "CATALOGO DE TIPOS DE FACILITADORES" -->
             <div class="form-header">
-                <h4 class="modal-title"><font color="507642"><center><b>CATÁTOLOGOS DE TIPOS DE FACILITADORES</b></center></font></h4>
+                <h4 class="modal-title"><font color="507642"><center><b>CATÁTOLOGO DE TIPOS DE FACILITADORES</b></center></font></h4>
             </div>
             
             <!-- Panel con 2 pestañas --> 
@@ -30,12 +31,9 @@
                                 
                 <div id="myTabContent" class="tab-content">
                     
-                    <!-- Primer Panel "Categorías de Seguimientos"-->
+                    <!-- Primer Panel "Lista de Tipos"-->
                     <div role="tabpanel" class="tab-pane fade active in" id="tipos" aria-labelledby="tipos-tab">
-                        <form role="form">
-                        
-                        <!-- Espacio en blanco -->
-                        <div class="col-xs-12"><label></label></div>
+                        <form role="form"><br/>
                             
                         <!-- Formulario para mostrar lista de tipos de facilitadores -->
                         <h:form id="formTipos">
@@ -44,11 +42,11 @@
 
                                     <!-- Cabecera de la tabla -->
                                     <thead>
-                                        <!-- Atributos de la tabla -->
                                         <tr>
                                             <th><center>Id.</center></th>
                                             <th><center>Nombre</center></th>
                                             <th><center>Descripción</center></th>
+                                            <th><center>Editar</center></th>
                                         </tr>
                                     </thead>
 
@@ -59,11 +57,77 @@
                                                 <td align="center">#{tipo.tipofId}</td>
                                                 <td>#{tipo.tipofNombre}</td>
                                                 <td>#{tipo.tipofDescripcion}</td>
+                                                <td align="center">
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
+                                                                   pt:data-toggle="modal" pt:data-target="#editarTipo">
+                                                        <f:setPropertyActionListener value="#{tipo}" target="#{catalogosControlador.tipoSeleccionado}" />
+                                                        <p:ajax process="@this" update=":formTipos:displayJ2"/>
+                                                    </h:commandLink>
+                                                </td>
                                             </tr>
                                         </ui:repeat>
                                     </tbody> 
                                 </table>
                             </div>
+                            
+                            <!-- Modal editarTipos -->
+                            <div id="editarTipo" class="modal">
+                                <div class="modal-dialog" keyboard="true">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                            <h4 class="modal-title"><font color="507642">Editar Tipo de Facilitador</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="95%">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.tipoSeleccionado.tipofId}"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nombre" value="#{catalogosControlador.tipoSeleccionado.tipofNombre}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Descripción -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Descripción :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="descri" value="#{catalogosControlador.tipoSeleccionado.tipofDescripcion}" style="width: 100%"/> 
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                        
+                                        <!-- Pie del modal -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <h:commandButton id="actualizar" type="submit" class="btn btn-default" value="Actualizar" action="#{catalogosControlador.actualizarTipo()}"/>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </h:form>
                         </form>
                     </div>
@@ -71,10 +135,7 @@
                     
                     <!-- Segundo Panel "Nuevo"-->
                     <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
-                        <form role="form">
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                        <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de tipos de facilitadores -->
                             <h:form>
@@ -84,81 +145,58 @@
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Id</label>
                                 </div>
                                 <div class="col-xs-1">
-                                    <div>
-                                        <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
-                                    </div>
+                                    <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
                                 </div>
                                 <div class="col-xs-6">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Nombre -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="nomcat" value="#{catalogosControlador.nuevoTipo.tipofNombre}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="nomcat" value="#{catalogosControlador.nuevoTipo.tipofNombre}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Descripción -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="descri" value="#{catalogosControlador.nuevoTipo.tipofDescripcion}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="descri" value="#{catalogosControlador.nuevoTipo.tipofDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-8" align="center">
+                                <div class="col-xs-12" align="center">
                                     <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
                                     <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarTipo()}"/>
                                 </div>
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
                             </div>
-                            </h:form>
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </h:form><br/>
                         
                         </form>
                     </div>

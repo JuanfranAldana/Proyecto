@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui">
+
+    <!-- Vista correspondiente a la Img. 45 Consulta Detalle de Seguimiento Seleccionado -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+    
+                            <!-- Título del formulario "DETALLE DE SEGUIMIENTO" -->
+                            <legend>
+                                <div class="form-header">
+                                    <h4 class="modal-title"><font color="507642"><center><b>DETALLE DE SEGUIMIENTO</b></center></font></h4>
+                                </div>
+                            </legend>
+                            
+                            <h:form>
+                                
+                                <!-- Primer Panel -->
+                                <p:fieldset>
+                                    <legend>Detalle de Seguimiento</legend>
+                                    
+                                    <!-- Categoría -->
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <label >Categoría</label>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <p:inputText id="catego" value="#{fixme}" readonly="true" style="width: 100%;"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                        </div>
+                                    </div><br/>
+
+                                    <!-- Sub Categoría -->
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <label>Sub Categoría</label>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <p:inputText id="subcat" value="#{fixme}" readonly="true" style="width: 100%;"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                        </div>
+                                    </div><br/>
+
+                                    <!-- Fecha Inicio -->
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <label>Fecha de Inicio</label>
+                                        </div>
+                                        <div class="col-xs-2
+                                             ">
+                                            <p:inputText id="fecini" value="#{fixme}" readonly="true" style="width: 100%;">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </p:inputText>    
+                                        </div>
+                                        <div class="col-xs-5">
+                                        </div>
+                                    </div><br/>
+
+                                    <!-- Fecha de Fin -->
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <label>Fecha de Fin</label>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <p:inputText id="fecfin" value="#{fixme}" readonly="true" style="width: 100%;">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </p:inputText>    
+                                        </div>
+                                        <div class="col-xs-5">
+                                        </div>
+                                    </div><br/>
+
+                                    <!-- Fecha de Observación -->
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <label>Fecha de Observación</label>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <p:inputText id="fecobs" value="#{fixme}" readonly="true" style="width: 100%;">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </p:inputText>    
+                                        </div>
+                                        <div class="col-xs-5">
+                                        </div>
+                                    </div><br/>
+
+                                    <!-- Observación -->
+                                    <div class="row">
+                                        <div class="col-xs-2">
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <label>Observación</label>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <p:inputTextarea rows="2" value="#{fixme}" readonly="true" autoResize="false" style="width: 100%;"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                        </div>
+                                    </div><br/>
+                                    
+                                </p:fieldset>
+                                
+                                <!-- Espacio en blanco -->
+                                <div class="col-xs-12"><label></label></div>
+                                
+                                <!-- Segundo Panel -->
+                                <p:fieldset>
+                                <legend>Detalle de Alerta</legend>
+                                
+                                <!-- Fecha de Alerta -->
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label>Fecha de Alerta</label>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <p:inputText id="fecale" value="#{fixme}" readonly="true" style="width: 100%;">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                        </p:inputText>    
+                                    </div>
+                                    <div class="col-xs-5">
+                                    </div>
+                                </div><br/>
+                                
+                                <!-- Mensaje de Alerta -->
+                                <div class="row">
+                                   <div class="col-xs-2">
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label>Mensaje de Alerta</label>
+                                        </div>
+                                        <div class="col-xs-5">
+                                            <p:inputTextarea rows="2" value="#{fixme}" readonly="true" autoResize="false" style="width: 100%;"/>
+                                        </div>
+                                        <div class="col-xs-2">
+                                        </div>
+                                    </div><br/>
+                                
+                                </p:fieldset><br/>
+                            
+                            </h:form>
+    
+                            <!-- Botón inferior central "Regresar" -->
+                            <div class="col-md-12" align="center" >
+                                <a href="lis_seguimientos.jsf" class="btn btn-default  btn-xm">
+                                    <span class="glyphicon glyphicon-share-alt"></span>Regresar
+                                    <!-- <img src="../resources/iconos/addIC.png"></img>Nuevo Perfil  -->
+                                </a>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+        </ui:define>
+    </ui:composition>
+</html>
+

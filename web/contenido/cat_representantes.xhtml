@@ -1,0 +1,496 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- Vista correspondiente a la Img. 21 Listado de Catálogo de Representantes Legales por Institución Cultural
+                                    Img. 22 Nuevo Representante Legal por Institución Cultural -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            
+            <!-- Título del formulario "CATÁLOGO DE REPRESENTANTES LEGALES POR INSTITUCIÓN" -->
+            <div class="form-header">
+                <h4 class="modal-title"><font color="507642"><center><b>CATÁLOGO DE REPRESENTANTES LEGALES POR INSTITUCIÓN</b></center></font></h4>
+            </div>
+            
+            <!-- Panel con 2 pestañas --> 
+            <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+                <!-- Propiedades de las pestañas -->
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#representantes" role="tab" id="representantes-tab" data-toggle="tab" aria-controls="representantes" aria-expanded="false"><font color="507642"><b>Lista de Representantes</b></font></a></li>
+                    <li role="presentation" class=""><a href="#nuevo" role="tab" id="nuevo-tab" data-toggle="tab" aria-controls="nuevo" aria-expanded="true"><font color="507642"><b>Nuevo</b></font></a></li>
+                </ul>
+                                
+                <div id="myTabContent" class="tab-content">
+                    
+                    <!-- Primer Panel "Catálogo de Representantes"-->
+                    <div role="tabpanel" class="tab-pane fade active in" id="representantes" aria-labelledby="representantes-tab">
+                        <form role="form"><br/>
+                            
+                        <!-- Formulario para mostrar lista de representantes -->
+                        <h:form id="formRepresentantes">
+                            <div class="table table-responsive" >
+                                <table id="representante" class="table table-striped table-bordered table-hover table-condensed">
+
+                                    <!-- Cabecera de la tabla -->
+                                    <thead>
+                                        <tr>
+                                            <th><center>Id.</center></th>
+                                            <th><center>Nombre</center></th>
+                                            <th><center>Correo</center></th>
+                                            <th><center>Tipo de Facilitador</center></th>
+                                            <th><center>Editar/Ver</center></th>
+                                        </tr>
+                                    </thead>
+
+                                    <!-- Cuerpo de la tabla -->
+                                    <tbody>
+                                        <ui:repeat value="#{catalogosControlador.todasFacilitadoresTecnicos()}" var="facilitador" >
+                                            <tr>
+                                                <td align="center">#{facilitador.faciId}</td>
+                                                <td>#{facilitador.faciNombre}</td>
+                                                <td>#{facilitador.faciCorreo}</td>
+                                                <td>#{facilitador.faciDescripcion}</td>
+                                                <td align="center">
+                                                    <h:commandLink value="Ver" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
+                                                                   pt:data-toggle="modal" pt:data-target="#verRepresentante">
+                                                        <f:setPropertyActionListener value="#{facilitador}" target="#{catalogosControlador.facilitadorSeleccionada}" />
+                                                        <p:ajax process="@this" update=":formRepresentantes:displayJ1"/>
+                                                    </h:commandLink>
+                                                </td>
+                                            </tr>
+                                        </ui:repeat>
+                                    </tbody> 
+                                </table>
+                            </div>
+                            
+                            <!-- Modal verRepresentante -->
+                            <div id="verRepresentante" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642">Representante</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="displayJ1" columns="2" border="0">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Id:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciId}"/> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Nombre:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciNombre}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Correo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Correo:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciCorreo}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Teléfono -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Teléfono:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciTelefono}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Cargo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Cargo:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciCargo}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Tipo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Tipo:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.tipofId.tipofNombre}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Institución -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Institución:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.instId.instNombre}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Unidad Técnica -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Udidad:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.utecId.utecNombre}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Descripción -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-6">
+                                                        <label>Descripción:</label>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div>
+                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciDescripcion}"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </h:form>
+                        </form>
+                    </div>
+                    
+                    
+                    <!-- Segundo Panel "Nuevo"-->
+                    <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
+                        <form role="form">
+                            <h:messages showDetail="true"/>
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Formulario para captura de datos de facilitadores -->
+                            <h:form>
+                                
+                            <!-- Id -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Id</label>
+                                </div>
+                                <div class="col-xs-1">
+                                    <div>
+                                        <p:inputText id="id" disabled="true" value="#{catalogosControlador.nuevoFacilitador.faciId}" style="width: 100%;"/>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Nombre -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Nombre</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <p:inputText id="nomcat" value="#{catalogosControlador.nuevoFacilitador.faciNombre}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Correo -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Correo</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <p:inputText id="correo" value="#{catalogosControlador.nuevoFacilitador.faciCorreo}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Teléfono -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Teléfono</label>
+                                </div>
+                                <div class="col-xs-3">
+                                    <div>
+                                        <p:inputText id="telefo" value="#{catalogosControlador.nuevoFacilitador.faciTelefono}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Institución -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Institución</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <h:selectOneMenu id="inscul" class="form-control" value="#{catalogosControlador.nuevoFacilitador.instId}"  style="width: 100%;" converter="#{institucionConvertidor}">
+                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                            <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="ins" itemLabel="#{ins.instNombre}" itemValue="#{ins}"/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- DUI -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>DUI</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <p:inputText id="dui" value="#{catalogosControlador.nuevoRepresentante.repDui}" style="width: 100%;"/> 
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- NIT -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>NIT</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <p:inputText id="nit" value="#{catalogosControlador.nuevoRepresentante.repNit}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Nacionalidad -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Nacionalidad</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <p:inputText id="nacion" value="#{catalogosControlador.nuevoRepresentante.repNacionalidad}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- No. Pasaporte -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>No. Pasaporte</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <p:inputText id="pasapo" value="#{catalogosControlador.nuevoRepresentante.repPasaporte}" style="width: 100%;"/> 
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Fecha de Ingreso -->
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label>Fecha de Ingreso</label>
+                                </div>
+                                <div class="col-xs-5">
+                                    <div>
+                                        <p:calendar id="fecing"
+                                                    value="#{catalogosControlador.nuevoRepresentante.repFechaIngreso}" locale="es"
+                                                pattern="yyyy-MM-dd" showOn="button" 
+                                                size="12" tabindex="2" style="width: 100%;">
+                                        <p:ajax event="dateSelect" />
+                                    </p:calendar>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                            
+                            <!-- Botones "Cancelar" y "Guardar" -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-8" align="center">
+                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <label> </label>
+                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarRepresentantes()}"/>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                            </h:form>
+                            <!-- Espacio en blanco -->
+                            <div class="col-xs-12"><label></label></div>
+                        
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+        
+        <ui:define name="scripts">
+            <script>
+                $(document).ready(function () {
+                    $('#representante').dataTable(
+                            {
+                                "oLanguage": {
+                                    "sProcessing": "Procesando...",
+                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                    "sZeroRecords": "No se encontraron resultados",
+                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "Buscar:",
+                                    "sUrl": "",
+                                    "sInfoThousands": ",",
+                                    "sLoadingRecords": "Cargando...",
+                                    "oPaginate": {
+                                        "sFirst": "Primero",
+                                        "sLast": "Último",
+                                        "sNext": "Siguiente",
+                                        "sPrevious": "Anterior"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                    }
+                                }
+                            }
+                    );
+                });
+            </script>
+        </ui:define>
+        
+    </ui:composition>
+</html>
+

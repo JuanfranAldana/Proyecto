@@ -6,6 +6,7 @@
 package dao;
 
 import entidades.Actividades;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +28,10 @@ public class ActividadesFacade extends AbstractFacade<Actividades> {
     public ActividadesFacade() {
         super(Actividades.class);
     }
+    
+    public List<Actividades> buscarMeta(int meta){
+        return getEntityManager().createNamedQuery("Actividades.buscarMeta").setParameter("meta", meta).getResultList();
+    }
+
     
 }

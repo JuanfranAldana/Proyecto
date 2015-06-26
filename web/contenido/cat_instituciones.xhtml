@@ -33,25 +33,21 @@
                     
                     <!-- Primer Panel "Catalogo de Instituciones"-->
                     <div role="tabpanel" class="tab-pane fade active in" id="instituciones" aria-labelledby="instituciones-tab">
-                        <form role="form">
+                        <form role="form"><br/>
                         
-                        <!-- Espacio en blanco -->
-                        <div class="col-xs-12"><label></label></div>
-                            
-                        <!-- Formulario para mostrar lista de direccioness -->
+                        <!-- Formulario para mostrar lista de instituciones -->
                         <h:form id="formInstituciones">
                             <div class="table table-responsive" >
                                 <table id="institucion" class="table table-striped table-bordered table-hover table-condensed">
 
                                     <!-- Cabecera de la tabla -->
                                     <thead>
-                                        <!-- Atributos de la tabla -->
                                         <tr>
                                             <th><center>Id</center></th>
                                             <th><center>Nombre</center></th>
                                             <th><center>Teléfono</center></th>
                                             <th><center>Dirección</center></th>
-                                            <th><center>Consultar</center></th>
+                                            <th><center>Editar/Ver</center></th>
                                         </tr>
                                     </thead>
 
@@ -61,10 +57,17 @@
                                             <tr>
                                                 <td align="center">#{institucion.instId}</td>
                                                 <td>#{institucion.instNombre}</td>
-                                                <td>#{institucion.instTelefono}</td>
+                                                <td align="center">#{institucion.instTelefono}</td>
                                                 <td>#{institucion.instDireccion}</td>
                                                 <td align="center">
-                                                    <h:commandLink value="Ver" class="btn btn-default btn-xs" pt:data-toggle="modal" pt:data-target="#verInstitucion">
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
+                                                                   pt:data-toggle="modal" pt:data-target="#editarInstitucion">
+                                                        <f:setPropertyActionListener value="#{institucion}" target="#{catalogosControlador.institucionSeleccionada}" />
+                                                        <p:ajax process="@this" update=":formInstituciones:displayJ2"/>
+                                                    </h:commandLink>
+                                                    <label></label>
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
+                                                                   pt:data-toggle="modal" pt:data-target="#verInstitucion">
                                                         <f:setPropertyActionListener value="#{institucion}" target="#{catalogosControlador.institucionSeleccionada}" />
                                                         <p:ajax process="@this" update=":formInstituciones:displayJ1"/>
                                                     </h:commandLink>
@@ -75,116 +78,214 @@
                                 </table>
                             </div>
                             
-                            <!-- Modal Instituciones -->
+                            <!-- Modal verInstituciones -->
                             <div id="verInstitucion" class="modal">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
+                                        
                                         <!-- Cabecera del modal -->
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             <h4 class="modal-title"><font color="507642">Institución</font></h4>
                                         </div>
+                                        
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
                                             <h:panelGrid id="displayJ1" columns="2" border="0">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Id:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.institucionSeleccionada.instId}" /> 
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.institucionSeleccionada.instId}" /> 
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Nombre -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Nombre:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.institucionSeleccionada.instNombre}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.institucionSeleccionada.instNombre}" />
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- País -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>País:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>País :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.institucionSeleccionada.paisId.paisNombre}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.institucionSeleccionada.paisId.paisNombre}" />
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Dirección -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Dirección:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Dirección :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.institucionSeleccionada.instDireccion}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.institucionSeleccionada.instDireccion}" />
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Teléfono -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Teléfono:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Teléfono :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.institucionSeleccionada.instTelefono}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.institucionSeleccionada.instTelefono}" />
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Descripción -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Descripción:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Descripción :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.institucionSeleccionada.instDescripcion}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.institucionSeleccionada.instDescripcion}" />
                                                     </div>
                                                 </div> 
                                                  
                                                 <!-- NIT -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>NIT:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>NIT :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.institucionSeleccionada.instNit}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.institucionSeleccionada.instNit}" />
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Registro Fiscal -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Registro Fiscal:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Registro Fiscal :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.institucionSeleccionada.instRegFiscal}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.institucionSeleccionada.instRegFiscal}" />
                                                     </div>
                                                 </div>
                                             </h:panelGrid>  
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <!-- Modal editarInstitución -->
+                            <div id="editarInstitucion" class="modal">
+                                <div class="modal-dialog" keyboard="true">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                            <h4 class="modal-title"><font color="507642">Editar Institución</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="95%">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.institucionSeleccionada.instId}"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nombre" value="#{catalogosControlador.institucionSeleccionada.instNombre}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Teléfono -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Teléfono :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="telefo" value="#{catalogosControlador.institucionSeleccionada.instTelefono}" style="width: 50%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Dirección -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Dirección :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="direcc" value="#{catalogosControlador.institucionSeleccionada.instDireccion}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- País -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>País :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:selectOneMenu id="pais" value="#{catalogosControlador.pais}"  style="width: 100%;">
+                                                            <f:selectItem itemLabel="#{catalogosControlador.institucionSeleccionada.paisId.paisNombre}" noSelectionOption="true" itemValue=""/>
+                                                            <f:selectItems value="#{catalogosControlador.todasPaises()}" var="pai" itemLabel="#{pai.paisNombre}" itemValue="#{pai.paisId}"/>
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- NIT -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>NIT :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nit" value="#{catalogosControlador.institucionSeleccionada.instNit}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- No. Registro Contribuyente -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>No. Registro Contribuyente:</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="numcon" value="#{catalogosControlador.institucionSeleccionada.instRegFiscal}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Descripción -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Descripción :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="descri" value="#{catalogosControlador.institucionSeleccionada.instDescripcion}" style="width: 100%"/> 
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                        
+                                        <!-- Pie del modal -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <h:commandButton id="actualizar" type="submit" class="btn btn-default" value="Actualizar" action="#{catalogosControlador.actualizarInstitucion()}"/>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -196,19 +297,16 @@
                     
                     <!-- Segundo Panel "Nuevo"-->
                     <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
-                        <form role="form">
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                        <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de instituciones -->
                             <h:form>
-                                <h:messages showDetail="true"/>
+
                             <!-- Id -->
                             <div class="row">
                                 <div class="col-xs-1">
                                 </div>
-                                <div class="col-xs-1">
+                                <div class="col-xs-1" align="right">
                                     <label>Id</label>
                                 </div>
                                 <div class="col-xs-2">
@@ -216,22 +314,19 @@
                                 </div>
                                 <div class="col-xs-8">
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Nombre y Teléfono -->
                             <div class="row">
                                 <div class="col-xs-1">
                                 </div>
-                                <div class="col-xs-1">
+                                <div class="col-xs-1" align="right">
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-5">
                                     <p:inputText id="nombre" value="#{catalogosControlador.nuevaInstitucion.instNombre}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-1">
+                                <div class="col-xs-1" align="right">
                                     <label>Teléfono</label>
                                 </div>
                                 <div class="col-xs-3">
@@ -239,42 +334,13 @@
                                 </div>
                                 <div class="col-xs-1">
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
-                            
-                            <!-- Representante Legal y NIT -->
-                            <div class="row">
-                                <div class="col-xs-1">
-                                </div>
-                                <div class="col-xs-2">
-                                    <label>Representante</label>
-                                </div>
-                                <div class="col-xs-4">
-                                    <h:selectOneMenu id="repleg" class="form-control" value="#{fixme}"  style="width: 100%;" converter="#{fixme}">
-                                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                        <f:selectItems value="#{fixme}" var="con" itemLabel="#{fixme}" itemValue="#{fixme}"/>
-                                    </h:selectOneMenu>
-                                </div>
-                                <div class="col-xs-1">
-                                    <label>NIT</label>
-                                </div>
-                                <div class="col-xs-3">
-                                    <p:inputText id="nit" value="#{catalogosControlador.nuevaInstitucion.instNit}" style="width: 100%;"/> 
-                                </div>
-                                <div class="col-xs-1">
-                                </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Dirección -->
                             <div class="row">
                                 <div class="col-xs-1">
                                 </div>
-                                <div class="col-xs-1">
+                                <div class="col-xs-1" align="right">
                                     <label>Dirección</label>
                                 </div>
                                 <div class="col-xs-9">
@@ -282,25 +348,36 @@
                                 </div>
                                 <div class="col-xs-1">
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- País y No. Registro Contribuyente -->
                             <div class="row">
                                 <div class="col-xs-1">
                                 </div>
-                                <div class="col-xs-1">
+                                <div class="col-xs-1" align="right">
                                     <label>País</label>
                                 </div>
-                                <div class="col-xs-3">
-                                    <h:selectOneMenu id="pais" class="form-control" value="#{catalogosControlador.nuevaInstitucion.paisId}"  style="width: 100%;" converter="#{fixme}">
+                                <div class="col-xs-4">
+                                    <p:selectOneMenu id="pais" value="#{catalogosControlador.pais}"  style="width: 75%;">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                        <f:selectItems value="#{catalogosControlador.todasPaises()}" var="pai" itemLabel="#{pai.paisNombre}" itemValue="#{pai}"/>
-                                    </h:selectOneMenu>
+                                        <f:selectItems value="#{catalogosControlador.todasPaises()}" var="pai" itemLabel="#{pai.paisNombre}" itemValue="#{pai.paisId}"/>
+                                    </p:selectOneMenu>
+                                </div>
+                                <div class="col-xs-6">
+                                </div>
+                            </div><br/>
+                            
+                            <!-- NIT y No. Registro Contribuyente-->
+                            <div class="row">
+                                <div class="col-xs-1">
+                                </div>
+                                <div class="col-xs-1" align="right">
+                                    <label>NIT</label>
                                 </div>
                                 <div class="col-xs-3">
+                                    <p:inputMask id="nit" value="#{catalogosControlador.nuevaInstitucion.instNit}" mask="9999-999999-999-9" style="width: 100%;"/> 
+                                </div>
+                                <div class="col-xs-3" align="right">
                                     <label>No. Registro Contribuyente</label>
                                 </div>
                                 <div class="col-xs-3">
@@ -308,16 +385,13 @@
                                 </div>
                                 <div class="col-xs-1">
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Descripción -->
                             <div class="row">
                                 <div class="col-xs-1">
                                 </div>
-                                <div class="col-xs-1">
+                                <div class="col-xs-1" align="right">
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-9">
@@ -325,28 +399,17 @@
                                 </div>
                                 <div class="col-xs-1">
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-8" align="center">
+                                <div class="col-xs-12" align="center">
                                     <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
                                     <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarInstitucion()}"/>
                                 </div>
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
                             </div>
-                            </h:form>
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </h:form><br/>
                         
                         </form>
                     </div>

@@ -32,11 +32,8 @@
                     
                     <!-- Primer Panel "Catálogo de Roles" -->
                     <div role="tabpanel" class="tab-pane fade active in" id="roles" aria-labelledby="roles-tab">
-                        <form role="form">
+                        <form role="form"><br/>
                         
-                        <!-- Espacio en blanco -->
-                        <div class="col-xs-12"><label></label></div>
-                            
                         <!-- Formulario para mostrar lista de roles -->
                         <h:form id="formRoles">
                             <div class="table table-responsive" >
@@ -44,7 +41,6 @@
 
                                     <!-- Cabecera de la tabla -->
                                     <thead>
-                                        <!-- Atributos de la tabla -->
                                         <tr>
                                             <th><center>Id.</center></th>
                                             <th><center>Nombre</center></th>
@@ -71,10 +67,7 @@
                     
                     <!-- Segundo Panel "Nuevo"-->
                     <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
-                        <form role="form">
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                        <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de catálogo de roles -->
                             <h:form>
@@ -84,63 +77,48 @@
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Id</label>
                                 </div>
                                 <div class="col-xs-1">
-                                    <div>
-                                        <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
-                                    </div>
+                                    <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
                                 </div>
                                 <div class="col-xs-6">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Nombre -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <div>
-                                        <p:inputText id="nomcat" value="#{catalogosControlador.nuevoRol.rolNombre}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="nomcat" value="#{catalogosControlador.nuevoRol.rolNombre}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Descripción -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="descri" value="#{catalogosControlador.nuevoRol.rolDescripcion}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="descri" value="#{catalogosControlador.nuevoRol.rolDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
@@ -156,9 +134,7 @@
                                     <label></label>
                                 </div>
                             </div>
-                            </h:form>
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </h:form><br/>
                         
                         </form>
                     </div>

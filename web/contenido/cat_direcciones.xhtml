@@ -33,25 +33,21 @@
                     
                     <!-- Primer Panel "Catalogo de Direcciones"-->
                     <div role="tabpanel" class="tab-pane fade active in" id="direcciones" aria-labelledby="direcciones-tab">
-                        <form role="form">
+                        <form role="form"><br/>
                         
-                        <!-- Espacio en blanco -->
-                        <div class="col-xs-12"><label></label></div>
-                            
-                        <!-- Formulario para mostrar lista de direccioness -->
+                        <!-- Formulario para mostrar lista de direcciones nacionales -->
                         <h:form id="formDirecciones">
                             <div class="table table-responsive" >
                                 <table id="direccion" class="table table-striped table-bordered table-hover table-condensed">
 
                                     <!-- Cabecera de la tabla -->
                                     <thead>
-                                        <!-- Atributos de la tabla -->
                                         <tr>
                                             <th><center>Id</center></th>
                                             <th><center>Nombre</center></th>
                                             <th><center>Director</center></th>
                                             <th><center>Correo</center></th>
-                                            <th><center>Consultar</center></th>
+                                            <th><center>Editar/Ver</center></th>
                                         </tr>
                                     </thead>
 
@@ -64,7 +60,14 @@
                                                 <td>#{direccion.dnacDirector}</td>
                                                 <td>#{direccion.dnacCorreoDir}</td>
                                                 <td align="center">
-                                                    <h:commandLink value="Ver" class="btn btn-default btn-xs" pt:data-toggle="modal" pt:data-target="#verDireccion">
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
+                                                                   pt:data-toggle="modal" pt:data-target="#editarDireccion">
+                                                        <f:setPropertyActionListener value="#{direccion}" target="#{catalogosControlador.direccionSeleccionada}" />
+                                                        <p:ajax process="@this" update=":formDirecciones:displayJ2"/>
+                                                    </h:commandLink>
+                                                    <label></label>
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
+                                                                   pt:data-toggle="modal" pt:data-target="#verDireccion">
                                                         <f:setPropertyActionListener value="#{direccion}" target="#{catalogosControlador.direccionSeleccionada}" />
                                                         <p:ajax process="@this" update=":formDirecciones:displayJ1"/>
                                                     </h:commandLink>
@@ -75,13 +78,14 @@
                                 </table>
                             </div>
                             
-                            <!-- Modal Direcciones -->
+                            <!-- Modal verDirecciones -->
                             <div id="verDireccion" class="modal">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
+                                        
                                         <!-- Cabecera del modal -->
                                         <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
                                             <h4 class="modal-title"><font color="507642">Dirección Nacional</font></h4>
                                         </div>
                                         
@@ -91,78 +95,155 @@
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-11" align="right">
                                                         <label>Id:</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacId}" /> 
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacId}"/> 
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Nombre -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-11" align="right">
                                                         <label>Nombre:</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacNombre}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacNombre}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Director -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-11" align="right">
                                                         <label>Director:</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacDirector}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacDirector}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Correo -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-11" align="right">
                                                         <label>Correo:</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacCorreoDir}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacCorreoDir}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Teléfono -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-11" align="right">
                                                         <label>Teléfono:</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacTelefono}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacTelefono}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Descripción -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
+                                                    <div class="col-xs-11" align="right">
                                                         <label>Descripción:</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacDescripcion}" />
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacDescripcion}"/>
                                                     </div>
                                                 </div> 
                                                  
                                             </h:panelGrid>  
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <!-- Modal editarDirecciones -->
+                            <div id="editarDireccion" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642">Editar Dirección Nacional</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="85%">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.direccionSeleccionada.dnacId}"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nomcat" value="#{catalogosControlador.direccionSeleccionada.dnacNombre}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Director -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Director :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="direct" value="#{catalogosControlador.direccionSeleccionada.dnacDirector}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Correo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Correo :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="correo" value="#{catalogosControlador.direccionSeleccionada.dnacCorreoDir}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Teléfono -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Teléfono :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="telefo" value="#{catalogosControlador.direccionSeleccionada.dnacTelefono}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Descripción -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Descripción :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="descri" value="#{catalogosControlador.direccionSeleccionada.dnacDescripcion}" style="width: 100%"/> 
+                                                    </div>
+                                                </div>
+                                            
+                                            </h:panelGrid>  
+                                        </div>
+                                        
+                                        <!-- Pie del modal -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <h:commandButton id="actualizar" type="submit" class="btn btn-default" value="Actualizar" action="#{catalogosControlador.actualizarDireccion()}"/>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -174,156 +255,116 @@
                     
                     <!-- Segundo Panel "Nuevo"-->
                     <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
-                        <form role="form">
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                        <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de direcciones nacionales -->
                             <h:form>
+
                             <!-- Id -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Id</label>
                                 </div>
                                 <div class="col-xs-1">
-                                    <div>
-                                        <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-6">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Nombre -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="nombre" value="#{catalogosControlador.nuevaDireccion.dnacNombre}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="nombre" value="#{catalogosControlador.nuevaDireccion.dnacNombre}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Director -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Director</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="direct" value="#{catalogosControlador.nuevaDireccion.dnacDirector}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="direct" value="#{catalogosControlador.nuevaDireccion.dnacDirector}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Correo Dir. -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Correo Dir.</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="cordir" value="#{catalogosControlador.nuevaDireccion.dnacCorreoDir}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="cordir" value="#{catalogosControlador.nuevaDireccion.dnacCorreoDir}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Teléfono -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Teléfono</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <div>
-                                        <p:inputText id="telefo" value="#{catalogosControlador.nuevaDireccion.dnacTelefono}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="telefo" value="#{catalogosControlador.nuevaDireccion.dnacTelefono}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Descripción -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="descri" value="#{catalogosControlador.nuevaDireccion.dnacDescripcion}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="descri" value="#{catalogosControlador.nuevaDireccion.dnacDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-8" align="center">
+                                <div class="col-xs-12" align="center">
                                     <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
                                     <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarDireccion()}"/>
                                 </div>
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
                             </div>
-                            </h:form>
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </h:form><br/>
                         
                         </form>
                     </div>

@@ -23,7 +23,6 @@
                         <thead>
                             <!-- Título -->
                             <tr><center><h4><font color="507642">LISTADO DE PROYECTOS</font></h4></center></tr>
-                            <!-- Atributos de la tabla -->
                             <tr>
                                 <th><center>Id</center></th>
                                 <th><center>Nombre Proyecto</center></th>
@@ -46,16 +45,14 @@
                                     <td align="center">#{proyecto.estadoId.estadoNombre}</td>
                                     <td align="center">#{proyecto.proyeAnio}</td>
                                     <td align="center">
-                                        <h:commandLink value="Ver" class="btn btn-default btn-xs
-                                                       " action="ver_perfil.jsf">
+                                        <h:commandLink value="Ver" class="btn btn-default btn-xs" action="ver_perfil.jsf">
                                             <f:setPropertyActionListener value="#{proyecto}"
                                                                          target="#{proyectosControlador.proyectoSeleccionado}"  />
-                                        </h:commandLink></td>
-                                    
+                                        </h:commandLink>
+                                    </td>
                                 </tr>
                             </ui:repeat>
                         </tbody> 
-                        
                     </table>
                 </div>
                 

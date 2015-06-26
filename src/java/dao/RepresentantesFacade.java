@@ -6,6 +6,7 @@
 package dao;
 
 import entidades.Representantes;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +28,9 @@ public class RepresentantesFacade extends AbstractFacade<Representantes> {
     public RepresentantesFacade() {
         super(Representantes.class);
     }
+    
+    /*public List<Representantes> buscarRep(int repre){
+        return getEntityManager().createNamedQuery("Representantes.buscarRep").setParameter("repre", repre).getResultList();
+    }*/
     
 }

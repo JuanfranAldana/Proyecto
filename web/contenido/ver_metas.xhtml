@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+    
+    <!-- Vista correspondiente a la Img. 41 Consulta de Metas y Actividades del proyecto -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            <!-- Formulario -->
+            <h:form id="formPerfiles" >
+                <!-- Tabla responsive -->
+                <div class="table table-responsive table-bordered " >
+                    <table id="perfiles" class="table table-striped table-bordered table-hover table-condensed">
+                        <br/>
+                        
+                        <!-- Información del proyecto -->
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                <h:outputLabel value="Proyecto:" style="font-weight: bold"/>  
+                            </div>
+                            <div class="col-md-11">
+                                <h:outputLabel value="#{proyectosControlador.proyectoSeleccionado.proyeNombre}" style="font-weight: bold"/>  
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                <h:outputLabel value="Institución:" style="font-weight: bold"/>  
+                            </div>
+                            <div class="col-md-11">
+                                <h:outputLabel value="#{proyectosControlador.proyectoSeleccionado.instId.instNombre}" style="font-weight: bold"/> 
+                            </div>
+                        </div>
+                        
+                        <!-- Espacio en blanco -->
+                        <div class="col-md-12"><br /></div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h:outputLabel value="Detalle de Metas" style="font-weight: bold"/>  
+                            </div>
+                        </div>
+                        
+                        <!--  Tabla con las metas -->
+                        <table id="" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th><center>Id</center></th>
+                                    <th><center>Nombre de la Meta</center></th>
+                                    <th><center>Monto Total</center></th>
+                                    <th><center>Consultar</center></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ui:repeat value="#{proyectosControlador.proyectoSeleccionado.metasList}" var="meta" >
+                                    <tr>
+                                        <td align="center">#{meta.metaId}</td>
+                                        <td>#{meta.metaNombre}</td>
+                                        <td align="right">#{meta.metaMtoContraparte + meta.metaMtoSec}</td>
+                                        <td align="center">
+                                            <h:commandLink value="Consultar" class="btn btn-default btn-xs" action="#">
+                                                <f:setPropertyActionListener value="#{meta}" target="#{proyectosControlador.meta}"/>
+                                                <ajax update="actividades"/>
+                                            </h:commandLink>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+                            </tbody>
+                        </table>
+                        </table>
+                    
+                    <!-- Espacio en blanco -->
+                    <div class="col-md-12"><br/></div>
+                        
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h:outputLabel value="Detalle de Actividades por Meta Seleccionada" style="font-weight: bold"/>  
+                            </div>
+                        </div>
+                    
+                    <table id="actividades" class="display" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th><center>Id</center></th>
+                                    <th><center>Nombre de la Actividad</center></th>
+                                    <th><center>Consultar</center></th>
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
+                                <ui:repeat value="#{proyectosControlador.todosActividadesporMeta()}" var="actividad" >
+                                    <tr>
+                                        <td align="center">#{actividad.actiId}</td>
+                                        <td>#{actividad.actiNombre}</td>
+                                        <td align="center">
+                                            <h:commandLink value="Consultar" class="btn btn-default btn-xs" action="per_proyecto.jsf">
+                                                <f:setPropertyActionListener value="#{proyecto}"
+                                                                             target="#{proyectosBean.proyectoSeleccionado}"  />
+                                            </h:commandLink>
+                                        </td>
+                                    </tr>
+                                </ui:repeat>
+                            </tbody>
+                            
+                    </table>
+                </div>
+                
+                <!-- Para botón "Regresar" -->
+                <div class="form-group">
+                    
+                    <div align="center" class="col-md-12">
+                        <!-- Botón "Regresar"-->
+                        <h:commandLink value="" class="btn btn-default btn-xm" action="ver_perfil.jsf">
+                            <span class="glyphicon glyphicon-share-alt"></span>Regresar
+                        </h:commandLink>
+                    </div>
+                    
+                    <!-- Espacio en blanco -->
+                    <div class="col-md-12"><br /></div>
+                    
+                </div>
+                
+             </h:form>
+        </ui:define>
+        
+        <ui:define name="scripts">
+            <script>
+                $(document).ready(function() {
+                    
+                    $('table.display').dataTable(
+                            {
+                                "oLanguage": {
+                                    "sProcessing": "Procesando...",
+                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                    "sZeroRecords": "No se encontraron resultados",
+                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "Buscar:",
+                                    "sUrl": "",
+                                    "sInfoThousands": ",",
+                                    "sLoadingRecords": "Cargando...",
+                                    "oPaginate": {
+                                        "sFirst": "Primero",
+                                        "sLast": "Último",
+                                        "sNext": "Siguiente",
+                                        "sPrevious": "Anterior"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                    }
+                                }
+                            }
+                    );
+                    
+                    
+                } );
+            </script>
+        </ui:define>
+    </ui:composition>    
+</html>
+

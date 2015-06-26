@@ -27,6 +27,7 @@ import entidades.TiposFacilitadores;
 import entidades.UnidadesTecnicas;
 import entidades.Usuarios;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -40,6 +41,7 @@ public class CatalogosControlador implements Serializable{
     @EJB
     private CategoriaSeguimientosFacade categoriaSeguimientosFacade;
     private CategoriaSeguimientos nuevaCategoria = new CategoriaSeguimientos();
+    private CategoriaSeguimientos categoriaSeleccionada = new CategoriaSeguimientos();
     
     @EJB
     private DireccionesNacionalesFacade direccionesNacionalesFacade;
@@ -64,14 +66,17 @@ public class CatalogosControlador implements Serializable{
     @EJB
     private TiposFacilitadoresFacade tiposFacilitadoresFacade;
     private TiposFacilitadores nuevoTipo = new TiposFacilitadores();
+    private TiposFacilitadores tipoSeleccionado = new TiposFacilitadores();
     
     @EJB
     private FuentesFinanciamientoFacade fuentesFinanciamientoFacade;
     private FuentesFinanciamiento nuevaFuente = new FuentesFinanciamiento();
+    private FuentesFinanciamiento fuenteSeleccionada = new FuentesFinanciamiento();
     
     @EJB
     private PaisesFacade paisesFacade;
     private Paises nuevoPais = new Paises();
+    private Paises paisSeleccionado = new Paises();
     
     @EJB
     private ContinentesFacade continentesFacade;
@@ -95,7 +100,7 @@ public class CatalogosControlador implements Serializable{
     private Representantes nuevoRepresentante = new Representantes();
     private Representantes representanteSeleccionado = new Representantes();
     
-    private int direccion;
+    private int continente, direccion, pais, rol, unidad, categoria, tipo, institucion;
     
     //Creates a new instance of catalogosControlador
     public CatalogosControlador() {
@@ -153,7 +158,7 @@ public class CatalogosControlador implements Serializable{
     public List<Representantes> todasRepresentantes(){
         return getRepresentantesFacade().findAll();}
     
-    
+/////**********************************************************************/////
     
     //Método Get para obtener datos de entidad CategoriaSeguimientos
     public CategoriaSeguimientosFacade getCategoriaSeguimientosFacade() {
@@ -220,7 +225,7 @@ public class CatalogosControlador implements Serializable{
         return representantesFacade;
     }
     
-        
+/////**********************************************************************/////
     
     //Métodos Get y Set para nuevaCategoria
     public CategoriaSeguimientos getNuevaCategoria() {
@@ -318,7 +323,7 @@ public class CatalogosControlador implements Serializable{
         this.nuevoRepresentante = nuevoRepresentante;
     }
 
-    
+/////**********************************************************************/////  
     
     //Métodos Get y Set para direccionSeleccionada
     public DireccionesNacionales getDireccionSeleccionada() {
@@ -375,18 +380,107 @@ public class CatalogosControlador implements Serializable{
     public void setRepresentanteSeleccionado(Representantes representanteSeleccionado) {
         this.representanteSeleccionado = representanteSeleccionado;
     }
+
+    //Métodos Get y Set para categoriaSeleccionada
+    public CategoriaSeguimientos getCategoriaSeleccionada() {
+        return categoriaSeleccionada;
+    }
+    public void setCategoriaSeleccionada(CategoriaSeguimientos categoriaSeleccionada) {
+        this.categoriaSeleccionada = categoriaSeleccionada;
+    }
+
+    //Métodos Get y Set para paisSeleccionado
+    public Paises getPaisSeleccionado() {
+        return paisSeleccionado;
+    }
+    public void setPaisSeleccionado(Paises paisSeleccionado) {
+        this.paisSeleccionado = paisSeleccionado;
+    }
+
+    //Métodos Get y Set para fuenteSeleccionado
+    public FuentesFinanciamiento getFuenteSeleccionada() {
+        return fuenteSeleccionada;
+    }
+    public void setFuenteSeleccionada(FuentesFinanciamiento fuenteSeleccionada) {
+        this.fuenteSeleccionada = fuenteSeleccionada;
+    }
+
+    //Métodos Get y Set para tipoSeleccionado
+    public TiposFacilitadores getTipoSeleccionado() {
+        return tipoSeleccionado;
+    }
+    public void setTipoSeleccionado(TiposFacilitadores tipoSeleccionado) {
+        this.tipoSeleccionado = tipoSeleccionado;
+    }
     
     
+/////**********************************************************************/////
     
-    //Get y Set para Id Dirección
+    //Métodos Get y Set para Id Direcciones Nacionales
     public int getDireccion() {
         return direccion;
     }
     public void setdireccion(int direccion) {
         this.direccion = direccion;
     }
+
+    //Métodos Get y Set para Id Paises
+    public int getPais() {
+        return pais;
+    }
+    public void setPais(int pais) {
+        this.pais = pais;
+    }
+
+    //Métodos Get y Set para Id Roles
+    public int getRol() {
+        return rol;
+    }
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
+
+    //Métodos Get y Set para Id Unidadades Técnica
+    public int getUnidad() {
+        return unidad;
+    }
+    public void setUnidad(int unidad) {
+        this.unidad = unidad;
+    }
+
+    //Métodos Get y Set para Id Categoria
+    public int getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(int categoria) {
+        this.categoria = categoria;
+    }
+
+    //Métodos Get y Set para Id Continente
+    public int getContinente() {
+        return continente;
+    }
+    public void setContinente(int continente) {
+        this.continente = continente;
+    }
+
+    //Métodos Get y Set para Id Tipofacilitador
+    public int getTipo() {
+        return tipo;
+    }
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    //Métodos Get y Set para Id Instituciones
+    public int getInstitucion() {
+        return institucion;
+    }
+    public void setInstitucion(int institucion) {
+        this.institucion = institucion;
+    }
     
-    
+/////**********************************************************************/////
     
     //Método para guardar a la entidad CategoriaSeguimientos
     public void guardarCategoria() {
@@ -439,18 +533,23 @@ public class CatalogosControlador implements Serializable{
     
     //Método para guardar a la entidad Usuarios
     public void guardarUsuario() {
+        nuevoUsuario.setRolId(new Roles(rol));
+        nuevoUsuario.setUtecId(new UnidadesTecnicas(unidad));
+        nuevoUsuario.setUsuarioFechaCrea(new Date());
         getUsuariosFacade().create(nuevoUsuario);
         nuevoUsuario = new Usuarios();
     }
     
-    //Método para guardar a la entidad Usuarios
+    //Método para guardar a la entidad Instituciones
     public void guardarInstitucion() {
+        nuevaInstitucion.setPaisId(new Paises(pais));
         getInstitucionesFacade().create(nuevaInstitucion);
         nuevaInstitucion = new Instituciones();
     }
     
     //Método para guardar a la entidad SubCatSeguimientos 
     public void guardarSubSeguimientos() {
+        nuevaSubseguimientos.setCatsegId(new CategoriaSeguimientos(categoria));
         getSubCatseguimientosFacade().create(nuevaSubseguimientos);
         nuevaSubseguimientos = new SubCatseguimientos();
     }
@@ -459,6 +558,60 @@ public class CatalogosControlador implements Serializable{
     public void guardarRepresentantes() {
         getRepresentantesFacade().create(nuevoRepresentante);
         nuevoRepresentante = new Representantes();
+    }
+    
+/////**********************************************************************/////
+    
+    //Método para actualizar en la entidad CategoriaSeguimientos 
+    public void actualizarCategoria() {
+        getCategoriaSeguimientosFacade().edit(categoriaSeleccionada);
+    }
+    
+    //Método para actualizar en la entidad DireccionesNacionales 
+    public void actualizarDireccion() {
+        getDireccionesNacionalesFacade().edit(direccionSeleccionada);
+    }
+    
+    //Método para actualizar en la entidad Facilitadores 
+    public void actualizarFacilitador() {
+        facilitadorSeleccionada.setTipofId(new TiposFacilitadores(tipo));
+        facilitadorSeleccionada.setInstId(new Instituciones(institucion));
+        facilitadorSeleccionada.setUtecId(new UnidadesTecnicas(unidad));
+        getFacilitadoresTecnicosFacade().edit(facilitadorSeleccionada);
+    }
+
+    //Método para guardar a la entidad Facilitadores 
+    public void actualizarFuente() {
+        getFuentesFinanciamientoFacade().edit(fuenteSeleccionada);
+    }
+    
+    //Método para guardar a la entidad Paises 
+    public void actualizarPais() {
+        paisSeleccionado.setContiId(new Continentes(continente));
+        getPaisesFacade().edit(paisSeleccionado);
+    }
+    
+    //Método para actualizar en la entidad Instituciones 
+    public void actualizarInstitucion() {
+        institucionSeleccionada.setPaisId(new Paises(pais));
+        getInstitucionesFacade().edit(institucionSeleccionada);
+    }
+    
+    //Método para actualizar en la entidad Unidades Técnicas 
+    public void actualizarUnidad() {
+        unidadSeleccionada.setDnacId(new DireccionesNacionales(direccion));
+        getUnidadesTecnicasFacade().edit(unidadSeleccionada);
+    }
+    
+    //Método para actualizar en la entidad SubCatseguimientos 
+    public void actualizarSubCatsegimientos() {
+        subseguimientosSeleccionada.setCatsegId(new CategoriaSeguimientos(categoria));
+        getSubCatseguimientosFacade().edit(subseguimientosSeleccionada);
+    }
+    
+    //Método para guardar a la entidad TiposFacilitadores 
+    public void actualizarTipo() {
+        getTiposFacilitadoresFacade().edit(tipoSeleccionado);
     }
     
 }

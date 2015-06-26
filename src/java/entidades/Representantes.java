@@ -30,6 +30,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "representantes")
 @NamedQueries({
+    //@NamedQuery(name = "Representantes.buscarRep", query = "SELECT r FROM Representantes r WHERE r.instId.repId =:repre"),
     @NamedQuery(name = "Representantes.findAll", query = "SELECT r FROM Representantes r"),
     @NamedQuery(name = "Representantes.findByRepId", query = "SELECT r FROM Representantes r WHERE r.repId = :repId"),
     @NamedQuery(name = "Representantes.findByRepNombre", query = "SELECT r FROM Representantes r WHERE r.repNombre = :repNombre"),

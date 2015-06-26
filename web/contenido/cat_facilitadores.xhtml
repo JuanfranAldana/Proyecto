@@ -31,27 +31,23 @@
                                 
                 <div id="myTabContent" class="tab-content">
                     
-                    <!-- Primer Panel "Categorías de Seguimientos"-->
+                    <!-- Primer Panel "Catálogo de Facilitadores"-->
                     <div role="tabpanel" class="tab-pane fade active in" id="facilitadores" aria-labelledby="facilitadores-tab">
-                        <form role="form">
+                        <form role="form"><br/>
                         
-                        <!-- Espacio en blanco -->
-                        <div class="col-xs-12"><label></label></div>
-                            
-                        <!-- Formulario para mostrar lista de perfiles -->
+                        <!-- Formulario para mostrar lista de facilitadores -->
                         <h:form id="formFacilitadores">
                             <div class="table table-responsive" >
                                 <table id="facilitador" class="table table-striped table-bordered table-hover table-condensed">
 
                                     <!-- Cabecera de la tabla -->
                                     <thead>
-                                        <!-- Atributos de la tabla -->
                                         <tr>
                                             <th><center>Id.</center></th>
                                             <th><center>Nombre</center></th>
                                             <th><center>Correo</center></th>
                                             <th><center>Tipo de Facilitador</center></th>
-                                            <th><center>Consultar</center></th>
+                                            <th><center>Editar/Ver</center></th>
                                         </tr>
                                     </thead>
 
@@ -62,9 +58,16 @@
                                                 <td align="center">#{facilitador.faciId}</td>
                                                 <td>#{facilitador.faciNombre}</td>
                                                 <td>#{facilitador.faciCorreo}</td>
-                                                <td>#{facilitador.faciDescripcion}</td>
+                                                <td>#{facilitador.tipofId.tipofNombre}</td>
                                                 <td align="center">
-                                                    <h:commandLink value="Ver" class="btn btn-default btn-xs" pt:data-toggle="modal" pt:data-target="#verFacilitador">
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
+                                                                   pt:data-toggle="modal" pt:data-target="#editarFacilitador">
+                                                        <f:setPropertyActionListener value="#{facilitador}" target="#{catalogosControlador.facilitadorSeleccionada}" />
+                                                        <p:ajax process="@this" update=":formFacilitadores:displayJ2"/>
+                                                    </h:commandLink>
+                                                    <label></label>
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
+                                                                   pt:data-toggle="modal" pt:data-target="#verFacilitador">
                                                         <f:setPropertyActionListener value="#{facilitador}" target="#{catalogosControlador.facilitadorSeleccionada}" />
                                                         <p:ajax process="@this" update=":formFacilitadores:displayJ1"/>
                                                     </h:commandLink>
@@ -75,129 +78,241 @@
                                 </table>
                             </div>
                             
-                            <!-- Modal Facilitador -->
+                            <!-- Modal verFacilitador -->
                             <div id="verFacilitador" class="modal">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
+                                        
                                         <!-- Cabecera del modal -->
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                             <h4 class="modal-title"><font color="507642">Facilitador</font></h4>
                                         </div>
+                                        
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
                                             <h:panelGrid id="displayJ1" columns="2" border="0">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Id:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciId}"/> 
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciId}"/> 
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Nombre -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Nombre:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciNombre}"/>
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciNombre}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Correo -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Correo:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Correo :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciCorreo}"/>
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciCorreo}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Teléfono -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Teléfono:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Teléfono :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciTelefono}"/>
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciTelefono}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Cargo -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Cargo:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Cargo :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciCargo}"/>
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciCargo}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Tipo -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Tipo:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Tipo :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.tipofId.tipofNombre}"/>
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.tipofId.tipofNombre}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Institución -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Institución:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Institución :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.instId.instNombre}"/>
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.instId.instNombre}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Unidad Técnica -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Udidad:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Udidad :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.utecId.utecNombre}"/>
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.utecId.utecNombre}"/>
                                                     </div>
                                                 </div>
                                                 
                                                 <!-- Descripción -->
                                                 <div class="form-group">
-                                                    <div class="col-xs-6">
-                                                        <label>Descripción:</label>
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Descripción :</label>
                                                     </div>
-                                                    <div class="col-xs-6">
-                                                        <div>
-                                                            <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciDescripcion}"/>
-                                                        </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciDescripcion}"/>
                                                     </div>
                                                 </div>
                                                 
                                             </h:panelGrid>  
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                            <!-- Modal edtitarFacilitador -->
+                            <div id="editarFacilitador" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642"> Editar Facilitador</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="85%">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciId}"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nombre" value="#{catalogosControlador.facilitadorSeleccionada.faciNombre}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Correo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Correo :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="correo" value="#{catalogosControlador.facilitadorSeleccionada.faciCorreo}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Teléfono -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Teléfono :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="telefo" value="#{catalogosControlador.facilitadorSeleccionada.faciTelefono}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Cargo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Cargo :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="cargo" value="#{catalogosControlador.facilitadorSeleccionada.faciCargo}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Tipo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Tipo :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:selectOneMenu id="tipfac" value="#{catalogosControlador.tipo}"  style="width: 100%;">
+                                                            <f:selectItem itemLabel="#{catalogosControlador.facilitadorSeleccionada.tipofId.tipofNombre}" noSelectionOption="true" itemValue=""/>
+                                                            <f:selectItems value="#{catalogosControlador.todasTiposFacilitadores()}" var="tip" itemLabel="#{tip.tipofNombre}" itemValue="#{tip.tipofId}"/>
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Institución -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Institución :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:selectOneMenu id="inscul" value="#{catalogosControlador.institucion}"  style="width: 100%;">
+                                                            <f:selectItem itemLabel="#{catalogosControlador.facilitadorSeleccionada.instId.instNombre}" noSelectionOption="true" itemValue=""/>
+                                                            <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="ins" itemLabel="#{ins.instNombre}" itemValue="#{ins.instId}"/>
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Unidad Técnica -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Unidad Técnica :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:selectOneMenu id="unitec" value="#{catalogosControlador.unidad}"  style="width: 100%;">
+                                                            <f:selectItem itemLabel="#{catalogosControlador.facilitadorSeleccionada.utecId.utecNombre}" noSelectionOption="true" itemValue=""/>
+                                                            <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="uni" itemLabel="#{uni.utecNombre}" itemValue="#{uni.utecId}"/>
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Descripción -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Descripción :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="descri" value="#{catalogosControlador.facilitadorSeleccionada.faciDescripcion}" style="width: 100%"/> 
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                        
+                                        <!-- Pie del modal -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <h:commandButton id="actualizar" type="submit" class="btn btn-default" value="Actualizar" action="#{catalogosControlador.actualizarFacilitador()}"/>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -209,10 +324,7 @@
                     
                     <!-- Segundo Panel "Nuevo"-->
                     <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
-                        <form role="form">
-                            <h:messages showDetail="true"/>
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                        <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de facilitadores -->
                             <h:form>
@@ -222,216 +334,163 @@
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Id</label>
                                 </div>
                                 <div class="col-xs-1">
-                                    <div>
-                                        <p:inputText id="id" disabled="true" value="#{catalogosControlador.nuevoFacilitador.faciId}" style="width: 100%;"/>
-                                    </div>
+                                    <p:inputText id="id" disabled="true" value="#{catalogosControlador.nuevoFacilitador.faciId}" style="width: 100%;"/>
                                 </div>
                                 <div class="col-xs-6">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Nombre -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="nomcat" value="#{catalogosControlador.nuevoFacilitador.faciNombre}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="nomcat" value="#{catalogosControlador.nuevoFacilitador.faciNombre}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Correo -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Correo</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="correo" value="#{catalogosControlador.nuevoFacilitador.faciCorreo}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="correo" value="#{catalogosControlador.nuevoFacilitador.faciCorreo}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Teléfono -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-xs-3" align="right">
                                     <label></label>
                                 </div>
                                 <div class="col-xs-2">
                                     <label>Teléfono</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <div>
-                                        <p:inputText id="telefo" value="#{catalogosControlador.nuevoFacilitador.faciTelefono}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="telefo" value="#{catalogosControlador.nuevoFacilitador.faciTelefono}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Cargo -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Cargo</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="cargo" value="#{catalogosControlador.nuevoFacilitador.faciCargo}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="cargo" value="#{catalogosControlador.nuevoFacilitador.faciCargo}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Tipo -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Tipo</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <h:selectOneMenu id="tipfac" class="form-control" value="#{catalogosControlador.nuevoFacilitador.tipofId}"  style="width: 100%;" converter="#{tipoFacilConvertidor}">
-                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                            <f:selectItems value="#{catalogosControlador.todasTiposFacilitadores()}" var="tip" itemLabel="#{tip.tipofNombre}" itemValue="#{tip}"/>
-                                        </h:selectOneMenu>
-                                    </div>
+                                    <p:selectOneMenu id="tipfac" value="#{catalogosControlador.nuevoFacilitador.tipofId}"  style="width: 60%;" converter="#{tipoFacilConvertidor}">
+                                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                        <f:selectItems value="#{catalogosControlador.todasTiposFacilitadores()}" var="tip" itemLabel="#{tip.tipofNombre}" itemValue="#{tip}"/>
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Institución -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Institución</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <h:selectOneMenu id="inscul" class="form-control" value="#{catalogosControlador.nuevoFacilitador.instId}"  style="width: 100%;" converter="#{institucionConvertidor}">
-                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                            <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="ins" itemLabel="#{ins.instNombre}" itemValue="#{ins}"/>
-                                        </h:selectOneMenu>
-                                    </div>
+                                    <p:selectOneMenu id="inscul" value="#{catalogosControlador.nuevoFacilitador.instId}"  style="width: 100%;" converter="#{institucionConvertidor}">
+                                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                        <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="ins" itemLabel="#{ins.instNombre}" itemValue="#{ins}"/>
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Unidad Ténica -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Unidad Técnica</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <h:selectOneMenu id="unitec" class="form-control" value="#{catalogosControlador.nuevoFacilitador.utecId}" style="width: 100%;" converter="#{uniTecConvertidor}">
-                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                            <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="uni" itemLabel="#{uni.utecNombre}" itemValue="#{uni}"/>
-                                        </h:selectOneMenu>
-                                    </div>
+                                    <p:selectOneMenu id="unitec" value="#{catalogosControlador.nuevoFacilitador.utecId}" style="width: 100%;" converter="#{uniTecConvertidor}">
+                                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                        <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="uni" itemLabel="#{uni.utecNombre}" itemValue="#{uni}"/>
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Descripción -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="descri" value="#{catalogosControlador.nuevoFacilitador.faciDescripcion}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="descri" value="#{catalogosControlador.nuevoFacilitador.faciDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-8" align="center">
+                                <div class="col-xs-12" align="center">
                                     <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
                                     <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarFacilitador()}"/>
                                 </div>
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
                             </div>
-                            </h:form>
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </h:form><br/>
                         
                         </form>
                     </div>

@@ -2,9 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html   xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:f="http://xmlns.jcp.org/jsf/core">
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <!-- Vista correspondiente a la Img. 17 Listado de Catálogo de Países
                                     Img. 18 Nuevo País -->
@@ -15,9 +16,9 @@
         <!-- Contenedor -->
         <ui:define name="content">
             
-            <!-- Título del formulario "CATALOGOS DE PAISES" -->
+            <!-- Título del formulario "CATALOGO DE PAISES" -->
             <div class="form-header">
-                <h4 class="modal-title"><font color="507642"><center><b>CATÁLOGOS DE PAISES</b></center></font></h4>
+                <h4 class="modal-title"><font color="507642"><center><b>CATÁLOGO DE PAISES</b></center></font></h4>
             </div>
             
             <!-- Panel con 2 pestañas --> 
@@ -32,23 +33,20 @@
                     
                     <!-- Primer Panel "Catálogo de Paises" -->
                     <div role="tabpanel" class="tab-pane fade active in" id="paises" aria-labelledby="paises-tab">
-                        <form role="form">
+                        <form role="form"><br/>
                         
-                        <!-- Espacio en blanco -->
-                        <div class="col-xs-12"><label></label></div>
-                            
                         <!-- Formulario para mostrar lista de paises -->
-                        <h:form id="formSeguimientos">
+                        <h:form id="formPaises">
                             <div class="table table-responsive" >
                                 <table id="pais" class="table table-striped table-bordered table-hover table-condensed">
 
                                     <!-- Cabecera de la tabla -->
                                     <thead>
-                                        <!-- Atributos de la tabla -->
                                         <tr>
                                             <th><center>Id</center></th>
                                             <th><center>Nombre</center></th>
                                             <th><center>Continente</center></th>
+                                            <th><center>Editar</center></th>
                                         </tr>
                                     </thead>
 
@@ -59,11 +57,82 @@
                                                 <td align="center">#{pais.paisId}</td>
                                                 <td>#{pais.paisNombre}</td>
                                                 <td>#{pais.contiId.contiNombre}</td>
+                                                <td align="center">
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
+                                                                   pt:data-toggle="modal" pt:data-target="#editarPais">
+                                                        <f:setPropertyActionListener value="#{pais}" target="#{catalogosControlador.paisSeleccionado}" />
+                                                        <p:ajax process="@this" update=":formPaises:displayJ2"/>
+                                                    </h:commandLink>
+                                                </td>
                                             </tr>
                                         </ui:repeat>
                                     </tbody> 
                                 </table>
                             </div>
+                            
+                            
+                            <!-- Modal editarPais -->
+                            <div id="editarPais" class="modal">
+                                <div class="modal-dialog modal-open" keyboard="true">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                            <h4 class="modal-title"><font color="507642">Editar Pais</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="85%">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.paisSeleccionado.paisId}"/> 
+                                                    </div>
+                                                </div><br></br>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nombre" value="#{catalogosControlador.paisSeleccionado.paisNombre}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br></br>
+                                                
+                                                <!-- Continente -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Continente :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:selectOneMenu id="contin" value="#{catalogosControlador.continente}"  style="width: 100%;">
+                                                            <f:selectItem itemLabel="#{catalogosControlador.paisSeleccionado.contiId.contiNombre}" noSelectionOption="true" itemValue=""/>
+                                                            <f:selectItems value="#{catalogosControlador.todasContinentes()}" var="con" itemLabel="#{con.contiNombre}" itemValue="#{con.contiId}"/>
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                        
+                                        <!-- Pie del modal -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <h:commandButton id="actualizar" type="submit" class="btn btn-default" value="Actualizar" action="#{catalogosControlador.actualizarPais()}"/>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        
                         </h:form>
                         </form>
                     </div>
@@ -71,10 +140,7 @@
                     
                     <!-- Segundo Panel "Nuevo"-->
                     <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
-                        <form role="form">
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                        <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de paises -->
                             <h:form>
@@ -84,84 +150,61 @@
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Id</label>
                                 </div>
                                 <div class="col-xs-1">
-                                    <div>
-                                        <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
-                                    </div>
+                                    <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
                                 </div>
                                 <div class="col-xs-6">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Nombre -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <div>
-                                        <p:inputText id="nomcat" value="#{catalogosControlador.nuevoPais.paisNombre}" style="width: 100%;"/> 
-                                    </div>
+                                    <p:inputText id="nomcat" value="#{catalogosControlador.nuevoPais.paisNombre}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
                                 </div>
-                            </div>
+                            </div><br/>
                             
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
-                            
-                            <!-- Descripción -->
+                            <!-- Continente -->
                             <div class="row">
                                 <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Continente</label>
                                 </div>
                                 <div class="col-xs-2">
-                                    <div>
-                                        <h:selectOneMenu id="contin" class="form-control" value="#{catalogosControlador.nuevoPais.contiId}"  style="width: 100%;" converter="#{continenteConvertidor}">
-                                            <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                            <f:selectItems value="#{catalogosControlador.todasContinentes()}" var="con" itemLabel="#{con.contiNombre}" itemValue="#{con}"/>
-                                        </h:selectOneMenu>
-                                    </div>
+                                    <p:selectOneMenu id="contin" value="#{catalogosControlador.nuevoPais.contiId}"  style="width: 100%;" converter="#{continenteConvertidor}">
+                                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                        <f:selectItems value="#{catalogosControlador.todasContinentes()}" var="con" itemLabel="#{con.contiNombre}" itemValue="#{con}"/>
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-5">
                                     <label></label>
                                 </div>
-                            </div>
-                            
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </div><br/>
                             
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-8" align="center">
+                                <div class="col-xs-12" align="center">
                                     <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
                                     <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarPais()}"/>
                                 </div>
-                                <div class="col-xs-2">
-                                    <label></label>
-                                </div>
                             </div>
-                            </h:form>
-                            <!-- Espacio en blanco -->
-                            <div class="col-xs-12"><label></label></div>
+                            </h:form><br/>
                         
                         </form>
                     </div>

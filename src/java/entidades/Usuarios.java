@@ -88,11 +88,13 @@ public class Usuarios implements Serializable {
         this.usuarioUsuario = usuarioUsuario;
     }
 
-    public Usuarios(String usuarioUsuario, int usuarioId, String usuarioNombre, String usuarioContrasenia) {
+    public Usuarios(String usuarioUsuario, int usuarioId, String usuarioNombre, String usuarioContrasenia, Date usuarioFechaCrea) {
         this.usuarioUsuario = usuarioUsuario;
         this.usuarioId = usuarioId;
         this.usuarioNombre = usuarioNombre;
         this.usuarioContrasenia = usuarioContrasenia;
+        this.usuarioFechaCrea = usuarioFechaCrea;
+       
     }
 
     public int getUsuarioId() {

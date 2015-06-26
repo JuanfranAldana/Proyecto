@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <!-- Vista correspondiente a la Img. 37 Detalle de Proyecto Seleccionado -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+        template="./../plantillas/plantilla1.xhtml">
+                        
+       <!-- Contenedor -->
+        <ui:define name="content"> 
+            <!-- Formulario -->
+            <h:form id="formPerfiles" >
+                <!-- Tabla responseive -->
+                <div class="table table-responsive table-bordered " >
+                    <table id="perfiles" class="table table-striped table-bordered table-hover table-condensed">
+                    
+                        <!-- Espacio en blanco -->
+                        <div class="col-md-12"><br /></div>
+                        
+                        <!-- Información del perfil -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-2" align="right">
+                                <label>Proyecto :</label>  
+                            </div>
+                            <div class="col-md-6">
+                                <h:outputLabel value="#{proyectosControlador.proyectoSeleccionado.proyeNombre}"/> 
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div><br/>
+                        
+                        <div class="form-group">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-2" align="right">
+                                <label>Institución :</label>
+                            </div>
+                            <div class="col-md-6">
+                                <h:outputLabel value="#{proyectosControlador.proyectoSeleccionado.instId.instNombre}"/>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div><br/>
+                        
+                        
+                        <div class="form-group">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-2" align="right">
+                                <label>Estado :</label>
+                            </div>
+                            <div class="col-md-6">
+                                <h:outputLabel value="#{proyectosControlador.proyectoSeleccionado.estadoId.estadoNombre}"/>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div><br/>
+                        
+                        <div class="form-group">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-2" align="right">
+                                <label>Año :</label>
+                            </div>
+                            <div class="col-md-6">
+                                <h:outputLabel value="#{proyectosControlador.proyectoSeleccionado.proyeAnio}"/>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div><br/>
+                
+                        <!-- Hipervinculos -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-2">
+                                <a href="vis_proyecto.jsf">Ver Perfil</a> 
+                            </div>
+                            <div class="col-md-3">
+                                <a href="ver_metas.jsf">Ver Metas y Actividades</a> 
+                            </div>
+                            <div class="col-md-2">
+                                <a href="lis_seguimientos.jsf">Ver Seguimientos</a> 
+                            </div>
+                            <div class="col-md-2">
+                            </div>
+                        </div><br/>
+                       
+                        <!-- Botón inferior central "Regresar" -->
+                        <div class="col-md-12" align="center" >
+                            <a href="lis_proyectos.jsf" class="btn btn-default  btn-xm">
+                                <span class="glyphicon glyphicon-share-alt"></span>Regresar
+                                <!-- <img src="../resources/iconos/addIC.png"></img>Nuevo Perfil  -->
+                            </a>
+                        </div>
+                        
+                    </table>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

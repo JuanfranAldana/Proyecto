@@ -33,6 +33,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "actividades")
 @NamedQueries({
+    @NamedQuery(name = "Actividades.buscarMeta", query = "SELECT a FROM Actividades a WHERE a.metaId.metaId =:meta"),
     @NamedQuery(name = "Actividades.findAll", query = "SELECT a FROM Actividades a"),
     @NamedQuery(name = "Actividades.findByActiId", query = "SELECT a FROM Actividades a WHERE a.actiId = :actiId"),
     @NamedQuery(name = "Actividades.findByActiNombre", query = "SELECT a FROM Actividades a WHERE a.actiNombre = :actiNombre"),
