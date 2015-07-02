@@ -63,13 +63,13 @@
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
                                                                    pt:data-toggle="modal" pt:data-target="#editarDireccion">
                                                         <f:setPropertyActionListener value="#{direccion}" target="#{catalogosControlador.direccionSeleccionada}" />
-                                                        <p:ajax process="@this" update=":formDirecciones:displayJ2"/>
+                                                        <p:ajax process="@this" update=":formDirecciones:editar"/>
                                                     </h:commandLink>
                                                     <label></label>
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
                                                                    pt:data-toggle="modal" pt:data-target="#verDireccion">
                                                         <f:setPropertyActionListener value="#{direccion}" target="#{catalogosControlador.direccionSeleccionada}" />
-                                                        <p:ajax process="@this" update=":formDirecciones:displayJ1"/>
+                                                        <p:ajax process="@this" update=":formDirecciones:ver"/>
                                                     </h:commandLink>
                                                 </td>
                                             </tr>
@@ -78,7 +78,7 @@
                                 </table>
                             </div>
                             
-                            <!-- Modal verDirecciones -->
+                            <!-- Modal verDireccion -->
                             <div id="verDireccion" class="modal">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -91,7 +91,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ1" columns="2" border="0">
+                                            <h:panelGrid id="ver" columns="2" border="0">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -173,7 +173,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="85%">
+                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -191,7 +191,7 @@
                                                         <label>Nombre :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="nomcat" value="#{catalogosControlador.direccionSeleccionada.dnacNombre}" style="width: 100%"/> 
+                                                        <p:inputText id="nombre" value="#{catalogosControlador.direccionSeleccionada.dnacNombre}" style="width: 100%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -201,7 +201,7 @@
                                                         <label>Director :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="direct" value="#{catalogosControlador.direccionSeleccionada.dnacDirector}" style="width: 100%"/> 
+                                                        <p:inputText id="director" value="#{catalogosControlador.direccionSeleccionada.dnacDirector}" style="width: 100%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -221,7 +221,7 @@
                                                         <label>Teléfono :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="telefo" value="#{catalogosControlador.direccionSeleccionada.dnacTelefono}" style="width: 100%"/> 
+                                                        <p:inputText id="telefono" value="#{catalogosControlador.direccionSeleccionada.dnacTelefono}" style="width: 100%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -231,7 +231,7 @@
                                                         <label>Descripción :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="descri" value="#{catalogosControlador.direccionSeleccionada.dnacDescripcion}" style="width: 100%"/> 
+                                                        <p:inputText id="descripcion" value="#{catalogosControlador.direccionSeleccionada.dnacDescripcion}" style="width: 100%"/> 
                                                     </div>
                                                 </div>
                                             
@@ -301,7 +301,7 @@
                                     <label>Director</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="direct" value="#{catalogosControlador.nuevaDireccion.dnacDirector}" style="width: 100%;"/> 
+                                    <p:inputText id="director" value="#{catalogosControlador.nuevaDireccion.dnacDirector}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -317,7 +317,7 @@
                                     <label>Correo Dir.</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="cordir" value="#{catalogosControlador.nuevaDireccion.dnacCorreoDir}" style="width: 100%;"/> 
+                                    <p:inputText id="correo" value="#{catalogosControlador.nuevaDireccion.dnacCorreoDir}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -333,7 +333,7 @@
                                     <label>Teléfono</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="telefo" value="#{catalogosControlador.nuevaDireccion.dnacTelefono}" style="width: 100%;"/> 
+                                    <p:inputText id="telefono" value="#{catalogosControlador.nuevaDireccion.dnacTelefono}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
@@ -349,7 +349,7 @@
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="descri" value="#{catalogosControlador.nuevaDireccion.dnacDescripcion}" style="width: 100%;"/> 
+                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevaDireccion.dnacDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -359,9 +359,9 @@
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
                                 <div class="col-xs-12" align="center">
-                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
-                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarDireccion()}"/>
+                                    <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarDireccion()}"/>
                                 </div>
                             </div>
                             </h:form><br/>

@@ -6,6 +6,7 @@
 package dao;
 
 import entidades.Instituciones;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,10 @@ public class InstitucionesFacade extends AbstractFacade<Instituciones> {
 
     public InstitucionesFacade() {
         super(Instituciones.class);
+    }
+    
+    public List<Instituciones> buscarInst(int inst){
+        return getEntityManager().createNamedQuery("Instituciones.findByInstId").setParameter("instId", inst).getResultList();
     }
     
 }

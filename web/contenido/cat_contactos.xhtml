@@ -33,8 +33,21 @@
                     
                     <!-- Primer Panel "Catálogo de Contactos"-->
                     <div role="tabpanel" class="tab-pane fade active in" id="contactos" aria-labelledby="contactos-tab">
-                        <form role="form">
+                        <form role="form"><br/>
                         
+                        <!-- Selección de la institución -->
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <p:selectOneMenu  id="inscul" value="#{catalogosControlador.institucion}"  style="width: 100%;">
+                                    <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                    <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="inst" itemLabel="#{inst.instNombre}" itemValue="#{inst.instId}"/>
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-xs-1">
+                                <input type="submit" value="Ver"/>
+                            </div>
+                        </div> 
+                            
                         <!-- Espacio en blanco -->
                         <div class="col-xs-12"><label></label></div>
                             
@@ -45,27 +58,34 @@
 
                                     <!-- Cabecera de la tabla -->
                                     <thead>
-                                        <!-- Atributos de la tabla -->
                                         <tr>
                                             <th><center>Id</center></th>
                                             <th><center>Nombre</center></th>
                                             <th><center>Teléfono</center></th>
                                             <th><center>Unidad/Institución</center></th>
-                                            <th><center>Consultar</center></th>
+                                            <th><center>Editar/Ver</center></th>
                                         </tr>
                                     </thead>
 
                                     <!-- Cuerpo de la tabla -->
                                     <tbody>
-                                        <ui:repeat value="#{catalogosControlador.todasDireccionesNacionales()}" var="direccion" >
+                                        <ui:repeat value="#{catalogosControlador.todasRepresentantesByInst()}" var="contacto" >
                                             <tr>
-                                                <td align="center">#{direccion.dnacId}</td>
-                                                <td>#{direccion.dnacNombre}</td>
-                                                <td>#{direccion.dnacDirector}</td>
-                                                <td>#{direccion.dnacCorreoDir}</td>
+                                                <td align="center">#{contacto.repId}</td>
+                                                <td>#{contacto.repNombre}</td>
+                                                <td align="center">#{contacto.repTelefono}</td>
+                                                <td align="center">#{contacto.instId.instNombre}</td>
                                                 <td align="center">
-                                                    <h:commandLink value="Ver" class="btn btn-default btn-xs" pt:data-toggle="modal" pt:data-target="#verDireccion">
-                                                        <f:setPropertyActionListener value="#{fixme}" target="#{fixme}" />
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
+                                                                   pt:data-toggle="modal" pt:data-target="#editarContacto">
+                                                        <f:setPropertyActionListener value="#{contacto}" target="#{catalogosControlador.representanteSeleccionado}"/>
+                                                        <p:ajax process="@this" update=":formContactos:editar"/>
+                                                    </h:commandLink>
+                                                    <label></label>
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
+                                                                   pt:data-toggle="modal" pt:data-target="#verContacto">
+                                                        <f:setPropertyActionListener value="#{contacto}" target="#{catalogosControlador.representanteSeleccionado}"/>
+                                                        <p:ajax process="@this" update=":formContactos:ver"/>
                                                     </h:commandLink>
                                                 </td>
                                             </tr>
@@ -74,12 +94,274 @@
                                 </table>
                             </div>
                             
-                        <!-- Aquí va el modal -->    
+                        <!-- Modal verContacto -->
+                            <div id="verContacto" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642">Contacto</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="ver" columns="2" border="0">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repId}"/> 
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repNombre}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Correo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Correo :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repCorreo}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Teléfono -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Teléfono :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repTelefono}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Institución -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Institución :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.instId.instNombre}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- DUI -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>DUI :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repDui}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- NIT -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>NIT :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repNit}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Nacionalidad -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nacionalidad :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repNacionalidad}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- No. Pasaporte -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>No. Pasaporte :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repPasaporte}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Fecha Ingreso -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Fecha Ingreso :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repFechaIngreso}">
+                                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                        </h:outputText>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Activo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Activo :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repActivo}"/>
+                                                    </div>
+                                                </div>
+                                                                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>   
                             
+                            <!-- Modal editarContacto -->
+                            <div id="editarContacto" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642">Editar Contacto</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.representanteSeleccionado.repId}"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nombre" value="#{catalogosControlador.representanteSeleccionado.repNombre}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Correo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Correo :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="correo" value="#{catalogosControlador.representanteSeleccionado.repCorreo}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Teléfono -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Teléfono :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="telefono" value="#{catalogosControlador.representanteSeleccionado.repTelefono}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- DUI -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>DUI :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="dui" value="#{catalogosControlador.representanteSeleccionado.repDui}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                 
+                                                <!-- NIT -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>NIT :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nit" value="#{catalogosControlador.representanteSeleccionado.repNit}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Nacionalidad -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nacionalidad :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nacionalidad" value="#{catalogosControlador.representanteSeleccionado.repNacionalidad}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- No. Pasaporte -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>No. Pasaporte :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="pasaporte" value="#{catalogosControlador.representanteSeleccionado.repPasaporte}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Fecha de Ingreso -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Fecha de Ingreso :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:calendar id="fechaingreso" value="#{catalogosControlador.representanteSeleccionado.repFechaIngreso}" locale="es"
+                                                                    pattern="dd-MM-yyyy" showOn="button" size="12" tabindex="2" style="width: 100%;">
+                                                            <p:ajax event="dateSelect" />
+                                                        </p:calendar>
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Activo -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Activo :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:selectBooleanCheckbox id="activo" value="#{catalogosControlador.representanteSeleccionado.repActivo}">
+                                                        </h:selectBooleanCheckbox>
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                        
+                                        <!-- Pie del modal -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <h:commandButton id="actualizar" type="submit" class="btn btn-default" value="Actualizar" action="#{catalogosControlador.actualizarRepresentante()}"/>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
                         </h:form>
                         </form>
                     </div>
-                    
                     
                     <!-- Segundo Panel "Nuevo"-->
                     <div role="tabpanel" class="tab-pane fade" id="nuevo" aria-labelledby="nuevo-tab">
@@ -250,9 +532,9 @@
                                     <label></label>
                                 </div>
                                 <div class="col-xs-8" align="center">
-                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
-                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{fixme}"/>
+                                    <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{fixme}"/>
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>

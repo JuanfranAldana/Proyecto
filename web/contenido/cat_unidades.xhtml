@@ -59,13 +59,13 @@
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
                                                                    pt:data-toggle="modal" pt:data-target="#editarUnidad">
                                                         <f:setPropertyActionListener value="#{unidad}" target="#{catalogosControlador.unidadSeleccionada}" />
-                                                        <p:ajax process="@this" update=":formUnidades:displayJ2"/>
+                                                        <p:ajax process="@this" update=":formUnidades:editar"/>
                                                     </h:commandLink>
                                                     <label></label>
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
                                                                    pt:data-toggle="modal" pt:data-target="#verUnidad">
                                                         <f:setPropertyActionListener value="#{unidad}" target="#{catalogosControlador.unidadSeleccionada}" />
-                                                        <p:ajax process="@this" update=":formUnidades:displayJ1"/>
+                                                        <p:ajax process="@this" update=":formUnidades:ver"/>
                                                     </h:commandLink>
                                                 </td>
                                             </tr>
@@ -87,7 +87,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ1" columns="2" border="0">
+                                            <h:panelGrid id="ver" columns="2" border="0">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -169,7 +169,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="85%">
+                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -197,7 +197,7 @@
                                                         <label>Teléfono :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="telefo" value="#{catalogosControlador.unidadSeleccionada.utecTelefono}" style="width: 50%"/> 
+                                                        <p:inputText id="telefono" value="#{catalogosControlador.unidadSeleccionada.utecTelefono}" style="width: 50%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -207,7 +207,7 @@
                                                         <label>Ubicación :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="ubicac" value="#{catalogosControlador.unidadSeleccionada.utecUbicacion}" style="width: 100%"/> 
+                                                        <p:inputText id="ubicacion" value="#{catalogosControlador.unidadSeleccionada.utecUbicacion}" style="width: 100%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -217,9 +217,9 @@
                                                         <label>Dirección Nacional :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <h:selectOneMenu id="dirnac" value="#{catalogosControlador.direccion}"  style="width: 100%;">
+                                                        <h:selectOneMenu id="dirnacional" value="#{catalogosControlador.direccion}"  style="width: 100%;">
                                                             <f:selectItem itemLabel="#{catalogosControlador.unidadSeleccionada.dnacId.dnacNombre}" noSelectionOption="true" itemValue=""/>
-                                                            <f:selectItems value="#{catalogosControlador.todasDireccionesNacionales()}" var="dir" itemLabel="#{dir.dnacNombre}" itemValue="#{dir.dnacId}"/>
+                                                            <f:selectItems value="#{catalogosControlador.todasDireccionesNacionales()}" var="direc" itemLabel="#{direc.dnacNombre}" itemValue="#{direc.dnacId}"/>
                                                         </h:selectOneMenu>
                                                     </div>
                                                 </div><br/>
@@ -230,7 +230,7 @@
                                                         <label>Descripción :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="nit" value="#{catalogosControlador.unidadSeleccionada.utecDescripcion}" style="width: 100%"/> 
+                                                        <p:inputText id="descripcion" value="#{catalogosControlador.unidadSeleccionada.utecDescripcion}" style="width: 100%"/> 
                                                     </div>
                                                 </div>
                                                 
@@ -300,7 +300,7 @@
                                     <label>Teléfono</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="direct" value="#{catalogosControlador.nuevaUnidad.utecTelefono}" style="width: 100%;"/> 
+                                    <p:inputText id="telefono" value="#{catalogosControlador.nuevaUnidad.utecTelefono}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
@@ -316,7 +316,7 @@
                                     <label>Ubicación</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="cordir" value="#{catalogosControlador.nuevaUnidad.utecUbicacion}" style="width: 100%;"/> 
+                                    <p:inputText id="ubicacion" value="#{catalogosControlador.nuevaUnidad.utecUbicacion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -332,9 +332,9 @@
                                     <label>Dirección Nacional</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <h:selectOneMenu id="dirnac" class="form-control" value="#{catalogosControlador.direccion}"  style="width: 100%;">
+                                    <h:selectOneMenu id="dirnacional" class="form-control" value="#{catalogosControlador.direccion}"  style="width: 100%;">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                        <f:selectItems value="#{catalogosControlador.todasDireccionesNacionales()}" var="dir" itemLabel="#{dir.dnacNombre}" itemValue="#{dir.dnacId}"/>
+                                        <f:selectItems value="#{catalogosControlador.todasDireccionesNacionales()}" var="direc" itemLabel="#{direc.dnacNombre}" itemValue="#{direc.dnacId}"/>
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
@@ -351,7 +351,7 @@
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="descri" value="#{catalogosControlador.nuevaUnidad.utecDescripcion}" style="width: 100%;"/> 
+                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevaUnidad.utecDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -361,9 +361,9 @@
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
                                 <div class="col-xs-12" align="center">
-                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
-                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarUnidad()}"/>
+                                    <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarUnidad()}"/>
                                 </div>
                             </div>
                             </h:form><br/>

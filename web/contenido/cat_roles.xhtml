@@ -2,9 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html   xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:f="http://xmlns.jcp.org/jsf/core">
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
 
     <!-- Vista correspondiente a la Img. 29 Listado de Catálogo de Roles
                                     Img. 30 Nuevo Rol -->
@@ -45,6 +46,7 @@
                                             <th><center>Id.</center></th>
                                             <th><center>Nombre</center></th>
                                             <th><center>Descripción</center></th>
+                                            <th><center>Editar/Ver</center></th>
                                         </tr>
                                     </thead>
 
@@ -55,11 +57,134 @@
                                                 <td align="center">#{rol.rolId}</td>
                                                 <td>#{rol.rolNombre}</td>
                                                 <td>#{rol.rolDescripcion}</td>
+                                                <td align="center">
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
+                                                                   pt:data-toggle="modal" pt:data-target="#editarRol">
+                                                        <f:setPropertyActionListener value="#{rol}" target="#{catalogosControlador.rolSeleccionado}" />
+                                                        <p:ajax process="@this" update=":formRoles:editar"/>
+                                                    </h:commandLink>
+                                                    <label></label>
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
+                                                                   pt:data-toggle="modal" pt:data-target="#verRol">
+                                                        <f:setPropertyActionListener value="#{rol}" target="#{catalogosControlador.rolSeleccionado}" />
+                                                        <p:ajax process="@this" update=":formRoles:ver"/>
+                                                    </h:commandLink>
+                                                </td>
                                             </tr>
                                         </ui:repeat>
                                     </tbody> 
                                 </table>
                             </div>
+                            
+                            <!-- Modal verRol -->
+                            <div id="verRol" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642">Rol</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="ver" columns="2" border="0">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.rolSeleccionado.rolId}"/> 
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.rolSeleccionado.rolNombre}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Descripción -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Descripción :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.rolSeleccionado.rolDescripcion}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Modal editarUsuario -->
+                            <div id="editarRol" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642">Editar Rol</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.rolSeleccionado.rolId}" /> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="nombre" value="#{catalogosControlador.rolSeleccionado.rolNombre}" style="width: 100%"/> 
+                                                    </div>
+                                                </div><br/>
+                                                
+                                                <!-- Descripción -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Descripción :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <p:inputText id="descripcion" value="#{catalogosControlador.rolSeleccionado.rolDescripcion}" style="width: 100%"/> 
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                        
+                                        <!-- Pie del modal -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                            <h:commandButton id="actualizar" type="submit" class="btn btn-default" value="Actualizar" action="#{catalogosControlador.actualizarRol()}"/>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </h:form>
                         </form>
                     </div>
@@ -97,7 +222,7 @@
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="nomcat" value="#{catalogosControlador.nuevoRol.rolNombre}" style="width: 100%;"/> 
+                                    <p:inputText id="nombre" value="#{catalogosControlador.nuevoRol.rolNombre}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
@@ -113,7 +238,7 @@
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="descri" value="#{catalogosControlador.nuevoRol.rolDescripcion}" style="width: 100%;"/> 
+                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevoRol.rolDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -126,9 +251,9 @@
                                     <label></label>
                                 </div>
                                 <div class="col-xs-8" align="center">
-                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
-                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarRol()}"/>
+                                    <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarRol()}"/>
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>

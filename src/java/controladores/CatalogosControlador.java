@@ -84,6 +84,7 @@ public class CatalogosControlador implements Serializable{
     @EJB
     private RolesFacade rolesFacade;
     private Roles nuevoRol = new Roles();
+    private Roles rolSeleccionado = new Roles();
     
     @EJB
     private UsuariosFacade usuariosFacade;
@@ -101,6 +102,11 @@ public class CatalogosControlador implements Serializable{
     private Representantes representanteSeleccionado = new Representantes();
     
     private int continente, direccion, pais, rol, unidad, categoria, tipo, institucion;
+    private int inst;
+    
+    //Variables para concatenar duración de SubCategoría de Seguimientos
+    private String unidadTamanio="", unidadTiempo="";
+    
     
     //Creates a new instance of catalogosControlador
     public CatalogosControlador() {
@@ -157,6 +163,11 @@ public class CatalogosControlador implements Serializable{
     //Método que devuelve lista de Representantes
     public List<Representantes> todasRepresentantes(){
         return getRepresentantesFacade().findAll();}
+    
+    //Método que devuelve lista de Representantes por Id de Instituciones
+    public List<Representantes> todasRepresentantesByInst(){
+        return getRepresentantesFacade().buscarRep(institucion);}
+    
     
 /////**********************************************************************/////
     
@@ -412,6 +423,14 @@ public class CatalogosControlador implements Serializable{
     public void setTipoSeleccionado(TiposFacilitadores tipoSeleccionado) {
         this.tipoSeleccionado = tipoSeleccionado;
     }
+
+    //Métodos Get y Set para rolSeleccionado
+    public Roles getRolSeleccionado() {
+        return rolSeleccionado;
+    }
+    public void setRolSeleccionado(Roles rolSeleccionado) {
+        this.rolSeleccionado = rolSeleccionado;
+    }
     
     
 /////**********************************************************************/////
@@ -479,6 +498,33 @@ public class CatalogosControlador implements Serializable{
     public void setInstitucion(int institucion) {
         this.institucion = institucion;
     }
+
+    
+    public int getInst() {
+        return inst;
+    }
+    public void setInst(int inst) {
+        this.inst = inst;
+    }
+    
+/////**********************************************************************/////    
+
+    public String getUnidadTamanio() {
+        return unidadTamanio;
+    }
+    public void setUnidadTamanio(String unidadTamanio) {
+        this.unidadTamanio = unidadTamanio;
+    }
+
+    public String getUnidadTiempo() {
+        return unidadTiempo;
+    }
+    public void setUnidadTiempo(String unidadTiempo) {
+        this.unidadTiempo = unidadTiempo;
+    }
+
+    
+    
     
 /////**********************************************************************/////
     
@@ -550,6 +596,7 @@ public class CatalogosControlador implements Serializable{
     //Método para guardar a la entidad SubCatSeguimientos 
     public void guardarSubSeguimientos() {
         nuevaSubseguimientos.setCatsegId(new CategoriaSeguimientos(categoria));
+        nuevaSubseguimientos.setSubcatDuracion(unidadTamanio+unidadTiempo);
         getSubCatseguimientosFacade().create(nuevaSubseguimientos);
         nuevaSubseguimientos = new SubCatseguimientos();
     }
@@ -609,9 +656,27 @@ public class CatalogosControlador implements Serializable{
         getSubCatseguimientosFacade().edit(subseguimientosSeleccionada);
     }
     
-    //Método para guardar a la entidad TiposFacilitadores 
+    //Método para actualizar en la entidad TiposFacilitadores 
     public void actualizarTipo() {
         getTiposFacilitadoresFacade().edit(tipoSeleccionado);
     }
     
+    //Método para actualizar en la entidad Representantes 
+    public void actualizarRepresentante() {
+        getRepresentantesFacade().edit(representanteSeleccionado);
+    }
+    
+    //Método para actualizar en la entidad Roles 
+    public void actualizarRol() {
+        getRolesFacade().edit(rolSeleccionado);
+    }
+    
+    //Método para actualizar en la entidad Usuarios 
+    public void actualizarUsuario() {
+        usuarioSeleccionado.setRolId(new Roles(rol));
+        usuarioSeleccionado.setUtecId(new UnidadesTecnicas(unidad));
+        usuarioSeleccionado.setUsuarioFechaCrea(new Date());
+        getUsuariosFacade().edit(usuarioSeleccionado);
+    }
+
 }

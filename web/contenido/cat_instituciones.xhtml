@@ -63,13 +63,13 @@
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
                                                                    pt:data-toggle="modal" pt:data-target="#editarInstitucion">
                                                         <f:setPropertyActionListener value="#{institucion}" target="#{catalogosControlador.institucionSeleccionada}" />
-                                                        <p:ajax process="@this" update=":formInstituciones:displayJ2"/>
+                                                        <p:ajax process="@this" update=":formInstituciones:editar"/>
                                                     </h:commandLink>
                                                     <label></label>
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
                                                                    pt:data-toggle="modal" pt:data-target="#verInstitucion">
                                                         <f:setPropertyActionListener value="#{institucion}" target="#{catalogosControlador.institucionSeleccionada}" />
-                                                        <p:ajax process="@this" update=":formInstituciones:displayJ1"/>
+                                                        <p:ajax process="@this" update=":formInstituciones:ver"/>
                                                     </h:commandLink>
                                                 </td>
                                             </tr>
@@ -91,7 +91,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ1" columns="2" border="0">
+                                            <h:panelGrid id="ver" columns="2" border="0">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -192,7 +192,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="95%">
+                                            <h:panelGrid id="editar" columns="2" border="0" width="95%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -220,7 +220,7 @@
                                                         <label>Teléfono :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="telefo" value="#{catalogosControlador.institucionSeleccionada.instTelefono}" style="width: 50%"/> 
+                                                        <p:inputText id="telefono" value="#{catalogosControlador.institucionSeleccionada.instTelefono}" style="width: 50%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -230,7 +230,7 @@
                                                         <label>Dirección :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="direcc" value="#{catalogosControlador.institucionSeleccionada.instDireccion}" style="width: 100%"/> 
+                                                        <p:inputText id="direccion" value="#{catalogosControlador.institucionSeleccionada.instDireccion}" style="width: 100%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -242,7 +242,7 @@
                                                     <div class="col-xs-12">
                                                         <h:selectOneMenu id="pais" value="#{catalogosControlador.pais}"  style="width: 100%;">
                                                             <f:selectItem itemLabel="#{catalogosControlador.institucionSeleccionada.paisId.paisNombre}" noSelectionOption="true" itemValue=""/>
-                                                            <f:selectItems value="#{catalogosControlador.todasPaises()}" var="pai" itemLabel="#{pai.paisNombre}" itemValue="#{pai.paisId}"/>
+                                                            <f:selectItems value="#{catalogosControlador.todasPaises()}" var="pais" itemLabel="#{pais.paisNombre}" itemValue="#{pais.paisId}"/>
                                                         </h:selectOneMenu>
                                                     </div>
                                                 </div><br/>
@@ -263,7 +263,7 @@
                                                         <label>No. Registro Contribuyente:</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="numcon" value="#{catalogosControlador.institucionSeleccionada.instRegFiscal}" style="width: 100%"/> 
+                                                        <p:inputText id="numerocontri" value="#{catalogosControlador.institucionSeleccionada.instRegFiscal}" style="width: 100%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -273,7 +273,7 @@
                                                         <label>Descripción :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="descri" value="#{catalogosControlador.institucionSeleccionada.instDescripcion}" style="width: 100%"/> 
+                                                        <p:inputText id="descripcion" value="#{catalogosControlador.institucionSeleccionada.instDescripcion}" style="width: 100%"/> 
                                                     </div>
                                                 </div>
                                                 
@@ -330,7 +330,7 @@
                                     <label>Teléfono</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="telefo" value="#{catalogosControlador.nuevaInstitucion.instTelefono}" style="width: 100%;"/> 
+                                    <p:inputText id="telefono" value="#{catalogosControlador.nuevaInstitucion.instTelefono}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-1">
                                 </div>
@@ -344,7 +344,7 @@
                                     <label>Dirección</label>
                                 </div>
                                 <div class="col-xs-9">
-                                    <p:inputText id="direcc" value="#{catalogosControlador.nuevaInstitucion.instDireccion}" style="width: 100%;"/> 
+                                    <p:inputText id="direccion" value="#{catalogosControlador.nuevaInstitucion.instDireccion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-1">
                                 </div>
@@ -360,7 +360,7 @@
                                 <div class="col-xs-4">
                                     <p:selectOneMenu id="pais" value="#{catalogosControlador.pais}"  style="width: 75%;">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                        <f:selectItems value="#{catalogosControlador.todasPaises()}" var="pai" itemLabel="#{pai.paisNombre}" itemValue="#{pai.paisId}"/>
+                                        <f:selectItems value="#{catalogosControlador.todasPaises()}" var="pais" itemLabel="#{pais.paisNombre}" itemValue="#{pais.paisId}"/>
                                     </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-6">
@@ -381,7 +381,7 @@
                                     <label>No. Registro Contribuyente</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="regcon" value="#{catalogosControlador.nuevaInstitucion.instRegFiscal}" style="width: 100%;"/> 
+                                    <p:inputText id="registrocontri" value="#{catalogosControlador.nuevaInstitucion.instRegFiscal}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-1">
                                 </div>
@@ -395,7 +395,7 @@
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-9">
-                                    <p:inputText id="descri" value="#{catalogosControlador.nuevaInstitucion.instDescripcion}" style="width: 100%;"/> 
+                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevaInstitucion.instDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-1">
                                 </div>
@@ -404,9 +404,9 @@
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
                                 <div class="col-xs-12" align="center">
-                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
-                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarInstitucion()}"/>
+                                    <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarInstitucion()}"/>
                                 </div>
                             </div>
                             </h:form><br/>

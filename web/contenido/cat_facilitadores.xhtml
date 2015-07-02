@@ -63,13 +63,13 @@
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
                                                                    pt:data-toggle="modal" pt:data-target="#editarFacilitador">
                                                         <f:setPropertyActionListener value="#{facilitador}" target="#{catalogosControlador.facilitadorSeleccionada}" />
-                                                        <p:ajax process="@this" update=":formFacilitadores:displayJ2"/>
+                                                        <p:ajax process="@this" update=":formFacilitadores:editar"/>
                                                     </h:commandLink>
                                                     <label></label>
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
                                                                    pt:data-toggle="modal" pt:data-target="#verFacilitador">
                                                         <f:setPropertyActionListener value="#{facilitador}" target="#{catalogosControlador.facilitadorSeleccionada}" />
-                                                        <p:ajax process="@this" update=":formFacilitadores:displayJ1"/>
+                                                        <p:ajax process="@this" update=":formFacilitadores:ver"/>
                                                     </h:commandLink>
                                                 </td>
                                             </tr>
@@ -91,7 +91,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ1" columns="2" border="0">
+                                            <h:panelGrid id="ver" columns="2" border="0">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -203,7 +203,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="85%">
+                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -241,7 +241,7 @@
                                                         <label>Teléfono :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="telefo" value="#{catalogosControlador.facilitadorSeleccionada.faciTelefono}" style="width: 100%"/> 
+                                                        <p:inputText id="telefono" value="#{catalogosControlador.facilitadorSeleccionada.faciTelefono}" style="width: 100%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -261,9 +261,9 @@
                                                         <label>Tipo :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <h:selectOneMenu id="tipfac" value="#{catalogosControlador.tipo}"  style="width: 100%;">
+                                                        <h:selectOneMenu id="tipofaci" value="#{catalogosControlador.tipo}"  style="width: 100%;">
                                                             <f:selectItem itemLabel="#{catalogosControlador.facilitadorSeleccionada.tipofId.tipofNombre}" noSelectionOption="true" itemValue=""/>
-                                                            <f:selectItems value="#{catalogosControlador.todasTiposFacilitadores()}" var="tip" itemLabel="#{tip.tipofNombre}" itemValue="#{tip.tipofId}"/>
+                                                            <f:selectItems value="#{catalogosControlador.todasTiposFacilitadores()}" var="tipo" itemLabel="#{tipo.tipofNombre}" itemValue="#{tipo.tipofId}"/>
                                                         </h:selectOneMenu>
                                                     </div>
                                                 </div><br/>
@@ -274,9 +274,9 @@
                                                         <label>Institución :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <h:selectOneMenu id="inscul" value="#{catalogosControlador.institucion}"  style="width: 100%;">
+                                                        <h:selectOneMenu id="institucion" value="#{catalogosControlador.institucion}"  style="width: 100%;">
                                                             <f:selectItem itemLabel="#{catalogosControlador.facilitadorSeleccionada.instId.instNombre}" noSelectionOption="true" itemValue=""/>
-                                                            <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="ins" itemLabel="#{ins.instNombre}" itemValue="#{ins.instId}"/>
+                                                            <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="insti" itemLabel="#{insti.instNombre}" itemValue="#{insti.instId}"/>
                                                         </h:selectOneMenu>
                                                     </div>
                                                 </div><br/>
@@ -300,7 +300,7 @@
                                                         <label>Descripción :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="descri" value="#{catalogosControlador.facilitadorSeleccionada.faciDescripcion}" style="width: 100%"/> 
+                                                        <p:inputText id="descripcion" value="#{catalogosControlador.facilitadorSeleccionada.faciDescripcion}" style="width: 100%"/> 
                                                     </div>
                                                 </div>
                                                 
@@ -354,7 +354,7 @@
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="nomcat" value="#{catalogosControlador.nuevoFacilitador.faciNombre}" style="width: 100%;"/> 
+                                    <p:inputText id="nombre" value="#{catalogosControlador.nuevoFacilitador.faciNombre}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -379,14 +379,14 @@
                             
                             <!-- Teléfono -->
                             <div class="row">
-                                <div class="col-xs-3" align="right">
+                                <div class="col-xs-3">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-2" align="right">
                                     <label>Teléfono</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="telefo" value="#{catalogosControlador.nuevoFacilitador.faciTelefono}" style="width: 100%;"/> 
+                                    <p:inputText id="telefono" value="#{catalogosControlador.nuevoFacilitador.faciTelefono}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
@@ -418,9 +418,9 @@
                                     <label>Tipo</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:selectOneMenu id="tipfac" value="#{catalogosControlador.nuevoFacilitador.tipofId}"  style="width: 60%;" converter="#{tipoFacilConvertidor}">
+                                    <p:selectOneMenu id="tipofaci" value="#{catalogosControlador.nuevoFacilitador.tipofId}"  style="width: 60%;" converter="#{tipoFacilConvertidor}">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                        <f:selectItems value="#{catalogosControlador.todasTiposFacilitadores()}" var="tip" itemLabel="#{tip.tipofNombre}" itemValue="#{tip}"/>
+                                        <f:selectItems value="#{catalogosControlador.todasTiposFacilitadores()}" var="tipo" itemLabel="#{tipo.tipofNombre}" itemValue="#{tipo}"/>
                                     </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
@@ -437,9 +437,9 @@
                                     <label>Institución</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:selectOneMenu id="inscul" value="#{catalogosControlador.nuevoFacilitador.instId}"  style="width: 100%;" converter="#{institucionConvertidor}">
+                                    <p:selectOneMenu id="institucion" value="#{catalogosControlador.nuevoFacilitador.instId}"  style="width: 100%;" converter="#{institucionConvertidor}">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                        <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="ins" itemLabel="#{ins.instNombre}" itemValue="#{ins}"/>
+                                        <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="insti" itemLabel="#{insti.instNombre}" itemValue="#{insti}"/>
                                     </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
@@ -456,9 +456,9 @@
                                     <label>Unidad Técnica</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:selectOneMenu id="unitec" value="#{catalogosControlador.nuevoFacilitador.utecId}" style="width: 100%;" converter="#{uniTecConvertidor}">
+                                    <p:selectOneMenu id="unitecnica" value="#{catalogosControlador.nuevoFacilitador.utecId}" style="width: 100%;" converter="#{uniTecConvertidor}">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                        <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="uni" itemLabel="#{uni.utecNombre}" itemValue="#{uni}"/>
+                                        <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="unidad" itemLabel="#{unidad.utecNombre}" itemValue="#{unidad}"/>
                                     </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
@@ -475,7 +475,7 @@
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="descri" value="#{catalogosControlador.nuevoFacilitador.faciDescripcion}" style="width: 100%;"/> 
+                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevoFacilitador.faciDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -485,9 +485,9 @@
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
                                 <div class="col-xs-12" align="center">
-                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
-                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarFacilitador()}"/>
+                                    <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarFacilitador()}"/>
                                 </div>
                             </div>
                             </h:form><br/>

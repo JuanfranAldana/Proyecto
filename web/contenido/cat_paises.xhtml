@@ -61,7 +61,13 @@
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
                                                                    pt:data-toggle="modal" pt:data-target="#editarPais">
                                                         <f:setPropertyActionListener value="#{pais}" target="#{catalogosControlador.paisSeleccionado}" />
-                                                        <p:ajax process="@this" update=":formPaises:displayJ2"/>
+                                                        <p:ajax process="@this" update=":formPaises:editar"/>
+                                                    </h:commandLink>
+                                                    <label></label>
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
+                                                                   pt:data-toggle="modal" pt:data-target="#verPais">
+                                                        <f:setPropertyActionListener value="#{pais}" target="#{catalogosControlador.paisSeleccionado}" />
+                                                        <p:ajax process="@this" update=":formPaises:ver"/>
                                                     </h:commandLink>
                                                 </td>
                                             </tr>
@@ -70,6 +76,56 @@
                                 </table>
                             </div>
                             
+                            <!-- Modal verPais -->
+                            <div id="verPais" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642">Rol</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="ver" columns="2" border="0">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.paisSeleccionado.paisId}"/> 
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.paisSeleccionado.paisNombre}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Continente -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Continente :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.paisSeleccionado.contiId.contiNombre}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             
                             <!-- Modal editarPais -->
                             <div id="editarPais" class="modal">
@@ -84,7 +140,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="85%">
+                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -112,9 +168,9 @@
                                                         <label>Continente :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <h:selectOneMenu id="contin" value="#{catalogosControlador.continente}"  style="width: 100%;">
+                                                        <h:selectOneMenu id="continente" value="#{catalogosControlador.continente}"  style="width: 100%;">
                                                             <f:selectItem itemLabel="#{catalogosControlador.paisSeleccionado.contiId.contiNombre}" noSelectionOption="true" itemValue=""/>
-                                                            <f:selectItems value="#{catalogosControlador.todasContinentes()}" var="con" itemLabel="#{con.contiNombre}" itemValue="#{con.contiId}"/>
+                                                            <f:selectItems value="#{catalogosControlador.todasContinentes()}" var="conti" itemLabel="#{conti.contiNombre}" itemValue="#{conti.contiId}"/>
                                                         </h:selectOneMenu>
                                                     </div>
                                                 </div>
@@ -170,7 +226,7 @@
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="nomcat" value="#{catalogosControlador.nuevoPais.paisNombre}" style="width: 100%;"/> 
+                                    <p:inputText id="nombre" value="#{catalogosControlador.nuevoPais.paisNombre}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -186,9 +242,9 @@
                                     <label>Continente</label>
                                 </div>
                                 <div class="col-xs-2">
-                                    <p:selectOneMenu id="contin" value="#{catalogosControlador.nuevoPais.contiId}"  style="width: 100%;" converter="#{continenteConvertidor}">
+                                    <p:selectOneMenu id="continente" value="#{catalogosControlador.nuevoPais.contiId}"  style="width: 100%;" converter="#{continenteConvertidor}">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                        <f:selectItems value="#{catalogosControlador.todasContinentes()}" var="con" itemLabel="#{con.contiNombre}" itemValue="#{con}"/>
+                                        <f:selectItems value="#{catalogosControlador.todasContinentes()}" var="conti" itemLabel="#{conti.contiNombre}" itemValue="#{conti}"/>
                                     </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-5">
@@ -199,9 +255,9 @@
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
                                 <div class="col-xs-12" align="center">
-                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
-                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarPais()}"/>
+                                    <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarPais()}"/>
                                 </div>
                             </div>
                             </h:form><br/>

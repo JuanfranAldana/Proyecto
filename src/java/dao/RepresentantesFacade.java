@@ -29,8 +29,8 @@ public class RepresentantesFacade extends AbstractFacade<Representantes> {
         super(Representantes.class);
     }
     
-    /*public List<Representantes> buscarRep(int repre){
-        return getEntityManager().createNamedQuery("Representantes.buscarRep").setParameter("repre", repre).getResultList();
-    }*/
+    public List<Representantes> buscarRep(int institucion){
+        return getEntityManager().createNamedQuery("Representantes.findByInstitucion").setParameter("institucionId", institucion).getResultList();
+    }
     
 }

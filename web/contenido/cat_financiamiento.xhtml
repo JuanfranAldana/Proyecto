@@ -61,13 +61,70 @@
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
                                                                    pt:data-toggle="modal" pt:data-target="#editarFuente">
                                                         <f:setPropertyActionListener value="#{fuentes}" target="#{catalogosControlador.fuenteSeleccionada}" />
-                                                        <p:ajax process="@this" update=":formFuentes:displayJ2"/>
+                                                        <p:ajax process="@this" update=":formFuentes:editar"/>
+                                                    </h:commandLink>
+                                                    <label></label>
+                                                    <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
+                                                                   pt:data-toggle="modal" pt:data-target="#verFuente">
+                                                        <f:setPropertyActionListener value="#{fuentes}" target="#{catalogosControlador.fuenteSeleccionada}" />
+                                                        <p:ajax process="@this" update=":formFuentes:ver"/>
                                                     </h:commandLink>
                                                 </td>
                                             </tr>
                                         </ui:repeat>
                                     </tbody> 
                                 </table>
+                            </div>
+                            
+                            <!-- Modal verFuente -->
+                            <div id="verFuente" class="modal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        
+                                        <!-- Cabecera del modal -->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title"><font color="507642">Fuente de Financiamiento</font></h4>
+                                        </div>
+                                        
+                                        <!-- Cuerpo del modal -->
+                                        <div class="modal-body">
+                                            <h:panelGrid id="ver" columns="2" border="0">
+                                                
+                                                <!-- Id -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Id :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.fuenteSeleccionada.fuenteId}"/> 
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Nombre -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Nombre :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.fuenteSeleccionada.fuenteNombre}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Descripción -->
+                                                <div class="form-group">
+                                                    <div class="col-xs-11" align="right">
+                                                        <label>Descripción :</label>
+                                                    </div>
+                                                    <div class="col-xs-12">
+                                                        <h:outputText value="#{catalogosControlador.fuenteSeleccionada.fuenteDescripcion}"/>
+                                                    </div>
+                                                </div>
+                                                
+                                            </h:panelGrid>  
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             
                             <!-- Modal editarFuente -->
@@ -83,7 +140,7 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="displayJ2" columns="2" border="0" width="95%">
+                                            <h:panelGrid id="editar" columns="2" border="0" width="95%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -101,7 +158,7 @@
                                                         <label>Nombre:</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="nomcat" value="#{catalogosControlador.fuenteSeleccionada.fuenteNombre}" style="width: 100%"/> 
+                                                        <p:inputText id="nombre" value="#{catalogosControlador.fuenteSeleccionada.fuenteNombre}" style="width: 100%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -111,7 +168,7 @@
                                                         <label>Descripción:</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="descri" value="#{catalogosControlador.fuenteSeleccionada.fuenteDescripcion}" style="width: 100%"/> 
+                                                        <p:inputText id="descripcion" value="#{catalogosControlador.fuenteSeleccionada.fuenteDescripcion}" style="width: 100%"/> 
                                                     </div>
                                                 </div>
                                                 
@@ -165,7 +222,7 @@
                                     <label>Nombre</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="nomcat" value="#{catalogosControlador.nuevaFuente.fuenteNombre}" style="width: 100%;"/> 
+                                    <p:inputText id="nombre" value="#{catalogosControlador.nuevaFuente.fuenteNombre}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -181,7 +238,7 @@
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="descri" value="#{catalogosControlador.nuevaFuente.fuenteDescripcion}" style="width: 100%;"/> 
+                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevaFuente.fuenteDescripcion}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -191,9 +248,9 @@
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
                                 <div class="col-xs-12" align="center">
-                                    <h:commandButton id="cancel" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
                                     <label> </label>
-                                    <h:commandButton id="guarda" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarFuente()}"/>
+                                    <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarFuente()}"/>
                                 </div>
                             </div>
                             </h:form><br/>
