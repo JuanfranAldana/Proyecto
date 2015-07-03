@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- Vista correspondiente a la Img. 47 Finalizar Proyecto
+                                    Img. 48 Confirmación de Finalización de Proyecto seleccionado -->
+
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+
+            <!-- Formulario -->
+            <h:form id="formFinalizar" >
+                
+                
+
+                <!-- Tabla responseive -->
+                <div class="table table-responsive table-bordered " >
+                    <table id="perfiles" class="table table-striped table-bordered table-hover table-condensed">
+                    
+                        <!-- Título del formulario "PERFIL DEL PROYECTO" -->
+                        <legend>
+                            <div class="form-header">
+                                <h4 class="modal-title"><font color="507642"><center><b>FINALIZACIÓN DEL PROYECTO</b></center></font></h4>
+                            </div>
+                        </legend>
+                        
+                        <!-- Proyecto -->
+                        <div class="row">
+                            <div class="col-xs-3">
+                            </div>
+                            <div class="col-xs-2" align="right">
+                                <label>Proyecto :</label>  
+                            </div>
+                            <div class="col-xs-6">
+                                <h:outputLabel value="#{proyectosControlador.proyectoSeleccionado.proyeNombre}"/> 
+                            </div>
+                            <div class="col-xs-1">
+                            </div>
+                        </div><br></br>
+                        
+                        <!-- Institución -->
+                        <div class="row">
+                            <div class="col-xs-3">
+                            </div>
+                            <div class="col-xs-2" align="right">
+                                <label>Institución :</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <h:outputLabel value="#{proyectosControlador.proyectoSeleccionado.instId.instNombre}"/>
+                            </div>
+                            <div class="col-xs-1">
+                            </div>
+                        </div><br></br>
+                        
+                        <!-- Fecha de Finalización -->
+                        <div class="row">
+                            <div class="col-xs-3">
+                            </div>
+                            <div class="col-xs-2" align="right">
+                                <label>Fecha de Finalización :</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <p:calendar id="fecfinalizado" value="#{fixme}" locale="es"
+                                            pattern="dd-MM-yyyy" showOn="button" size="12" tabindex="2" style="width: 100%;">
+                                    <p:ajax event="dateSelect" />
+                                </p:calendar>
+                            </div>
+                            <div class="col-xs-1">
+                            </div>
+                        </div><br></br>
+                        
+                        <!-- Estado -->
+                        <div class="row">
+                            <div class="col-xs-3">
+                            </div>
+                            <div class="col-xs-2" align="right">
+                                <label>Estado :</label>
+                            </div>
+                            <div class="col-xs-6">
+                                <p:selectOneMenu id="unidadtiempo" value="#{catalogosControlador.unidadTiempo}" style="width:40%;">
+                                    <f:selectItem itemLabel="#{proyectosControlador.proyectoSeleccionado.estadoId.estadoNombre}" itemValue="" />
+                                    <f:selectItem itemLabel="Finalizado" itemValue="Finalizado" />
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-xs-1">
+                            </div>
+                        </div><br></br>
+                
+                        <!-- Observación -->
+                        <div class="row">
+                            <div class="col-xs-3">
+                            </div>
+                            <div class="col-xs-2" align="right">
+                                <label>Observación :</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <textarea class="form-control" name="observacion" value="#{fixme}" rows="4" style="width: 100%;">
+                                </textarea>
+                            </div>
+                            <div class="col-xs-3">
+                            </div>
+                        </div><br></br>
+                       
+                        <!-- Documentos Adjuntos -->
+                        <div class="row">
+                            <div class="col-xs-3">
+                            </div>
+                            <div class="col-xs-2" align="right">
+                                <label>Documentos Adjuntos :</label>
+                            </div>
+                            <div class="col-xs-4">
+                                <a href="" class="btn btn-default  btn-xm" style="width: 35%;">
+                                    <span class="glyphicon glyphicon-paperclip"></span> Adjuntar
+                                </a>
+                            </div>
+                            <div class="col-xs-3">
+                            </div>
+                        </div><br></br>
+                        
+                        <!-- Botones "Cancelar" y "Guardar" -->
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                                <div class="col-xs-8" align="center">
+                                    <a href="lis_finproyectos.jsf" class="btn btn-default  btn-xm">
+                                        <span class="glyphicon glyphicon-share-alt"></span>Cancelar
+                                    </a>
+                                    <h:commandLink value="Finalizar" style="text-decoration:none;color:darkseagreen;" class="btn btn-default  btn-xm"
+                                                   pt:data-toggle="modal" pt:data-target="#finalizarProyecto">
+                                                   <p:ajax process="@this"/>
+                                    </h:commandLink>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label></label>
+                                </div>
+                            </div>
+                        
+                    </table>
+                </div>
+                
+                <!-- Modal FinalizarProyecto -->
+                <div id="finalizarProyecto" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Cabecera del modal -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title"><font color="507642">Confirmación de Finalización de Proyecto</font></h4>
+                            </div>
+
+                            <!-- Cuerpo del modal -->
+                            <div class="modal-body">
+                                <h:panelGrid id="finalizar" columns="1" border="0">
+
+                                    <div class="form-group">
+                                        <div class="col-xs-12" align="center">
+                                            <label>¿Está seguro de finalizar este proyecto?</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-xs-12" align="center">
+                                            <label><font color="red">Nota: Despues de realizar este proceso la información registrada no podrá ser modificada.</font></label>
+                                        </div>
+                                    </div>
+
+                                </h:panelGrid>  
+                                
+                                <br></br>
+                                
+                                <!-- Botones "Cancelar" y "Guardar" -->
+                                <div class="row">
+                                    <div class="col-xs-12" align="center">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        <label> </label>
+                                        <h:commandButton id="confirmar" type="submit" class="btn btn-default" value="Confirmar" action="#{fixme}"/>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</html>

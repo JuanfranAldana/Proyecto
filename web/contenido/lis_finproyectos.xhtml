@@ -37,11 +37,11 @@
                                     <td align="center">#{proyecto.proyeId}</td>
                                     <td>#{proyecto.proyeNombre}</td>
                                     <td>#{proyecto.instId.instNombre}</td>
-                                    <td align="right">#{proyecto.proyeMontoSolicitado+proyecto.proyeMontoContraparte}</td>
+                                    <td align="right">$ #{proyecto.proyeMontoSolicitado+proyecto.proyeMontoContraparte}</td>
                                     <td align="center">
-                                        <h:commandLink value="Finalizar" class="btn btn-default btn-xs" action="#{proyectosControlador.actializaEstado()}">
-                                            <f:setPropertyActionListener value="#{proyecto}"
-                                                                         target="#{proyectosControlador.proyectoSeleccionado}"  />
+                                        <h:commandLink value="" style="text-decoration:none;color:darkseagreen;"
+                                                       class="glyphicon glyphicon-lock" action="fin_proyecto.jsf">
+                                            <f:setPropertyActionListener value="#{proyecto}" target="#{proyectosControlador.proyectoSeleccionado}"  />
                                         </h:commandLink>  
                                     </td>
                                 </tr>

@@ -198,7 +198,7 @@ public class ProyectosControlador implements Serializable {
     }
     
     //Método para actualizar el estado de proyectos
-    public void actializaEstado(){
+    public void actualizaEstado(){
         getProyectosFacade().edit(proyectoSeleccionado);
     }
 }
