@@ -25,7 +25,7 @@
                 <div class="table table-responsive table-bordered " >
                     <table id="perfiles" class="table table-striped table-bordered table-hover table-condensed">
                     
-                        <!-- Título del formulario "PERFIL DEL PROYECTO" -->
+                        <!-- Título del formulario "FINALIZACIÓN DEL PROYECTO" -->
                         <legend>
                             <div class="form-header">
                                 <h4 class="modal-title"><font color="507642"><center><b>FINALIZACIÓN DEL PROYECTO</b></center></font></h4>
@@ -68,10 +68,7 @@
                                 <label>Fecha de Finalización :</label>
                             </div>
                             <div class="col-xs-6">
-                                <p:calendar id="fecfinalizado" value="#{fixme}" locale="es"
-                                            pattern="dd-MM-yyyy" showOn="button" size="12" tabindex="2" style="width: 100%;">
-                                    <p:ajax event="dateSelect" />
-                                </p:calendar>
+                                <p:calendar id="fecfinalizado" value="#{proyectosControlador.fechaFinalizacion}" pattern="dd-MM-yyyy" mask="true" locale="es" style="width: 30%"/>
                             </div>
                             <div class="col-xs-1">
                             </div>
@@ -85,10 +82,7 @@
                                 <label>Estado :</label>
                             </div>
                             <div class="col-xs-6">
-                                <p:selectOneMenu id="unidadtiempo" value="#{catalogosControlador.unidadTiempo}" style="width:40%;">
-                                    <f:selectItem itemLabel="#{proyectosControlador.proyectoSeleccionado.estadoId.estadoNombre}" itemValue="" />
-                                    <f:selectItem itemLabel="Finalizado" itemValue="Finalizado" />
-                                </p:selectOneMenu>
+                                <p:inputText id="estado" readonly="true" value="#{proyectosControlador.proyectoSeleccionado.estadoId.estadoNombre}" style="width: 45%;"/> 
                             </div>
                             <div class="col-xs-1">
                             </div>
@@ -102,8 +96,7 @@
                                 <label>Observación :</label>
                             </div>
                             <div class="col-xs-4">
-                                <textarea class="form-control" name="observacion" value="#{fixme}" rows="4" style="width: 100%;">
-                                </textarea>
+                                <p:inputTextarea id="observacion" rows="5" autoResize="false" value="#{fixme}" style="width: 100%;"/> 
                             </div>
                             <div class="col-xs-3">
                             </div>
@@ -183,7 +176,7 @@
                                     <div class="col-xs-12" align="center">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                         <label> </label>
-                                        <h:commandButton id="confirmar" type="submit" class="btn btn-default" value="Confirmar" action="#{fixme}"/>
+                                        <h:commandButton id="confirmar" type="submit" class="btn btn-default" value="Confirmar" actionListener="#{proyectosControlador.actualizaEstado()}" action="lis_finproyectos.jsf"/>
                                     </div>
                                 </div>
                                 
@@ -195,5 +188,37 @@
             </h:form>
 
         </ui:define>
+        
+        <ui:define name="scripts">
+            <script type="text/javascript">
+            PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText: 'Todo el día'
+            };
+            </script>
+        </ui:define>
+        
     </ui:composition>
 </html>

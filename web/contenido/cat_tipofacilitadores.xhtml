@@ -195,27 +195,11 @@
                         <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de tipos de facilitadores -->
-                            <h:form>
+                            <h:form><br/>
                                 
-                            <!-- Id -->
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Id</label>
-                                </div>
-                                <div class="col-xs-1">
-                                    <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
-                                </div>
-                                <div class="col-xs-6">
-                                    <label></label>
-                                </div>
-                            </div><br/>
-                            
                             <!-- Nombre -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-xs-2">
                                     <label></label>
                                 </div>
                                 <div class="col-xs-2" align="right">
@@ -224,23 +208,23 @@
                                 <div class="col-xs-5">
                                     <p:inputText id="nombre" value="#{catalogosControlador.nuevoTipo.tipofNombre}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-3">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Descripción -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-xs-2">
                                     <label></label>
                                 </div>
                                 <div class="col-xs-2" align="right">
                                     <label>Descripción</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevoTipo.tipofDescripcion}" style="width: 100%;"/> 
+                                    <p:inputTextarea id="descripcion" rows="5" autoResize="false" value="#{catalogosControlador.nuevoTipo.tipofDescripcion}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-xs-3">
                                     <label></label>
                                 </div>
                             </div><br/>

@@ -35,7 +35,7 @@
                                             <label >Categoría</label>
                                         </div>
                                         <div class="col-xs-5">
-                                            <p:inputText id="catego" value="#{fixme}" readonly="true" style="width: 100%;"/>
+                                            <p:inputText id="catego" value="#{proyectosControlador.seguimientoSeleccionado.catsegId.catsegNombre}" readonly="true" style="width: 100%;"/>
                                         </div>
                                         <div class="col-xs-2">
                                         </div>
@@ -49,7 +49,7 @@
                                             <label>Sub Categoría</label>
                                         </div>
                                         <div class="col-xs-5">
-                                            <p:inputText id="subcat" value="#{fixme}" readonly="true" style="width: 100%;"/>
+                                            <p:inputText id="subcat" value="#{proyectosControlador.seguimientoSeleccionado.catsegId.subCatseguimientosList}" readonly="true" style="width: 100%;"/>
                                         </div>
                                         <div class="col-xs-2">
                                         </div>
@@ -62,9 +62,8 @@
                                         <div class="col-xs-3">
                                             <label>Fecha de Inicio</label>
                                         </div>
-                                        <div class="col-xs-2
-                                             ">
-                                            <p:inputText id="fecini" value="#{fixme}" readonly="true" style="width: 100%;">
+                                        <div class="col-xs-2">
+                                            <p:inputText id="fecini" value="#{proyectosControlador.seguimientoSeleccionado.seguiFechaIni}" readonly="true" style="width: 100%; text-align: center">
                                                 <f:convertDateTime pattern="dd-MM-yyyy"/>
                                             </p:inputText>    
                                         </div>
@@ -80,7 +79,7 @@
                                             <label>Fecha de Fin</label>
                                         </div>
                                         <div class="col-xs-2">
-                                            <p:inputText id="fecfin" value="#{fixme}" readonly="true" style="width: 100%;">
+                                            <p:inputText id="fecfin" value="#{proyectosControlador.seguimientoSeleccionado.seguiFechaFin}" readonly="true" style="width: 100%; text-align: center">
                                                 <f:convertDateTime pattern="dd-MM-yyyy"/>
                                             </p:inputText>    
                                         </div>
@@ -96,7 +95,7 @@
                                             <label>Fecha de Observación</label>
                                         </div>
                                         <div class="col-xs-2">
-                                            <p:inputText id="fecobs" value="#{fixme}" readonly="true" style="width: 100%;">
+                                            <p:inputText id="fecobs" value="#{proyectosControlador.seguimientoSeleccionado.seguiFechaObs}" readonly="true" style="width: 100%; text-align: center">
                                                 <f:convertDateTime pattern="dd-MM-yyyy"/>
                                             </p:inputText>    
                                         </div>
@@ -112,7 +111,7 @@
                                             <label>Observación</label>
                                         </div>
                                         <div class="col-xs-5">
-                                            <p:inputTextarea rows="2" value="#{fixme}" readonly="true" autoResize="false" style="width: 100%;"/>
+                                            <p:inputTextarea rows="2" value="#{proyectosControlador.seguimientoSeleccionado.seguiObserva}" readonly="true" autoResize="false" style="width: 100%;"/>
                                         </div>
                                         <div class="col-xs-2">
                                         </div>
@@ -135,7 +134,7 @@
                                         <label>Fecha de Alerta</label>
                                     </div>
                                     <div class="col-xs-2">
-                                        <p:inputText id="fecale" value="#{fixme}" readonly="true" style="width: 100%;">
+                                        <p:inputText id="fecale" value="#{proyectosControlador.seguimientoSeleccionado.seguiFechaAlerta}" readonly="true" style="width: 100%; text-align: center">
                                             <f:convertDateTime pattern="dd-MM-yyyy"/>
                                         </p:inputText>    
                                     </div>
@@ -151,7 +150,7 @@
                                         <label>Mensaje de Alerta</label>
                                         </div>
                                         <div class="col-xs-5">
-                                            <p:inputTextarea rows="2" value="#{fixme}" readonly="true" autoResize="false" style="width: 100%;"/>
+                                            <p:inputTextarea rows="2" value="#{proyectosControlador.seguimientoSeleccionado.alertasList}" readonly="true" autoResize="false" style="width: 100%;"/>
                                         </div>
                                         <div class="col-xs-2">
                                         </div>

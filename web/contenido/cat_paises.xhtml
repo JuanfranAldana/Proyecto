@@ -94,7 +94,7 @@
                                                 <!-- Id -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Id :</label>
+                                                        <label>Id:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.paisSeleccionado.paisId}"/> 
@@ -104,7 +104,7 @@
                                                 <!-- Nombre -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Nombre :</label>
+                                                        <label>Nombre:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.paisSeleccionado.paisNombre}"/>
@@ -114,7 +114,7 @@
                                                 <!-- Continente -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Continente :</label>
+                                                        <label>Continente:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.paisSeleccionado.contiId.contiNombre}"/>
@@ -140,12 +140,15 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
+                                            
+                                            <style>.c1{width:75px;}.c2{width:325px;}</style>
+                                            
+                                            <h:panelGrid id="editar" columns="2" columnClasses="c1,c2" border="0" width="95%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Id :</label>
+                                                        <label>Id</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.paisSeleccionado.paisId}"/> 
@@ -155,7 +158,7 @@
                                                 <!-- Nombre -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Nombre :</label>
+                                                        <label>Nombre</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <p:inputText id="nombre" value="#{catalogosControlador.paisSeleccionado.paisNombre}" style="width: 100%"/> 
@@ -165,10 +168,10 @@
                                                 <!-- Continente -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Continente :</label>
+                                                        <label>Continente</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <h:selectOneMenu id="continente" value="#{catalogosControlador.continente}"  style="width: 100%;">
+                                                        <h:selectOneMenu id="continente" class="form-control" value="#{catalogosControlador.continente}"  style="width: 40%;">
                                                             <f:selectItem itemLabel="#{catalogosControlador.paisSeleccionado.contiId.contiNombre}" noSelectionOption="true" itemValue=""/>
                                                             <f:selectItems value="#{catalogosControlador.todasContinentes()}" var="conti" itemLabel="#{conti.contiNombre}" itemValue="#{conti.contiId}"/>
                                                         </h:selectOneMenu>
@@ -199,24 +202,8 @@
                         <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de paises -->
-                            <h:form>
+                            <h:form><br/>
                                 
-                            <!-- Id -->
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Id</label>
-                                </div>
-                                <div class="col-xs-1">
-                                    <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
-                                </div>
-                                <div class="col-xs-6">
-                                    <label></label>
-                                </div>
-                            </div><br/>
-                            
                             <!-- Nombre -->
                             <div class="row">
                                 <div class="col-xs-3">

@@ -6,6 +6,7 @@
 package dao;
 
 import entidades.Metas;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,10 @@ public class MetasFacade extends AbstractFacade<Metas> {
 
     public MetasFacade() {
         super(Metas.class);
+    }
+    
+    public List<Metas> findMetaByProyecto(int proyec) {
+        return getEntityManager().createNamedQuery("Metas.findMetaByProyecto").setParameter("proyec", proyec).getResultList();
     }
     
 }

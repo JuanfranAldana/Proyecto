@@ -58,7 +58,7 @@
                                                 <td align="center">#{facilitador.faciId}</td>
                                                 <td>#{facilitador.faciNombre}</td>
                                                 <td>#{facilitador.faciCorreo}</td>
-                                                <td>#{facilitador.tipofId.tipofNombre}</td>
+                                                <td align="center">#{facilitador.tipofId.tipofNombre}</td>
                                                 <td align="center">
                                                     <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
                                                                    pt:data-toggle="modal" pt:data-target="#editarFacilitador">
@@ -96,7 +96,7 @@
                                                 <!-- Id -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Id :</label>
+                                                        <label>Id:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciId}"/> 
@@ -106,7 +106,7 @@
                                                 <!-- Nombre -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Nombre :</label>
+                                                        <label>Nombre:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciNombre}"/>
@@ -116,7 +116,7 @@
                                                 <!-- Correo -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Correo :</label>
+                                                        <label>Correo:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciCorreo}"/>
@@ -126,7 +126,7 @@
                                                 <!-- Teléfono -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Teléfono :</label>
+                                                        <label>Teléfono:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciTelefono}"/>
@@ -136,7 +136,7 @@
                                                 <!-- Cargo -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Cargo :</label>
+                                                        <label>Cargo:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciCargo}"/>
@@ -146,7 +146,7 @@
                                                 <!-- Tipo -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Tipo :</label>
+                                                        <label>Tipo:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.tipofId.tipofNombre}"/>
@@ -156,7 +156,7 @@
                                                 <!-- Institución -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Institución :</label>
+                                                        <label>Institución:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.instId.instNombre}"/>
@@ -166,7 +166,7 @@
                                                 <!-- Unidad Técnica -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Udidad :</label>
+                                                        <label>Udidad:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.utecId.utecNombre}"/>
@@ -176,7 +176,7 @@
                                                 <!-- Descripción -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Descripción :</label>
+                                                        <label>Descripción:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.facilitadorSeleccionada.faciDescripcion}"/>
@@ -203,7 +203,10 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
+                                            
+                                            <style>.c1{width:75px;}.c2{width:325px;}</style>
+                                            
+                                            <h:panelGrid id="editar" columns="2" columnClasses="c1,c2" border="0" width="95%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -241,7 +244,7 @@
                                                         <label>Teléfono :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="telefono" value="#{catalogosControlador.facilitadorSeleccionada.faciTelefono}" style="width: 100%"/> 
+                                                        <p:inputMask id="telefono" value="#{catalogosControlador.facilitadorSeleccionada.faciTelefono}" mask="9999-9999" style="width: 30%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -261,7 +264,7 @@
                                                         <label>Tipo :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <h:selectOneMenu id="tipofaci" value="#{catalogosControlador.tipo}"  style="width: 100%;">
+                                                        <h:selectOneMenu id="tipofaci" class="form-control" value="#{catalogosControlador.tipo}"  style="width: 50%;">
                                                             <f:selectItem itemLabel="#{catalogosControlador.facilitadorSeleccionada.tipofId.tipofNombre}" noSelectionOption="true" itemValue=""/>
                                                             <f:selectItems value="#{catalogosControlador.todasTiposFacilitadores()}" var="tipo" itemLabel="#{tipo.tipofNombre}" itemValue="#{tipo.tipofId}"/>
                                                         </h:selectOneMenu>
@@ -274,7 +277,7 @@
                                                         <label>Institución :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <h:selectOneMenu id="institucion" value="#{catalogosControlador.institucion}"  style="width: 100%;">
+                                                        <h:selectOneMenu id="institucion" class="form-control" value="#{catalogosControlador.institucion}"  style="width: 100%;">
                                                             <f:selectItem itemLabel="#{catalogosControlador.facilitadorSeleccionada.instId.instNombre}" noSelectionOption="true" itemValue=""/>
                                                             <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="insti" itemLabel="#{insti.instNombre}" itemValue="#{insti.instId}"/>
                                                         </h:selectOneMenu>
@@ -287,7 +290,7 @@
                                                         <label>Unidad Técnica :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <h:selectOneMenu id="unitec" value="#{catalogosControlador.unidad}"  style="width: 100%;">
+                                                        <h:selectOneMenu id="unitec" class="form-control" value="#{catalogosControlador.unidad}"  style="width: 100%;">
                                                             <f:selectItem itemLabel="#{catalogosControlador.facilitadorSeleccionada.utecId.utecNombre}" noSelectionOption="true" itemValue=""/>
                                                             <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="uni" itemLabel="#{uni.utecNombre}" itemValue="#{uni.utecId}"/>
                                                         </h:selectOneMenu>
@@ -300,7 +303,7 @@
                                                         <label>Descripción :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="descripcion" value="#{catalogosControlador.facilitadorSeleccionada.faciDescripcion}" style="width: 100%"/> 
+                                                        <p:inputTextarea id="descripcion" autoResize="false" value="#{catalogosControlador.facilitadorSeleccionada.faciDescripcion}" style="width: 100%"/> 
                                                     </div>
                                                 </div>
                                                 
@@ -327,157 +330,141 @@
                         <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de facilitadores -->
-                            <h:form>
+                            <h:form><br/>
                                 
-                            <!-- Id -->
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Id</label>
-                                </div>
-                                <div class="col-xs-1">
-                                    <p:inputText id="id" disabled="true" value="#{catalogosControlador.nuevoFacilitador.faciId}" style="width: 100%;"/>
-                                </div>
-                                <div class="col-xs-6">
-                                    <label></label>
-                                </div>
-                            </div><br/>
-                            
                             <!-- Nombre -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Nombre</label>
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
+                                    <label>Nombre*</label>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
                                     <p:inputText id="nombre" value="#{catalogosControlador.nuevoFacilitador.faciNombre}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Correo -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Correo</label>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
                                     <p:inputText id="correo" value="#{catalogosControlador.nuevoFacilitador.faciCorreo}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Teléfono -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Teléfono</label>
                                 </div>
-                                <div class="col-xs-3">
-                                    <p:inputText id="telefono" value="#{catalogosControlador.nuevoFacilitador.faciTelefono}" style="width: 100%;"/> 
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:inputMask id="telefono" value="#{catalogosControlador.nuevoFacilitador.faciTelefono}" mask="9999-9999" style="width: 25%;"/> 
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Cargo -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Cargo</label>
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
+                                    <label>Cargo*</label>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
                                     <p:inputText id="cargo" value="#{catalogosControlador.nuevoFacilitador.faciCargo}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Tipo -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Tipo</label>
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
+                                    <label>Tipo*</label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <p:selectOneMenu id="tipofaci" value="#{catalogosControlador.nuevoFacilitador.tipofId}"  style="width: 60%;" converter="#{tipoFacilConvertidor}">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:selectOneMenu id="tipofaci" value="#{catalogosControlador.nuevoFacilitador.tipofId}"  style="width: 40%;" converter="#{tipoFacilConvertidor}">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
                                         <f:selectItems value="#{catalogosControlador.todasTiposFacilitadores()}" var="tipo" itemLabel="#{tipo.tipofNombre}" itemValue="#{tipo}"/>
                                     </p:selectOneMenu>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Institución -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Institución</label>
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
+                                    <label>Institución Cultural</label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <p:selectOneMenu id="institucion" value="#{catalogosControlador.nuevoFacilitador.instId}"  style="width: 100%;" converter="#{institucionConvertidor}">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:selectOneMenu id="institucion" value="#{catalogosControlador.nuevoFacilitador.instId}" filter="true"  filterMatchMode="startsWith" panelStyle="width: 33%" style="width: 100%;" converter="#{institucionConvertidor}">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
                                         <f:selectItems value="#{catalogosControlador.todasInstituciones()}" var="insti" itemLabel="#{insti.instNombre}" itemValue="#{insti}"/>
                                     </p:selectOneMenu>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Unidad Ténica -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Unidad Técnica</label>
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
+                                    <label>Unidad Técnica*</label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <p:selectOneMenu id="unitecnica" value="#{catalogosControlador.nuevoFacilitador.utecId}" style="width: 100%;" converter="#{uniTecConvertidor}">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:selectOneMenu id="unitecnica" value="#{catalogosControlador.nuevoFacilitador.utecId}" filter="true"  filterMatchMode="startsWith" panelStyle="width: 33%" style="width: 100%;" converter="#{uniTecConvertidor}">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
                                         <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="unidad" itemLabel="#{unidad.utecNombre}" itemValue="#{unidad}"/>
                                     </p:selectOneMenu>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Descripción -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Descripción</label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevoFacilitador.faciDescripcion}" style="width: 100%;"/> 
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:inputTextarea id="descripcion" rows="5" autoResize="false" value="#{catalogosControlador.nuevoFacilitador.faciDescripcion}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
@@ -485,7 +472,7 @@
                             <!-- Botones "Cancelar" y "Guardar" -->
                             <div class="row">
                                 <div class="col-xs-12" align="center">
-                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
+                                    <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar" onclick="document.location.reload();" action="#{catalogosControlador.cancelar()}"/>
                                     <label> </label>
                                     <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarFacilitador()}"/>
                                 </div>

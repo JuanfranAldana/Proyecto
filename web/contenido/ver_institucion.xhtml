@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- Vista correspondiente a la Img. 16 Agregar Contacto de Institución -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            
+            <!-- Título del formulario "CATÁLOGO DE INSTITUCIONES" -->
+            <div class="form-header">
+                <h4 class="modal-title"><font color="507642"><center><b>INSTITUCIÓN</b></center></font></h4>
+            </div>
+            
+            <form role="form"><br/>
+
+                <!-- Formulario para captura de datos de instituciones -->
+                <h:form><br/>
+
+                    <!-- Nombre -->
+                    <div class="row">
+                        <div class="col-xs-2" align="right">
+                            <label>Nombre*</label>
+                        </div>
+                        <div class="col-xs-5">
+                            <p:inputText id="nombre" value="#{catalogosControlador.institucionSeleccionada.instNombre}" style="width: 100%;"/> 
+                        </div>
+                        <div class="col-xs-1">
+                        </div>
+                        <div class="col-xs-3">
+                        </div>
+                        <div class="col-xs-1">
+                        </div>
+                    </div><br/>
+
+                    <!-- Dirección -->
+                    <div class="row">
+                        <div class="col-xs-2" align="right">
+                            <label>Dirección</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <p:inputText id="direccion" value="#{catalogosControlador.institucionSeleccionada.instDireccion}" style="width: 100%;"/> 
+                        </div>
+                        <div class="col-xs-1">
+                        </div>
+                    </div><br/>
+
+                    <!-- País y Teléfono -->
+                    <div class="row">
+                        <div class="col-xs-2" align="right">
+                            <label>País*</label>
+                        </div>
+                        <div class="col-xs-3">
+                            <p:selectOneMenu id="pais" value="#{catalogosControlador.pais}" filter="true" filterMatchMode="startsWith" panelStyle="width: 18%;" style="width: 100%;">
+                                <f:selectItem itemLabel="#{catalogosControlador.institucionSeleccionada.paisId.paisNombre}" noSelectionOption="true" itemValue=""/>
+                                <f:selectItems value="#{catalogosControlador.todasPaises()}" var="pais" itemLabel="#{pais.paisNombre}" itemValue="#{pais.paisId}"/>
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="col-xs-4" align="right">
+                            <label>Teléfono</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <p:inputMask id="telefono" value="#{catalogosControlador.institucionSeleccionada.instTelefono}" mask="9999-9999" style="width: 100%;"/> 
+                        </div>
+                        <div class="col-xs-1">
+                        </div>
+                    </div><br/>
+
+                    <!-- NIT y No. Registro Contribuyente-->
+                    <div class="row">
+                        <div class="col-xs-2" align="right">
+                            <label>NIT*</label>
+                        </div>
+                        <div class="col-xs-3">
+                            <p:inputMask id="nit" value="#{catalogosControlador.institucionSeleccionada.instNit}" mask="9999-999999-999-9" style="width: 100%;"/> 
+                        </div>
+                        <div class="col-xs-4" align="right">
+                            <label>No. Registro Contribuyente</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <p:inputText id="registrocontri" value="#{catalogosControlador.institucionSeleccionada.instRegFiscal}" style="width: 100%;"/> 
+                        </div>
+                        <div class="col-xs-1">
+                        </div>
+                    </div><br/>
+
+                    <!-- Descripción -->
+                    <div class="row">
+                        <div class="col-xs-0">
+                        </div>
+                        <div class="col-xs-2" align="right">
+                            <label>Descripción</label>
+                        </div>
+                        <div class="col-xs-9">
+                            <p:inputTextarea id="descripcion" rows="3" autoResize="false" value="#{catalogosControlador.institucionSeleccionada.instDescripcion}" style="width: 100%;"/> 
+                        </div>
+                        <div class="col-xs-1">
+                        </div>
+                    </div><br/>
+
+                    <!-- Botones "Cancelar" y "Guardar" -->
+                    <div class="row">
+                        <div class="col-xs-12" align="center">
+                            <h:commandButton id="cancelar" type="reset" class="btn btn-default" value="Cancelar"/>
+                            <label> </label>
+                            <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{catalogosControlador.guardarInstitucion()}"/>
+                        </div>
+                    </div>
+                </h:form><br/>
+
+            </form>
+            
+        </ui:define>
+        
+        <ui:define name="scripts">
+            <script>
+                $(document).ready(function () {
+                    $('#institucion').dataTable(
+                            {
+                                "oLanguage": {
+                                    "sProcessing": "Procesando...",
+                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                    "sZeroRecords": "No se encontraron resultados",
+                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "Buscar:",
+                                    "sUrl": "",
+                                    "sInfoThousands": ",",
+                                    "sLoadingRecords": "Cargando...",
+                                    "oPaginate": {
+                                        "sFirst": "Primero",
+                                        "sLast": "Último",
+                                        "sNext": "Siguiente",
+                                        "sPrevious": "Anterior"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                    }
+                                }
+                            }
+                    );
+                });
+            </script>
+        </ui:define>
+        
+    </ui:composition>
+</html>

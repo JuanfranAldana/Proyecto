@@ -29,6 +29,9 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "facilitadores_tecnicos")
 @NamedQueries({
+    @NamedQuery(name = "FacilitadoresTecnicos.findByTipoAdministrativo", query = "SELECT f FROM FacilitadoresTecnicos f WHERE f.tipofId.tipofNombre = 'Administrativo'"),
+    @NamedQuery(name = "FacilitadoresTecnicos.findByTipoTecnico", query = "SELECT f FROM FacilitadoresTecnicos f WHERE f.tipofId.tipofNombre = 'Técnico'"),
+    @NamedQuery(name = "FacilitadoresTecnicos.findByTipoCultural", query = "SELECT f FROM FacilitadoresTecnicos f WHERE f.tipofId.tipofNombre = 'Cultural'"),
     @NamedQuery(name = "FacilitadoresTecnicos.findAll", query = "SELECT f FROM FacilitadoresTecnicos f"),
     @NamedQuery(name = "FacilitadoresTecnicos.findByFaciId", query = "SELECT f FROM FacilitadoresTecnicos f WHERE f.faciId = :faciId"),
     @NamedQuery(name = "FacilitadoresTecnicos.findByFaciNombre", query = "SELECT f FROM FacilitadoresTecnicos f WHERE f.faciNombre = :faciNombre"),

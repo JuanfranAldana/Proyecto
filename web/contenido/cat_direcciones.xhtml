@@ -31,7 +31,7 @@
                                 
                 <div id="myTabContent" class="tab-content">
                     
-                    <!-- Primer Panel "Catalogo de Direcciones"-->
+                    <!-- Primer Panel "Lista de Direcciones"-->
                     <div role="tabpanel" class="tab-pane fade active in" id="direcciones" aria-labelledby="direcciones-tab">
                         <form role="form"><br/>
                         
@@ -173,7 +173,10 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
+                                            
+                                            <style>.c1{width:75px;}.c2{width:325px;}</style>
+                                            
+                                            <h:panelGrid id="editar" columns="2" columnClasses="c1,c2" border="0" width="95%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -221,7 +224,7 @@
                                                         <label>Teléfono :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="telefono" value="#{catalogosControlador.direccionSeleccionada.dnacTelefono}" style="width: 100%"/> 
+                                                        <p:inputMask id="telefono" value="#{catalogosControlador.direccionSeleccionada.dnacTelefono}" mask="9999-9999" style="width: 30%"/> 
                                                     </div>
                                                 </div><br/>
                                                 
@@ -231,7 +234,7 @@
                                                         <label>Descripción :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="descripcion" value="#{catalogosControlador.direccionSeleccionada.dnacDescripcion}" style="width: 100%"/> 
+                                                        <p:inputTextarea id="descripcion" autoResize="false" value="#{catalogosControlador.direccionSeleccionada.dnacDescripcion}" style="width: 100%"/> 
                                                     </div>
                                                 </div>
                                             
@@ -258,100 +261,84 @@
                         <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de direcciones nacionales -->
-                            <h:form>
+                            <h:form><br/>
 
-                            <!-- Id -->
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Id</label>
-                                </div>
-                                <div class="col-xs-1">
-                                    <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/> 
-                                </div>
-                                <div class="col-xs-6">
-                                    <label></label>
-                                </div>
-                            </div><br/>
-                            
                             <!-- Nombre -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Nombre</label>
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
+                                    <label>Nombre*</label>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
                                     <p:inputText id="nombre" value="#{catalogosControlador.nuevaDireccion.dnacNombre}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Director -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Director</label>
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
+                                    <label>Director*</label>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
                                     <p:inputText id="director" value="#{catalogosControlador.nuevaDireccion.dnacDirector}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Correo Dir. -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Correo Dir.</label>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
                                     <p:inputText id="correo" value="#{catalogosControlador.nuevaDireccion.dnacCorreoDir}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Teléfono -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Teléfono</label>
                                 </div>
-                                <div class="col-xs-3">
-                                    <p:inputText id="telefono" value="#{catalogosControlador.nuevaDireccion.dnacTelefono}" style="width: 100%;"/> 
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:inputMask id="telefono" value="#{catalogosControlador.nuevaDireccion.dnacTelefono}"  mask="9999-9999" style="width: 25%;"/> 
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Descripción -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Descripción</label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevaDireccion.dnacDescripcion}" style="width: 100%;"/> 
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:inputTextarea id="descripcion" rows="5" autoResize="false" value="#{catalogosControlador.nuevaDireccion.dnacDescripcion}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>

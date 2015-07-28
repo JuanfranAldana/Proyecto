@@ -30,8 +30,8 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "representantes")
 @NamedQueries({
-    //@NamedQuery(name = "Representantes.buscarRep", query = "SELECT r FROM Representantes r WHERE r.instId.repId =:repre"),
-    @NamedQuery(name = "Representantes.findByInstitucion", query = "SELECT r FROM Representantes r WHERE r.instId.instId = :institucionId"),
+    @NamedQuery(name = "Representantes.findContactosByInstitucion", query = "SELECT r FROM Representantes r WHERE r.instId.instId = :inst AND r.repTipo = 'FALSE'"),
+    @NamedQuery(name = "Representantes.findByInstitucion", query = "SELECT r FROM Representantes r WHERE r.instId.instId = :inst AND r.repTipo = 'TRUE'"),
     @NamedQuery(name = "Representantes.findAll", query = "SELECT r FROM Representantes r"),
     @NamedQuery(name = "Representantes.findByRepId", query = "SELECT r FROM Representantes r WHERE r.repId = :repId"),
     @NamedQuery(name = "Representantes.findByRepNombre", query = "SELECT r FROM Representantes r WHERE r.repNombre = :repNombre"),
@@ -44,6 +44,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Representantes.findByRepNacionalidad", query = "SELECT r FROM Representantes r WHERE r.repNacionalidad = :repNacionalidad"),
     @NamedQuery(name = "Representantes.findByRepPasaporte", query = "SELECT r FROM Representantes r WHERE r.repPasaporte = :repPasaporte")})
 public class Representantes implements Serializable {
+    @Column(name = "rep_tipo")
+    private Boolean repTipo;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -211,6 +213,14 @@ public class Representantes implements Serializable {
     @Override
     public String toString() {
         return "entidades.Representantes[ repId=" + repId + " ]";
+    }
+
+    public Boolean getRepTipo() {
+        return repTipo;
+    }
+
+    public void setRepTipo(Boolean repTipo) {
+        this.repTipo = repTipo;
     }
     
 }

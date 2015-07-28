@@ -6,6 +6,7 @@
 package dao;
 
 import entidades.FacilitadoresTecnicos;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,18 @@ public class FacilitadoresTecnicosFacade extends AbstractFacade<FacilitadoresTec
 
     public FacilitadoresTecnicosFacade() {
         super(FacilitadoresTecnicos.class);
+    }
+    
+    public List<FacilitadoresTecnicos> findByTipoAdministrativo(){
+        return getEntityManager().createNamedQuery("FacilitadoresTecnicos.findByTipoAdministrativo").getResultList();
+    }
+    
+    public List<FacilitadoresTecnicos> findByTipoTecnico(){
+        return getEntityManager().createNamedQuery("FacilitadoresTecnicos.findByTipoTecnico").getResultList();
+    }
+    
+    public List<FacilitadoresTecnicos> findByTipoCultural(){
+        return getEntityManager().createNamedQuery("FacilitadoresTecnicos.findByTipoCultural").getResultList();
     }
     
 }

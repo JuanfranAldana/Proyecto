@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- Vista correspondiente a Img. 53 Lista de Metas por Proyecto para mantenimiento de actividades -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            
+            <!-- Título del formulario "CATALOGO DE PAISES" -->
+            <div class="form-header">
+                <h4 class="modal-title"><font color="507642"><center><b>MANTENIMIENTO DE ACTIVIDADES</b></center></font></h4>
+            </div>
+            
+            <!-- Formulario para mostrar lista de proyectos -->
+            <h:form prependId="false">
+                
+            <!-- Seleccionable Institución Cultural -->
+            <div class="form-group">
+                <div class="col-xs-3" align="right">
+                    <label>Seleccione Institución</label>
+                </div>
+                <div class="col-xs-8">
+                    <p:selectOneMenu id="inscul" value="#{proyectosControlador.inst}"  style="width: 100%;">
+                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                        <f:selectItems value="#{proyectosControlador.todosInstituciones()}" var="inst" itemLabel="#{inst.instNombre}" itemValue="#{inst.instId}"/>
+                        <p:ajax update="proyecto"/>                         
+                    </p:selectOneMenu>
+                </div>
+                <div class="col-xs-1">
+                </div>
+            </div><br><label></label></br>
+                
+            <!-- Seleccionable Proyecto -->
+            <div class="form-group">
+                <div class="col-xs-3" align="right">
+                    <label>Seleccione Proyecto</label>
+                </div>
+                <div class="col-xs-8">
+                    <p:selectOneMenu id="proyecto" value="#{proyectosControlador.proyec}"  style="width: 100%;">
+                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                        <f:selectItems value="#{proyectosControlador.todosProyectosByInstitucion()}" var="proyec" itemLabel="#{proyec.proyeNombre}" itemValue="#{proyec.proyeId}"/>
+                    </p:selectOneMenu>
+                </div>
+                <div class="col-xs-1">
+                </div>
+            </div><br><label></label></br>
+            
+            <div class="form-group">
+                <div class="col-xs-12" align="center">
+                    <input type="submit" class="btn-default" value="Ver Metas" onclick="document.location.reload();"/>
+                </div>
+            </div>
+
+            <table id="tablametas" class="table table-striped table-bordered table-hover table-condensed">
+
+                <!-- Cabecera de la tabla -->
+                <thead>
+                    <tr>
+                        <th><center>Id</center></th>
+                        <th><center>Nombre de Meta</center></th>
+                        <th><center>Monto Total</center></th>
+                        <th><center>Actividades</center></th>
+                    </tr>
+                </thead>
+
+                <!-- Cuerpo de la tabla -->
+                <tbody>
+                    <ui:repeat value="#{proyectosControlador.todasMetasByProyecto()}" var="meta" >
+                        <tr>
+                            <td align="center">#{meta.metaId}</td>
+                            <td>#{meta.metaNombre}</td>
+                            <td align="right" >$ #{meta.metaMtoContraparte + meta.metaMtoSec}</td>
+                            <td align="center">
+                                <h:commandLink value="Ver Actividades" class="btn btn-default btn-xs" action="act_proyecto.jsf">
+                                    <f:setPropertyActionListener value="#{meta}" target="#{proyectosControlador.metaSeleccionada}"/>
+                                </h:commandLink>
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </tbody> 
+            </table><br><label></label></br>
+                
+                
+           </h:form>
+        </ui:define>
+       
+        <ui:define name="scripts">
+            <script>
+                $(document).ready(function () {
+                    $('#tablametas').dataTable(
+                            {
+                                "oLanguage": {
+                                    "sProcessing": "Procesando...",
+                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                    "sZeroRecords": "No se encontraron resultados",
+                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "Buscar:",
+                                    "sUrl": "",
+                                    "sInfoThousands": ",",
+                                    "sLoadingRecords": "Cargando...",
+                                    "oPaginate": {
+                                        "sFirst": "Primero",
+                                        "sLast": "Último",
+                                        "sNext": "Siguiente",
+                                        "sPrevious": "Anterior"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                    }
+                                }
+                            }
+                    );
+                });
+            </script>
+        </ui:define>
+    </ui:composition>
+</html>
+

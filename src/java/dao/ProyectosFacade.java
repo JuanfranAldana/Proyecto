@@ -29,8 +29,17 @@ public class ProyectosFacade extends AbstractFacade<Proyectos> {
         super(Proyectos.class);
     }
     
-    public List<Proyectos> findByEstado() {
-        return getEntityManager().createQuery("SELECT o FROM Proyectos o WHERE o.estadoId.estadoNombre LIKE '%Ingresado%'").getResultList();
+    public List<Proyectos> findByEstadoAprobado(){
+        return getEntityManager().createNamedQuery("Proyectos.findByEstadoAprobado").getResultList();
     }
+    
+    public List<Proyectos> findByEstadoIngresado(){
+        return getEntityManager().createNamedQuery("Proyectos.findByEstadoIngresado").getResultList();
+    }
+    
+    public List<Proyectos> findByInstitucionId(int inst) {
+        return getEntityManager().createNamedQuery("Proyectos.findByInstitucionId").setParameter("inst", inst).getResultList();
+    }
+    
     
 }

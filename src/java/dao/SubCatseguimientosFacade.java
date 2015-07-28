@@ -6,6 +6,7 @@
 package dao;
 
 import entidades.SubCatseguimientos;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +28,10 @@ public class SubCatseguimientosFacade extends AbstractFacade<SubCatseguimientos>
     public SubCatseguimientosFacade() {
         super(SubCatseguimientos.class);
     }
+    
+    public List<SubCatseguimientos> findSubSeguimientosByCategoria(int categoria) {
+        return getEntityManager().createNamedQuery("SubCatseguimientos.findByCategoria").setParameter("categoria", categoria).getResultList();
+    }
+    
     
 }

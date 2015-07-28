@@ -1,0 +1,321 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- Vista correspondiente a la Img. 50 Mantenimiento de Metas de Proyecto seleccionado
+                                    Img. 51 Nueva Meta
+                                    Img. 52 Consulta de Meta seleccionada -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            
+            <!-- Formulario para mostrar lista de metas -->
+            <h:form id="formMetas" >
+                
+                <!-- Mantenimiento o meta de Proyecto Seleccionado -->
+                <div class="form-group">
+                    <div class="col-md-3" align="right">
+                        <label>Mantenimiento o Metas de Proyecto:</label>  
+                    </div>
+                    <div class="col-md-9">
+                        <h:outputLabel value="#{proyectosControlador.proyectoSeleccionado.proyeNombre}"/> 
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+
+                <!-- Espacio en blanco -->
+                <div class="col-md-12"><br /></div>
+
+                <div class="table table-responsive table-bordered " >
+                    <table id="metas" class="table table-striped table-bordered table-hover table-condensed">
+                        
+                        <!-- Cabecera de la tabla -->
+                        <thead>
+                            <tr>
+                                <th><center>Id</center></th>
+                                <th><center>Nombre de Meta</center></th>
+                                <th><center>Monto Total</center></th>
+                                <th><center>Editar/Ver</center></th>
+                            </tr>
+                        </thead>
+                        
+                        <!-- Cuerpo de la tabla -->
+                        <tbody>
+                            <ui:repeat value="#{proyectosControlador.proyectoSeleccionado.metasList}" var="meta" >
+                                <tr>
+                                    <td align="center">#{meta.metaId}</td>
+                                    <td>#{meta.metaNombre}</td>
+                                    <td align="right">#{meta.metaMtoSec+meta.metaMtoContraparte}</td>
+                                    <td align="center">
+                                        <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-pencil"
+                                                       pt:data-toggle="modal" pt:data-target="#editarMeta">
+                                            <f:setPropertyActionListener value="#{meta}" target="#{proyectosControlador.metaSeleccionada}" />
+                                            <p:ajax process="@this" update=":formMetas:editar"/>
+                                        </h:commandLink>
+                                        <label></label>
+                                        <h:commandLink value="" style="text-decoration:none;color:darkseagreen;" class="glyphicon glyphicon-eye-open"
+                                                       pt:data-toggle="modal" pt:data-target="#verMeta">
+                                            <f:setPropertyActionListener value="#{meta}" target="#{proyectosControlador.metaSeleccionada}" />
+                                            <p:ajax process="@this" update=":formMetas:ver"/>
+                                        </h:commandLink>  
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </tbody> 
+                        
+                    </table>
+                </div>
+                
+                <!-- Modal verMeta -->
+                <div id="verMeta" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!-- Cabecera del modal -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title"><font color="507642">Consulta de Meta</font></h4>
+                            </div>
+
+                            <!-- Cuerpo del modal -->
+                            <div class="modal-body">
+                                <h:panelGrid id="ver" columns="2" border="0">
+
+                                    <!-- Id -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Id :</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h:outputText value="#{proyectosControlador.metaSeleccionada.metaId}"/> 
+                                        </div>
+                                    </div>
+
+                                    <!-- Nombre de Meta -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Nombre de Meta :</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h:outputText value="#{proyectosControlador.metaSeleccionada.metaNombre}"/>
+                                        </div>
+                                    </div>
+
+                                    <!-- Monto SEC de Meta -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Monto SEC de Meta :</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h:outputText value="$ #{proyectosControlador.metaSeleccionada.metaMtoSec}"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Monto Contraparte IC -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Monto Contraparte IC :</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h:outputText value="$ #{proyectosControlador.metaSeleccionada.metaMtoContraparte}"/>
+                                        </div>
+                                    </div>
+
+                                    <!-- Monto Total de la Meta -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Monto Total de la Meta :</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h:outputText value="$ #{proyectosControlador.metaSeleccionada.metaMtoSec+proyectosControlador.metaSeleccionada.metaMtoContraparte}"/>
+                                        </div>
+                                    </div>
+                                    
+                                </h:panelGrid>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal editarMeta -->
+                <div id="editarMeta" class="modal">
+                    <div class="modal-dialog modal-open" keyboard="true">
+                        <div class="modal-content">
+                            
+                            <!-- Cabecera del modal -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                <h4 class="modal-title"><font color="507642">Editar Meta</font></h4>
+                            </div>
+
+                            <!-- Cuerpo del modal -->
+                            <div class="modal-body">
+                                
+                                <style>.c1{width:125px;}.c2{width:275px;}</style>
+                                
+                                <h:panelGrid id="editar" columns="2" columnClasses="c1,c2" border="0" width="95%">
+                                    
+                                    <!-- Id -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Id:</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h:outputText value="#{proyectosControlador.metaSeleccionada.metaId}"/> 
+                                        </div>
+                                    </div><br></br>
+                                    
+                                    <!-- Proyecto Id -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Proyecto Id:</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <h:outputText value="#{proyectosControlador.metaSeleccionada.proyeId.proyeNombre}"/> 
+                                        </div>
+                                    </div><br></br>
+
+                                    <!-- Nombre -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Nombre de Meta:</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <p:inputText id="nombre" value="#{proyectosControlador.metaSeleccionada.metaNombre}" style="width: 100%"/> 
+                                        </div>
+                                    </div><br></br>
+
+                                    <!-- Monto SEC -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Monto SEC:</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <p:inputText id="montosec" value="#{proyectosControlador.metaSeleccionada.metaMtoSec}" style="width: 25%; text-align: right"/> 
+                                        </div>
+                                    </div><br></br>
+                                    
+                                    <!-- Monto Contraparte IC -->
+                                    <div class="form-group">
+                                        <div class="col-xs-11" align="right">
+                                            <label>Monto Contraparte IC:</label>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <p:inputText id="montoic" value="#{proyectosControlador.metaSeleccionada.metaMtoContraparte}" style="width: 25%; text-align: right"/> 
+                                        </div>
+                                    </div><br></br>
+                                    
+                                </h:panelGrid>
+                                    
+                            </div>
+
+                            <!-- Pie del modal -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                <h:commandButton id="actualizar" type="submit" class="btn btn-default" value="Actualizar" action="#{proyectosControlador.actualizarMeta()}"/>
+                            </div>
+
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Modal nuevaMeta -->
+                <div id="nuevaMeta" class="modal">
+                    <div class="modal-dialog modal-open" keyboard="true">
+                        <div class="modal-content">
+
+                            <!-- Cabecera del modal -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                                <h4 class="modal-title"><font color="507642">Nueva Meta</font></h4>
+                            </div>
+                            
+                            <!-- Cuerpo del modal -->
+                            <div class="modal-body">
+                                <h:panelGrid id="nueva" columns="2" border="0" width="95%">
+                                    
+                                    MODAL EN MANTENIMIENTO... REGRESE MAS TARDE...                                   
+                                    
+                                </h:panelGrid>  
+                            </div>
+                            
+                            <!-- Pie del modal -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                <h:commandButton id="guardar" type="submit" class="btn btn-default" value="Guardar" action="#{proyectosControlador.guardarMeta()}"/>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Botón inferior central "Nueva Meta" y "Regresar" -->
+                <div class="col-md-12" align="center" >
+                    <h:commandLink value="" style="text-decoration:none;color:black;" class="btn btn-default btn-xm"
+                                   pt:data-toggle="modal" pt:data-target="#nuevaMeta">
+                        <span class="glyphicon glyphicon-plus"></span>Nueva Meta
+                        <f:setPropertyActionListener value="#{meta}" target="#{proyectosControlador.metaSeleccionada}" />
+                        <p:ajax process="@this" update=":formMetas:nueva"/>
+                    </h:commandLink>
+                    <label></label>
+                    <a href="../contenido/mto_metas.jsf" class="btn btn-default  btn-xm">
+                        <span class="glyphicon glyphicon-plus"></span>Regresar
+                        <!-- <img src="../resources/iconos/addIC.png"></img>Nuevo Perfil  -->
+                    </a>
+                </div>
+                
+                <!-- Espacio en blanco -->
+                <div class="col-xs-12"><label></label></div>
+                
+           </h:form>
+        </ui:define>
+       
+        <ui:define name="scripts">
+            <script>
+                $(document).ready(function () {
+                    $('#metas').dataTable(
+                            {
+                                "oLanguage": {
+                                    "sProcessing": "Procesando...",
+                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                    "sZeroRecords": "No se encontraron resultados",
+                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "Buscar:",
+                                    "sUrl": "",
+                                    "sInfoThousands": ",",
+                                    "sLoadingRecords": "Cargando...",
+                                    "oPaginate": {
+                                        "sFirst": "Primero",
+                                        "sLast": "Último",
+                                        "sNext": "Siguiente",
+                                        "sPrevious": "Anterior"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                    }
+                                }
+                            }
+                    );
+                });
+            </script>
+            
+        </ui:define>
+    </ui:composition>
+</html>
+

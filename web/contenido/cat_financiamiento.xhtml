@@ -94,7 +94,7 @@
                                                 <!-- Id -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Id :</label>
+                                                        <label>Id:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.fuenteSeleccionada.fuenteId}"/> 
@@ -104,7 +104,7 @@
                                                 <!-- Nombre -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Nombre :</label>
+                                                        <label>Nombre:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.fuenteSeleccionada.fuenteNombre}"/>
@@ -114,7 +114,7 @@
                                                 <!-- Descripción -->
                                                 <div class="form-group">
                                                     <div class="col-xs-11" align="right">
-                                                        <label>Descripción :</label>
+                                                        <label>Descripción:</label>
                                                     </div>
                                                     <div class="col-xs-12">
                                                         <h:outputText value="#{catalogosControlador.fuenteSeleccionada.fuenteDescripcion}"/>
@@ -140,7 +140,10 @@
                                         
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="editar" columns="2" border="0" width="95%">
+                                            
+                                            <style>.c1{width:25px;}.c2{width:325px;}</style>
+                                            
+                                            <h:panelGrid id="editar" columns="2" columnClasses="c1,c2" border="0" width="95%">
                                                 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -168,7 +171,7 @@
                                                         <label>Descripción:</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="descripcion" value="#{catalogosControlador.fuenteSeleccionada.fuenteDescripcion}" style="width: 100%"/> 
+                                                        <p:inputTextarea id="descripcion" autoResize="false" value="#{catalogosControlador.fuenteSeleccionada.fuenteDescripcion}" style="width: 100%"/> 
                                                     </div>
                                                 </div>
                                                 
@@ -195,52 +198,36 @@
                         <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de fuentes de financiamiento -->
-                            <h:form>
+                            <h:form><br/>
                                 
-                            <!-- Id -->
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Id</label>
-                                </div>
-                                <div class="col-xs-1">
-                                    <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/>
-                                </div>
-                                <div class="col-xs-6">
-                                    <label></label>
-                                </div>
-                            </div><br/>
-                            
                             <!-- Nombre -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Nombre</label>
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
+                                    <label>Nombre*</label>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
                                     <p:inputText id="nombre" value="#{catalogosControlador.nuevaFuente.fuenteNombre}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Descripción -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Descripción</label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <p:inputText id="descripcion" value="#{catalogosControlador.nuevaFuente.fuenteDescripcion}" style="width: 100%;"/> 
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:inputTextarea id="descripcion" rows="5" autoResize="false" value="#{catalogosControlador.nuevaFuente.fuenteDescripcion}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>

@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html   xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"        
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <!-- Vista correspondiente a Img. 54 Mantenimiento de Actividades de meta seleccionada
+                                 Img. 55 Nueva Actividad
+                                 Img. 56 Consulta de actividad seleccionada -->
+    
+    <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                    template="./../plantillas/plantilla1.xhtml">
+
+        <!-- Contenedor -->
+        <ui:define name="content">
+            
+            <!-- Formulario para mostrar lista de proyectos -->
+            <h:form id="formActividades">
+                
+            <!-- Mantenimiento o Actividades de Meta Seleccionado -->
+            <div class="form-group">
+                <div class="col-md-4" align="right">
+                    <label>Mantenimiento o Actividades de Meta:</label>  
+                </div>
+                <div class="col-md-6">
+                    <p:inputText value="#{proyectosControlador.metaSeleccionada.metaNombre}" style="width: 100%"/> 
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
+
+            <!-- Espacio en blanco -->
+            <div class="col-md-12"><br /></div>
+
+            <table id="actividades" class="table table-striped table-bordered table-hover table-condensed">
+
+                <!-- Cabecera de la tabla -->
+                <thead>
+                    <tr>
+                        <th><center>Id</center></th>
+                        <th><center>Nombre de Actividad</center></th>
+                        <th><center>Consultar</center></th>
+                    </tr>
+                </thead>
+
+                <!-- Cuerpo de la tabla -->
+                <tbody>
+                    <ui:repeat value="#{proyectosControlador.metaSeleccionada.actividadesList}" var="actividad" >
+                        <tr>
+                            <td align="center">#{actividad.actiId}</td>
+                            <td>#{actividad.actiNombre}</td>
+                            <td align="center">
+                                <h:commandLink value="Ver" style="text-decoration:none;color:darkseagreen;" class="btn btn-default btn-xs"
+                                               pt:data-toggle="modal" pt:data-target="#verActividad">
+                                    <f:setPropertyActionListener value="#{actividad}" target="#{proyectosControlador.actividadSeleccionada}" />
+                                    <p:ajax process="@this" update=":formActividades:ver"/>
+                                </h:commandLink>
+                                
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                </tbody> 
+            </table><br><label></label></br>
+                
+            <!-- Modal verActividad -->
+            <div id="verActividad" class="modal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Cabecera del modal -->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title"><font color="507642">Consulta Actividad</font></h4>
+                        </div>
+
+                        <!-- Cuerpo del modal -->
+                        <div class="modal-body">
+                            <h:panelGrid id="ver" columns="2" border="1">
+                                <!-- Id -->
+                                <div class="form-group">
+                                    <div class="col-xs-11" align="right">
+                                        <label>Id:</label>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <h:outputText value="#{proyectosControlador.actividadSeleccionada.actiId}"/> 
+                                    </div>
+                                </div>
+                                <!-- Nombre de la Actividad -->
+                                <div class="form-group">
+                                    <div class="col-xs-11" align="right">
+                                        <label>Nombre de la Actividad:</label>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <h:outputText value="#{proyectosControlador.actividadSeleccionada.actiNombre}"/>
+                                    </div>
+                                </div><br/>
+                                <!-- Meses de Ejecución -->
+                                <div class="form-group">
+                                    <div class="col-xs-11">
+                                        <label>Meses de Ejecución:</label>
+                                    </div>
+                                    <div class="col-xs-12">
+                                    </div>
+                                </div>
+                            </h:panelGrid>
+                            
+                            <h:panelGrid id="ver2" columns="1" border="1" style="width: 100%">
+                                <p:selectOneRadio id="city" value="#{fixme}"  layout="grid" columns="3">
+                                    <f:selectItems value="#{proyectosControlador.todosMeses()}" var="mes" itemLabel="#{mes.mesNombre}" itemValue="#{mes.mesId}"/>
+                                </p:selectOneRadio>
+                            </h:panelGrid>
+                            
+                            
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Botones "Nueva Actividad" y "Regresar" -->
+            <div class="row">
+                <div class="col-xs-12" align="center">
+                    <a href="mto_actividades.jsf" class="btn btn-default  btn-xm">
+                        <span class="glyphicon glyphicon-share-alt"></span>Nueva Actividad
+                    </a>
+                    <a href="mto_actividades.jsf" class="btn btn-default  btn-xm">
+                        <span class="glyphicon glyphicon-share-alt"></span>Regresar
+                    </a>
+                </div>
+            </div><br/>
+            
+            
+           </h:form>
+        </ui:define>
+       
+        <ui:define name="scripts">
+            <script>
+                $(document).ready(function () {
+                    $('#actividades').dataTable(
+                            {
+                                "oLanguage": {
+                                    "sProcessing": "Procesando...",
+                                    "sLengthMenu": "Mostrar _MENU_ registros",
+                                    "sZeroRecords": "No se encontraron resultados",
+                                    "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                    "sInfoPostFix": "",
+                                    "sSearch": "Buscar:",
+                                    "sUrl": "",
+                                    "sInfoThousands": ",",
+                                    "sLoadingRecords": "Cargando...",
+                                    "oPaginate": {
+                                        "sFirst": "Primero",
+                                        "sLast": "Último",
+                                        "sNext": "Siguiente",
+                                        "sPrevious": "Anterior"
+                                    },
+                                    "oAria": {
+                                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                    }
+                                }
+                            }
+                    );
+                });
+            </script>
+        </ui:define>
+    </ui:composition>
+</html>
+

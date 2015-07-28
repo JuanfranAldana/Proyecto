@@ -6,6 +6,7 @@
 package dao;
 
 import entidades.Seguimientos;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,10 @@ public class SeguimientosFacade extends AbstractFacade<Seguimientos> {
 
     public SeguimientosFacade() {
         super(Seguimientos.class);
+    }
+    
+    public List<Seguimientos> buscarSeg(int proyecto){
+        return getEntityManager().createNamedQuery("Seguimientos.findByProyecto").setParameter("proyectoId", proyecto).getResultList();
     }
     
 }

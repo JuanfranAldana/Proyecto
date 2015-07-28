@@ -27,6 +27,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "sub_catseguimientos")
 @NamedQueries({
+    @NamedQuery(name = "SubCatseguimientos.findByCategoria", query = "SELECT s FROM SubCatseguimientos s WHERE s.catsegId.catsegId = :categoria"),
     @NamedQuery(name = "SubCatseguimientos.findAll", query = "SELECT s FROM SubCatseguimientos s"),
     @NamedQuery(name = "SubCatseguimientos.findBySubcatId", query = "SELECT s FROM SubCatseguimientos s WHERE s.subcatId = :subcatId"),
     @NamedQuery(name = "SubCatseguimientos.findBySubcatNombre", query = "SELECT s FROM SubCatseguimientos s WHERE s.subcatNombre = :subcatNombre"),

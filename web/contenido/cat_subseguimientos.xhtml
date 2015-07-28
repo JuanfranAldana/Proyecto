@@ -154,7 +154,10 @@
 
                                         <!-- Cuerpo del modal -->
                                         <div class="modal-body">
-                                            <h:panelGrid id="editar" columns="2" border="0" width="85%">
+                                            
+                                            <style>.c1{width:75px;}.c2{width:325px;}</style>
+                                            
+                                            <h:panelGrid id="editar" columns="2" columnClasses="c1,c2" border="0" width="95%">
 
                                                 <!-- Id -->
                                                 <div class="form-group">
@@ -172,7 +175,10 @@
                                                         <label>Categoría :</label>
                                                     </div>
                                                     <div class="col-xs-12">
-                                                        <p:inputText id="categoria" value="#{catalogosControlador.subseguimientosSeleccionada.catsegId.catsegNombre}" style="width: 100%"/> 
+                                                        <h:selectOneMenu id="categoria" class="form-control" value="#{catalogosControlador.categoria}"  style="width: 100%;">
+                                                            <f:selectItem itemLabel="#{catalogosControlador.subseguimientosSeleccionada.catsegId.catsegNombre}" noSelectionOption="true" itemValue=""/>
+                                                            <f:selectItems value="#{catalogosControlador.todasCategoriaSeguimientos()}" var="categ" itemLabel="#{categ.catsegNombre}" itemValue="#{categ.catsegId}"/>
+                                                        </h:selectOneMenu>
                                                     </div>
                                                 </div><br/>
 
@@ -229,98 +235,83 @@
                         <form role="form"><br/>
                             
                             <!-- Formulario para captura de datos de sub categoría de seguimientos -->
-                            <h:form>
+                            <h:form><br/>
 
-                                <!-- Id -->
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <label></label>
-                                </div>
-                                <div class="col-xs-2" align="right">
-                                    <label>Id</label>
-                                </div>
-                                <div class="col-xs-1">
-                                    <p:inputText id="id" disabled="true" value="#{fixme}" style="width: 100%;"/> 
-                                </div>
-                                <div class="col-xs-6">
-                                    <label></label>
-                                </div>
-                            </div><br/>
-                            
                             <!-- Categoría -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Categoría</label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <p:selectOneMenu id="categoria" value="#{catalogosControlador.categoria}"  style="width: 100%;">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:selectOneMenu id="categoria" value="#{catalogosControlador.categoria}" filter="true"  filterMatchMode="startsWith" panelStyle="width: 33%" style="width: 100%;">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
                                         <f:selectItems value="#{catalogosControlador.todasCategoriaSeguimientos()}" var="cate" itemLabel="#{cate.catsegNombre}" itemValue="#{cate.catsegId}"/>
                                     </p:selectOneMenu>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Nombre de Sub Categoría -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Nombre de Sub Categoría</label>
                                 </div>
-                                <div class="col-xs-5">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
                                     <p:inputText id="nombre" value="#{catalogosControlador.nuevaSubseguimientos.subcatNombre}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Duración Estimada -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Duración Estimada</label>
                                 </div>
-                                <div class="col-xs-1">
-                                    <p:inputText id="unidadtamanio" value="#{catalogosControlador.unidadTamanio}" style="width: 130%;"/> 
+                                <div class="col-lg-1 col-md-2 col-sm-3 col-xs-3">
+                                    <p:inputText id="unidadtamanio" value="#{catalogosControlador.unidadTamanio}" style="width: 100%;"/> 
                                 </div>
-                                <div class="col-xs-4">
-                                    <p:selectOneMenu id="unidadtiempo" value="#{catalogosControlador.unidadTiempo}" style="width:40%;">
+                                <div class="col-lg-4 col-md-4 col-sm-5 col-xs-6">
+                                    <p:selectOneMenu id="unidadtiempo" value="#{catalogosControlador.unidadTiempo}" style="width:35%;">
                                         <f:selectItem itemLabel="Seleccionar..." itemValue="" />
+                                        <f:selectItem itemLabel="Horas" itemValue=" horas" />
                                         <f:selectItem itemLabel="Dias" itemValue=" dias" />
+                                        <f:selectItem itemLabel="Semanas" itemValue=" semanas" />
                                         <f:selectItem itemLabel="Meses" itemValue=" meses" />
-                                        <f:selectItem itemLabel="Años" itemValue=" años" />
                                     </p:selectOneMenu>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>
                             
                             <!-- Unidad Técnica Responsable -->
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-lg-2 col-md-1 col-sm-0 col-xs-0">
                                     <label></label>
                                 </div>
-                                <div class="col-xs-2" align="right">
+                                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" align="right">
                                     <label>Unidad Técnica Responsable</label>
                                 </div>
-                                <div class="col-xs-5">
-                                    <p:selectOneMenu id="unidTecnica" value="#{fixme}"  style="width: 100%;" converter="#{fixme}">
+                                <div class="col-lg-5 col-md-6 col-sm-8 col-xs-9">
+                                    <p:selectOneMenu id="unidTecnica" value="#{fixme}" filter="true"  filterMatchMode="startsWith" panelStyle="width: 33%" style="width: 100%;" converter="#{fixme}">
                                         <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
-                                        <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="unidad" itemLabel="#{unidad.utecNombre}" itemValue="#{unidad}"/>
+                                        <f:selectItems value="#{catalogosControlador.todasUnidadesTecnicas()}" var="unidad" itemLabel="#{unidad.utecNombre}" itemValue="#{fixme}"/>
                                     </p:selectOneMenu>
                                 </div>
-                                <div class="col-xs-2">
+                                <div class="col-lg-3 col-md-2 col-sm-1 col-xs-0">
                                     <label></label>
                                 </div>
                             </div><br/>

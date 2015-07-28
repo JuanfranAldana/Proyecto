@@ -6,9 +6,8 @@
         xmlns:ui="http://java.sun.com/jsf/facelets"
         xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <!-- Vista correspondiente a la Img. 38 Consulta de Perfil de Proyecto
-                                    Img. 39 Consulta de Aprobación del Proyecto 
-                                    Img. 40 Consulta Facilitadores del Proyecto -->
+    <!-- Vista correspondiente a la Img. 34 Aprobación del Proyecto 
+                                    Img. 35 Adición de Facilitadores del Proyecto -->
     
     <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                     template="./../plantillas/plantilla1.xhtml">
@@ -41,7 +40,7 @@
                                 <label >Id</label>
                             </div>
                             <div class="col-xs-1">
-                                <p:inputText id="id" value="#{proyectosControlador.proyectoSeleccionado.proyeId}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="id" value="#{proyectosControlador.proyectoSeleccionado.proyeId}" style="width: 100%; text-align: right"/> 
                             </div>
                             <div class="col-xs-4">
                             </div>
@@ -49,7 +48,7 @@
                                 <label>Fecha de Ingreso</label>
                             </div>
                             <div class="col-xs-2">
-                                <p:inputText id="fecing" value="#{proyectosControlador.proyectoSeleccionado.proyeFechaIngreso}" readonly="true" style="width: 100%;">
+                                <p:inputText id="fecing" value="#{proyectosControlador.proyectoSeleccionado.proyeFechaIngreso}" style="width: 100%; text-align: center">
                                     <f:convertDateTime pattern="dd-MM-yyyy"/>
                                 </p:inputText> 
                             </div>
@@ -64,7 +63,7 @@
                                 <label >Nombre Proyecto</label>
                             </div>
                             <div class="col-xs-9">
-                                <p:inputText id="nompro" value="#{proyectosControlador.proyectoSeleccionado.proyeNombre}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="nompro" value="#{proyectosControlador.proyectoSeleccionado.proyeNombre}" style="width: 100%;"/> 
                             </div>
                         </div>
                         
@@ -77,7 +76,7 @@
                                 <label >Institución Cultural</label>
                             </div>
                             <div class="col-xs-9">
-                                <p:inputText id="inscul" value="#{proyectosControlador.proyectoSeleccionado.instId.instNombre}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="inscul" value="#{proyectosControlador.proyectoSeleccionado.instId.instNombre}" style="width: 100%;"/> 
                             </div>
                         </div>
                         
@@ -90,7 +89,7 @@
                                 <label >Representante Legal</label>
                             </div>
                             <div class="col-xs-5">
-                                <p:inputText id="repleg" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="repleg" value="#{fixme}" style="width: 100%;"/> 
                             </div>
                             <div class="col-xs-4"></div>
                         </div>
@@ -104,7 +103,7 @@
                                 <label >Persona de Contacto</label>
                             </div>
                             <div class="col-xs-5">
-                                <p:inputText id="percon" value="#{proyectosControlador.proyectoSeleccionado.proyeContactoInst}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="percon" value="#{proyectosControlador.proyectoSeleccionado.proyeContactoInst}" style="width: 100%;"/> 
                             </div>
                             <div class="col-xs-4">
                             </div>
@@ -119,13 +118,13 @@
                                 <label >Correo de Contacto</label>
                             </div>
                             <div class="col-xs-4">
-                                <p:inputText id="corcon" value="#{proyectosControlador.proyectoSeleccionado.proyeCorreoContacto}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="corcon" value="#{proyectosControlador.proyectoSeleccionado.proyeCorreoContacto}" style="width: 100%;"/> 
                             </div>
                             <div class="col-xs-3">
                                 <label >Teléfono de Contacto</label>
                             </div>
                             <div class="col-xs-2">
-                                <p:inputText id="telcon" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="telcon" value="#{fixme}" style="width: 100%;"/> 
                             </div>
                         </div>
                         
@@ -138,13 +137,13 @@
                                 <label >Unidad que Recibe</label>
                             </div>
                             <div class="col-xs-4">
-                                <p:inputText id="unirec" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="unirec" value="#{fixme}" style="width: 100%;"/> 
                             </div>
                             <div class="col-xs-3">
                                 <label >Fecha de Recepción UTR</label>
                             </div>
                             <div class="col-xs-2">
-                                <p:inputText id="fecrec" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="fecrec" value="#{fixme}" style="width: 100%; text-align: center"/> 
                             </div>
                         </div>
                         
@@ -157,7 +156,7 @@
                                 <label >Fecha de Inicio</label>
                             </div>
                             <div class="col-xs-2">
-                                <p:inputText id="fecini" value="#{proyectosControlador.proyectoSeleccionado.proyeFechaIni}" readonly="true" style="width: 100%;">
+                                <p:inputText id="fecini" value="#{proyectosControlador.proyectoSeleccionado.proyeFechaIni}" style="width: 100%; text-align: center">
                                     <f:convertDateTime pattern="dd-MM-yyyy"/>
                                 </p:inputText>
                             </div>
@@ -166,7 +165,7 @@
                                 <label >Fecha de Fin</label>
                             </div>
                             <div class="col-xs-2">
-                                <p:inputText id="fecfin" value="#{proyectosControlador.proyectoSeleccionado.proyeFechaFin}" readonly="true" style="width: 100%;">
+                                <p:inputText id="fecfin" value="#{proyectosControlador.proyectoSeleccionado.proyeFechaFin}" style="width: 100%; text-align: center">
                                     <f:convertDateTime pattern="dd-MM-yyyy"/>
                                 </p:inputText>
                             </div>
@@ -181,7 +180,7 @@
                                 <label >Objetivo</label>
                             </div>
                             <div class="col-xs-9">
-                                <p:inputTextarea rows="2" value="#{proyectosControlador.proyectoSeleccionado.proyeObjetivo}" readonly="true" autoResize="false" style="width: 100%;"/>
+                                <p:inputTextarea rows="2" value="#{proyectosControlador.proyectoSeleccionado.proyeObjetivo}" autoResize="false" style="width: 100%;"/>
                             </div>
                         </div>
                         
@@ -194,7 +193,7 @@
                                 <label >Metas / Alcance</label>
                             </div>
                             <div class="col-xs-9">
-                                <p:inputTextarea rows="2" value="#{proyectosControlador.proyectoSeleccionado.proyeAlcance}" readonly="true" autoResize="false" style="width: 100%;"/>
+                                <p:inputTextarea rows="2" value="#{proyectosControlador.proyectoSeleccionado.proyeAlcance}" autoResize="false" style="width: 100%;"/>
                             </div>
                         </div>
                         
@@ -207,7 +206,7 @@
                                 <label >Descripción</label>
                             </div>
                             <div class="col-xs-9">
-                                <p:inputTextarea rows="2" value="#{proyectosControlador.proyectoSeleccionado.proyeDescripcion}" readonly="true" autoResize="false" style="width: 100%;"/>
+                                <p:inputTextarea rows="2" value="#{proyectosControlador.proyectoSeleccionado.proyeDescripcion}" autoResize="false" style="width: 100%;"/>
                             </div>
                         </div>
                         
@@ -220,7 +219,7 @@
                                 <label >Beneficiados</label>
                             </div>
                             <div class="col-xs-9">
-                                <p:inputTextarea rows="2" value="#{proyectosControlador.proyectoSeleccionado.proyeBeneficiados}" readonly="true" autoResize="false" style="width: 100%;"/>
+                                <p:inputTextarea rows="2" value="#{proyectosControlador.proyectoSeleccionado.proyeBeneficiados}" autoResize="false" style="width: 100%;"/>
                             </div>
                         </div>
                         
@@ -233,7 +232,7 @@
                                 <label>Direccción Nacional</label>
                             </div>
                             <div class="col-xs-9">
-                                <p:inputText id="dirnac" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="dirnac" value="#{fixme}" style="width: 100%;"/> 
                             </div>
                         </div>
                         
@@ -246,7 +245,7 @@
                                 <label >No. de Convenio</label>
                             </div>
                             <div class="col-xs-2">
-                                <p:inputText id="numcon" value="#{proyectosControlador.proyectoSeleccionado.proyeNumConvenio}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="numcon" value="#{proyectosControlador.proyectoSeleccionado.proyeNumConvenio}" style="width: 100%; text-align: right"/> 
                             </div>
                             <div class="col-xs-1">
                             </div>
@@ -254,7 +253,7 @@
                                 <label >Fuente de Financiamiento</label>
                             </div>
                             <div class="col-xs-3">
-                                <p:inputText id="fuefin" value="#{proyectosControlador.proyectoSeleccionado.fuenteId.fuenteNombre}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="fuefin" value="#{proyectosControlador.proyectoSeleccionado.fuenteId.fuenteNombre}" style="width: 100%;"/> 
                             </div>
                         </div>
                         
@@ -267,7 +266,7 @@
                                 <label >Monto SEC</label>
                             </div>
                             <div class="col-xs-2">
-                                <p:inputText id="monsec" value="#{proyectosControlador.proyectoSeleccionado.proyeMontoSolicitado}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="monsec" value="$ #{proyectosControlador.proyectoSeleccionado.proyeMontoSolicitado}" style="width: 100%; text-align: right"/> 
                             </div>
                             <div class="col-xs-10">
                             </div>
@@ -282,7 +281,7 @@
                                 <label >Monto Contraparte IC</label>
                             </div>
                             <div class="col-xs-2">
-                                <p:inputText id="moncon" value="#{proyectosControlador.proyectoSeleccionado.proyeMontoContraparte}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="moncon" value="$ #{proyectosControlador.proyectoSeleccionado.proyeMontoContraparte}" style="width: 100%; text-align: right"/> 
                             </div>
                             <div class="col-xs-1">
                             </div>
@@ -303,7 +302,7 @@
                                 <label >Monto Total del Proyecto</label>
                             </div>
                             <div class="col-xs-2">
-                                <p:inputText id="montot" value="#{proyectosControlador.proyectoSeleccionado.proyeMontoSolicitado + proyectosControlador.proyectoSeleccionado.proyeMontoContraparte}" readonly="true" style="width: 100%;"/> 
+                                <p:inputText id="montot" value="$ #{proyectosControlador.proyectoSeleccionado.proyeMontoSolicitado + proyectosControlador.proyectoSeleccionado.proyeMontoContraparte}" style="width: 100%; text-align: right"/> 
                             </div>
                             <div class="col-xs-1">
                             </div>
@@ -324,7 +323,7 @@
                                     <label></label>
                                 </div>
                                 <div class="col-xs-8" align="center">
-                                    <a href="consultar_proyecto.jsf" class="btn btn-default  btn-xm">
+                                    <a href="lis_perfiles.jsf" class="btn btn-default  btn-xm">
                                         <span class="glyphicon glyphicon-share-alt"></span>Regresar
                                     </a>
                                 </div>
@@ -342,7 +341,8 @@
                     
                     <!-- Segundo Panel "Aprobacion"-->
                     <div role="tabpanel" class="tab-pane fade" id="aprobacion" aria-labelledby="aprobacion-tab">
-                        <form role="form">
+                        <h:form id="sumar" role="form">
+                            
                             <!-- Título del formulario "APROBACIÓN DEL PROYECTO" -->
                             <legend>
                                 <div class="form-header">
@@ -359,7 +359,10 @@
                                     <label>Fecha de Aprobación</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="fecapr" value="#{proyectosControlador.proyectoSeleccionado.proyeId}" readonly="true" style="width: 100%;"/> 
+                                    <p:calendar id="fechaaprobacion" value="#{fixme}" locale="es"
+                                                pattern="dd/MM/yyyy" showOn="button" size="12" tabindex="2" style="width: 100%;">
+                                        <p:ajax event="dateSelect" />
+                                    </p:calendar>
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
@@ -378,7 +381,7 @@
                                     <label>Aprobado por</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="aprpor" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                    <p:inputText id="aprpor" value="#{fixme}" style="width: 100%;"/> 
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -397,7 +400,8 @@
                                     <label>Monto Aprobado SEC</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="monapr" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                    <input type="text" name="numero1" size="2" onKeyUp="fncSumar()"/>
+                                    <p:inputText id="monapr" value="#{fixme}" style="width: 100%; text-align: right" onkeyup="fncSumar()"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
@@ -416,7 +420,8 @@
                                     <label>Monto Contraparte IC</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="moncon" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                    <input type="text" name="numero2" size="2" onKeyUp="fncSumar()"/>
+                                    <p:inputText id="moncon" value="#{fixme}" style="width: 100%; text-align: right" onkeyup="fncSumar()"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
@@ -435,7 +440,8 @@
                                     <label>Monto Total Aprobado</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="montot" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                    <input type="text" class="form-control" name="resultado"/>
+                                    <p:inputText id="montot" value="#{fixme}" readonly="true" style="width: 100%; text-align: right"/> 
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
@@ -459,7 +465,10 @@
                                                 <label>Fecha de Observación</label>
                                             </div>
                                             <div class="col-xs-5">
-                                                <p:inputText id="fecobs" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                                <p:calendar id="fechaobservacion" value="#{fixme}" locale="es"
+                                                            pattern="dd/MM/yyyy" showOn="button" size="12" tabindex="2" style="width: 100%;">
+                                                    <p:ajax event="dateSelect" />
+                                                </p:calendar>
                                             </div>
                                             
                                             <!-- Espacio en blanco -->
@@ -470,7 +479,7 @@
                                                 <label>Observación</label>
                                             </div>
                                             <div class="col-xs-8">
-                                                <p:inputTextarea rows="2" value="#{fixme}" readonly="true" autoResize="false" style="width: 100%;"/>
+                                                <p:inputTextarea rows="2" value="#{fixme}" autoResize="false" style="width: 100%;"/>
                                             </div>
                                             
                                         </div>
@@ -509,7 +518,10 @@
                                     <label>Estado</label>
                                 </div>
                                 <div class="col-xs-3">
-                                    <p:inputText id="estado" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                    <p:selectOneMenu id="estado" value="#{fixme}"  style="width: 100%;">
+                                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                        <f:selectItems value="#{fixme}" var="inst" itemLabel="#{fixme}" itemValue="#{fixme}"/>
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-4">
                                     <label></label>
@@ -525,7 +537,7 @@
                                     <label></label>
                                 </div>
                                 <div class="col-xs-8" align="center">
-                                    <a href="consultar_proyecto.jsf" class="btn btn-default  btn-xm">
+                                    <a href="lis_perfiles.jsf" class="btn btn-default  btn-xm">
                                         <span class="glyphicon glyphicon-share-alt"></span>Regresar
                                     </a>
                                 </div>
@@ -537,7 +549,7 @@
                             <!-- Espacio en blanco -->
                             <div class="col-xs-12"><label></label></div>
                         
-                        </form>
+                        </h:form>
                     </div>
                     
                     
@@ -560,7 +572,10 @@
                                     <label >Facilitador Administrativo</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="facadm" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                    <p:selectOneMenu id="faciadmin" value="#{fixme}" filter="true" filterMatchMode="startsWith" style="width: 100%;">
+                                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                        <f:selectItems value="#{proyectosControlador.todosFacilitadoresAdministrativos()}" var="admin" itemLabel="#{admin.faciNombre}" itemValue="#{admin.faciId}"/>
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
                                     <label></label>
@@ -579,7 +594,10 @@
                                     <label >Facilitador Técnico</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="factec" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                    <p:selectOneMenu id="facitecnico" value="#{fixme}" filter="true" filterMatchMode="startsWith" style="width: 100%;">
+                                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                        <f:selectItems value="#{proyectosControlador.todosFacilitadoresTecnicos()}" var="tecni" itemLabel="#{tecni.faciNombre}" itemValue="#{tecni.faciId}"/>
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
                                     <br></br>
@@ -598,7 +616,10 @@
                                     <label >Facilitador Cultural</label>
                                 </div>
                                 <div class="col-xs-5">
-                                    <p:inputText id="faccul" value="#{fixme}" readonly="true" style="width: 100%;"/> 
+                                    <p:selectOneMenu id="facicultural" value="#{fixme}" filter="true" filterMatchMode="startsWith" style="width: 100%;">
+                                        <f:selectItem itemLabel="Seleccionar..." noSelectionOption="true" itemValue=""/>
+                                        <f:selectItems value="#{proyectosControlador.todosFacilitadoresCulturales()}" var="cultu" itemLabel="#{cultu.faciNombre}" itemValue="#{cultu.faciId}"/>
+                                    </p:selectOneMenu>
                                 </div>
                                 <div class="col-xs-2">
                                     <br></br>
@@ -633,7 +654,7 @@
                                     <label></label>
                                 </div>
                                 <div class="col-xs-8" align="center">
-                                    <a href="consultar_proyecto.jsf" class="btn btn-default  btn-xm">
+                                    <a href="lis_perfiles.jsf" class="btn btn-default  btn-xm">
                                         <span class="glyphicon glyphicon-share-alt"></span>Regresar
                                     </a>
                                 </div>
@@ -651,5 +672,20 @@
                 </div>
             </div>
         </ui:define>
+        
+        <ui:define name="scripts">
+            <script>
+                function fncSumar(){
+                caja=document.forms["sumar"].elements;
+                var numero1 = Number(caja["numero1"].value);
+                var numero2 = Number(caja["numero2"].value);
+                resultado=numero1+numero2;
+                if(!isNaN(resultado)){
+                caja["resultado"].value=numero1+numero2;
+                }
+                }
+            </script>
+        </ui:define>
+        
     </ui:composition>
 </html>
